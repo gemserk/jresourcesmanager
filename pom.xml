@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.gemserk.resources</groupId>
+	<artifactId>resourcesmanager</artifactId>
+	<version>0.0.7-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>ResourceManager</name>
+	<description>Resources Manager</description>
+
+	<organization>
+		<name>Gemserk</name>
+		<url>http://www.gemserk.com</url>
+	</organization>
+
+	<scm>
+		<url>https://svn.gemserk.com/resourcesmanagertemp/trunk</url>
+		<connection>scm:https://svn.gemserk.com/resourcesmanagertemp/trunk</connection>
+		<developerConnection>scm:svn:https://svn.gemserk.com/resourcesmanagertemp/trunk</developerConnection>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>gemserk.releases</id>
+			<name>Gemserk Releases</name>
+			<url>https://maven.gemserk.com/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>gemserk.snapshots</id>
+			<name>Gemserk Snapshots</name>
+			<url>https://maven.gemserk.com/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<modules>
+		<module>core</module>
+		<module>java2dmodule</module>
+		<module>slickmodule</module>
+		<module>tests</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.0-beta-9</version>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.7</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymockclassextension</artifactId>
+				<version>2.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>0.9.17</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.5.8</version>
+			</dependency>
+			<dependency>
+				<groupId>slick</groupId>
+				<artifactId>slick</artifactId>
+				<version>262</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.inject</groupId>
+				<artifactId>guice</artifactId>
+				<version>2.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>slickmodule</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>java2dmodule</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+</project>
