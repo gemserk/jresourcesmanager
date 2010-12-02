@@ -14,9 +14,9 @@
 	</organization>
 
 	<scm>
-		<url>https://svn.gemserk.com/resourcesmanagertemp/trunk</url>
-		<connection>scm:https://svn.gemserk.com/resourcesmanagertemp/trunk</connection>
-		<developerConnection>scm:svn:https://svn.gemserk.com/resourcesmanagertemp/trunk</developerConnection>
+		<url>http://jresourcesmanager.googlecode.com/svn/trunk/</url>
+		<connection>scm:https://jresourcesmanager.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://jresourcesmanager.googlecode.com/svn/trunk/</developerConnection>
 	</scm>
 
 	<distributionManagement>
