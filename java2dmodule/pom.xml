@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.gemserk.resources</groupId>
+		<artifactId>resourcesmanager</artifactId>
+		<version>0.0.6</version>
+	</parent>
+
+	<groupId>com.gemserk.resources</groupId>
+	<artifactId>java2dmodule</artifactId>
+	<version>0.0.6</version>
+
+	<name>ResourceManager - Java2d module</name>
+	<description>Resources Manager</description>
+
+	<organization>
+		<name>Gemserk</name>
+		<url>http://www.gemserk.com</url>
+	</organization>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>
