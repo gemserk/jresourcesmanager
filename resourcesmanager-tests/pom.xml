@@ -8,10 +8,10 @@
 	</parent>
 
 	<groupId>com.gemserk.resources</groupId>
-	<artifactId>slickmodule</artifactId>
+	<artifactId>${project.parent.artifactId}-tests</artifactId>
 	<version>0.0.8-SNAPSHOT</version>
 
-	<name>ResourceManager - Slick module</name>
+	<name>ResourceManager - Tests module</name>
 	<description>Resources Manager</description>
 
 	<organization>
@@ -21,27 +21,25 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>slick</groupId>
-			<artifactId>slick</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>${project.parent.artifactId}-core</artifactId>
+		    <version>${project.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>${project.parent.artifactId}-slickmodule</artifactId>
+		    <version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>${project.parent.artifactId}-java2dmodule</artifactId>
+		    <version>${project.version}</version>
+		</dependency>
 	</dependencies>
 
 </project>

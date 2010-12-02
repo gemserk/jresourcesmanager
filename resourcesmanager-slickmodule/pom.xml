@@ -8,10 +8,10 @@
 	</parent>
 
 	<groupId>com.gemserk.resources</groupId>
-	<artifactId>core</artifactId>
+	<artifactId>${project.parent.artifactId}-slickmodule</artifactId>
 	<version>0.0.8-SNAPSHOT</version>
 
-	<name>ResourceManager - Core module</name>
+	<name>ResourceManager - Slick module</name>
 	<description>Resources Manager</description>
 
 	<organization>
@@ -20,19 +20,6 @@
 	</organization>
 
 	<dependencies>
-		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.easymock</groupId>
-			<artifactId>easymockclassextension</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -42,8 +29,18 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>slick</groupId>
+			<artifactId>slick</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>${project.parent.artifactId}-core</artifactId>
+		    <version>${project.version}</version>
 		</dependency>
 
 	</dependencies>

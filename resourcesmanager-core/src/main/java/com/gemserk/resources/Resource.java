@@ -27,6 +27,10 @@ public class Resource<T> {
 	public void set(T data) {
 		this.data = data;
 	}
+	
+	public void setDataLoader(DataLoader<T> dataLoader) {
+		this.dataLoader = dataLoader;
+	}
 
 	public void reload() {
 		if (data != null)

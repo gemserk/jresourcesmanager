@@ -8,10 +8,10 @@
 	</parent>
 
 	<groupId>com.gemserk.resources</groupId>
-	<artifactId>tests</artifactId>
+	<artifactId>${project.parent.artifactId}-java2dmodule</artifactId>
 	<version>0.0.8-SNAPSHOT</version>
 
-	<name>ResourceManager - Tests module</name>
+	<name>ResourceManager - Java2d module</name>
 	<description>Resources Manager</description>
 
 	<organization>
@@ -21,21 +21,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>slickmodule</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>java2dmodule</artifactId>
+			<artifactId>${project.parent.artifactId}-core</artifactId>
+		    <version>${project.version}</version>
 		</dependency>
 	</dependencies>
 
