@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.gemserk.resources</groupId>
+		<artifactId>resourcesmanager</artifactId>
+		<version>0.0.3</version>
+	</parent>
+
+	<groupId>com.gemserk.resources</groupId>
+	<artifactId>slickmodule</artifactId>
+	<version>0.0.3</version>
+
+	<name>ResourceManager - Slick module</name>
+	<description>Resources Manager</description>
+
+	<organization>
+		<name>Gemserk</name>
+		<url>http://www.gemserk.com</url>
+	</organization>
+
+	<dependencies>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>slick</groupId>
+			<artifactId>slick</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+
+	</dependencies>
+
+</project>
