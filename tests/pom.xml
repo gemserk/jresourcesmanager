@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.gemserk.resources</groupId>
+		<artifactId>resourcesmanager</artifactId>
+		<version>0.0.5</version>
+	</parent>
+
+	<groupId>com.gemserk.resources</groupId>
+	<artifactId>tests</artifactId>
+	<version>0.0.5</version>
+
+	<name>ResourceManager - Tests module</name>
+	<description>Resources Manager</description>
+
+	<organization>
+		<name>Gemserk</name>
+		<url>http://www.gemserk.com</url>
+	</organization>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>slickmodule</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>java2dmodule</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>
