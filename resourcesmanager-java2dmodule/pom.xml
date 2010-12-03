@@ -8,7 +8,7 @@
 	</parent>
 
 	<groupId>com.gemserk.resources</groupId>
-	<artifactId>${project.parent.artifactId}-java2dmodule</artifactId>
+	<artifactId>resourcesmanager-java2dmodule</artifactId>
 	<version>0.0.8-SNAPSHOT</version>
 
 	<name>ResourceManager - Java2d module</name>

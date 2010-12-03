@@ -8,7 +8,7 @@
 	</parent>
 
 	<groupId>com.gemserk.resources</groupId>
-	<artifactId>${project.parent.artifactId}-core</artifactId>
+	<artifactId>resourcesmanager-core</artifactId>
 	<version>0.0.8-SNAPSHOT</version>
 
 	<name>ResourceManager - Core module</name>
