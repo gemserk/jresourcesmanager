@@ -32,7 +32,7 @@ public class ResourcesBuilderTest {
 		// replay(resourceManager);
 
 		ResourcesBuilder resourcesBuilder = new ResourcesBuilder(resourceManager) {{
-			image(id, file);
+			java2d.image(id, file);
 		}};
 
 

@@ -21,10 +21,12 @@ public class SlickImageLoader extends DataLoader<Image> {
 	public Image load() {
 		try {
 			if (logger.isInfoEnabled())
-				logger.info("Loading slick image file " + file);
+				logger.info("Loading slick image from file " + file);
 			return new Image(file);
 		} catch (SlickException e) {
-			throw new RuntimeException(e);
+			if (logger.isErrorEnabled())
+				logger.error("Failed to load slick image from file " + file);
+			throw new RuntimeException("Failed to load slick image from file " + file, e);
 		}
 	}
 

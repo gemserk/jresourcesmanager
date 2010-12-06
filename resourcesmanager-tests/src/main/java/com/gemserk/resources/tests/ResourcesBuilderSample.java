@@ -26,8 +26,8 @@ public class ResourcesBuilderSample {
 
 		ResourcesBuilder resourcesBuilder = new ResourcesBuilder(resourceManager, new DataSourceProvider(Source.ClassPath)) {
 			{
-				image("CompanyLogo", "logo-gemserk-512x116.png");
-				font("ZombieRockers48px", "assets/fonts/Mugnuts.ttf", Font.PLAIN, 48);
+				java2d.image("CompanyLogo", "logo-gemserk-512x116.png");
+				java2d.font("ZombieRockers48px", "assets/fonts/Mugnuts.ttf", Font.PLAIN, 48);
 			}
 		};
 
