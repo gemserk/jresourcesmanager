@@ -24,12 +24,12 @@
 		<repository>
 			<id>googlecode.resourcesmanager.releases</id>
 			<name>GoogleCode resourcesmanager releases</name>
-			<url>dav:https://jresourcesmanager.googlecode.com/svn/maven/repository</url>
+			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository</url>
 		</repository>
 		<snapshotRepository>
 			<id>googlecode.resourcesmanager.snapshots</id>
 			<name>GoogleCode resourcesmanager snapshots</name>
-			<url>dav:https://jresourcesmanager.googlecode.com/svn/maven/repository-snapshots</url>
+			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -68,11 +68,11 @@
 		</plugins>
 
 		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-webdav</artifactId>
-				<version>1.0-beta-2</version>
-			</extension>
+            <extension>
+                <groupId>org.jvnet.wagon-svn</groupId>
+                <artifactId>wagon-svn</artifactId>
+                <version>1.8</version>
+            </extension>
 		</extensions>
 
 	</build>
