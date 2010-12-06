@@ -11,8 +11,8 @@ public class ResourcesBuilderTest {
 
 	@Test
 	public void shouldRegisterAResourceLoaderForAnImage() {
-		String id = "CompanyLogo";
-		String file = "assets/images/CompanyLogo.png";
+		final String id = "CompanyLogo";
+		final String file = "assets/images/CompanyLogo.png";
 
 		ResourceManager resourceManager = new ResourceManager() {
 
@@ -31,10 +31,10 @@ public class ResourcesBuilderTest {
 		// resourceManager.add(eq(id), (ResourceLoader) anyObject());
 		// replay(resourceManager);
 
-		ResourcesBuilder resourcesBuilder = new ResourcesBuilder();
-		resourcesBuilder.setResourceManager(resourceManager);
+		ResourcesBuilder resourcesBuilder = new ResourcesBuilder(resourceManager) {{
+			image(id, file);
+		}};
 
-		resourcesBuilder.image(id, file);
 
 		// verify(resourceManager);
 	}

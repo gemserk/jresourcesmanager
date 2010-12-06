@@ -2,23 +2,27 @@ package com.gemserk.resources.tests.slick;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 import com.gemserk.resources.Resource;
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.ResourceManagerImpl;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
-import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
+import com.gemserk.resources.ResourcesBuilder;
 
 public class ResourcesReloadSample extends BasicGame {
 
 	ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
 
 	Resource<Image> companyLogoResource;
+
+	private Resource<Sound> fileReloadedResource;
 
 	public ResourcesReloadSample(String title) {
 		super(title);
@@ -40,10 +44,16 @@ public class ResourcesReloadSample extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 
-		resourceManager.add("CompanyLogo", new ResourceLoaderImpl<Image>(new SlickImageLoader("logo-gemserk-512x116-white.png"), true));
+		new ResourcesBuilder(resourceManager) {
+			{
+				slick.image("CompanyLogo", "logo-gemserk-512x116-white.png");
+				slick.sound("FileReloadedSound", "assets/sounds/nextwave.wav");
+				slick.truetypefont("MyFont", "assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48);
+			}
+		};
 
 		companyLogoResource = resourceManager.get("CompanyLogo");
-
+		fileReloadedResource = resourceManager.get("FileReloadedSound");
 	}
 
 	@Override
@@ -54,10 +64,15 @@ public class ResourcesReloadSample extends BasicGame {
 	@Override
 	public void keyPressed(int key, char c) {
 
-		if (key == Input.KEY_R ) {
-			companyLogoResource.reload();
+		if (key == Input.KEY_R) {
+			fileReloadedResource.get().play();
+
+			resourceManager.get("CompanyLogo").reload();
+			resourceManager.get("MyFont").reload();
+			resourceManager.get("FileReloadedSound").reload();
+			
 		}
-		
+
 	}
 
 	@Override
@@ -75,7 +90,11 @@ public class ResourcesReloadSample extends BasicGame {
 
 		Image image = companyLogoResource.get();
 		g.drawImage(image, 320 - image.getWidth() / 2, 240 - image.getHeight() / 2);
-
+		
+		Resource<Font> fontResource = resourceManager.get("MyFont");
+		g.setColor(Color.white);
+		g.setFont(fontResource.get());
+		g.drawString("Hello world",320 - image.getWidth() / 2, 100);
 	}
 
 }

@@ -7,6 +7,10 @@ import com.gemserk.resources.java2d.dataloaders.ImageLoader;
 import com.gemserk.resources.java2d.dataloaders.TrueTypeFontLoader;
 import com.gemserk.resources.resourceloaders.CachedResourceLoader;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
+import com.gemserk.resources.slick.dataloaders.SlickAnimationLoader;
+import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
+import com.gemserk.resources.slick.dataloaders.SlickSoundLoader;
+import com.gemserk.resources.slick.dataloaders.SlickTrueTypeFontLoader;
 import com.google.inject.Inject;
 
 /**
@@ -18,7 +22,33 @@ public class ResourcesBuilder {
 	private ResourceManager resourceManager;
 
 	private DataSourceProvider dataSourceProvider;
+	
+	protected class SlickResourcesBuilder {
+		
+		public void image(String id, String file) {
+			DataLoader dataLoader = new SlickImageLoader(file);
+			addCachedResourceLoader(id, dataLoader);
+		}
+		
+		public void animation(String id, String file, int th, int tw, int time, int totalFrames, boolean autoUpdate) {
+			// animations resources are not cached, we want new resource each time...
+			DataLoader dataLoader = new SlickAnimationLoader(file, tw, th, time, totalFrames, autoUpdate);
+			addResourceLoader(id, dataLoader);
+		}
 
+		public void sound(String id, String file) {
+			DataLoader dataLoader = new SlickSoundLoader(file);
+			addCachedResourceLoader(id, dataLoader);
+		}
+		
+		public void truetypefont(String id, String file, int style, int size) {
+			DataLoader dataLoader = new SlickTrueTypeFontLoader(file, style, size);
+			addCachedResourceLoader(id, dataLoader);
+		}
+	}
+
+	protected SlickResourcesBuilder slick = new SlickResourcesBuilder();
+	
 	@Inject
 	public void setResourceManager(ResourceManager resourceManager) {
 		this.resourceManager = resourceManager;
@@ -54,5 +84,9 @@ public class ResourcesBuilder {
 
 	private void addCachedResourceLoader(String id, DataLoader dataLoader) {
 		resourceManager.add(id, new CachedResourceLoader(new ResourceLoaderImpl(dataLoader)));
+	}
+	
+	private void addResourceLoader(String id, DataLoader dataLoader) {
+		resourceManager.add(id, new ResourceLoaderImpl(dataLoader));
 	}
 }
