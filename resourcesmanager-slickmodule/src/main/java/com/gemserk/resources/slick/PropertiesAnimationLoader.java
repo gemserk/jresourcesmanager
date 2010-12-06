@@ -19,8 +19,8 @@ public class PropertiesAnimationLoader {
 	ResourceManager resourceManager;
 
 	@Inject
-	public void setResourceManager(ResourceManager resourceManagerOldImpl) {
-		this.resourceManager = resourceManagerOldImpl;
+	public void setResourceManager(ResourceManager resourceManager) {
+		this.resourceManager = resourceManager;
 	}
 
 	public void load(String animationPropertiesFile) {

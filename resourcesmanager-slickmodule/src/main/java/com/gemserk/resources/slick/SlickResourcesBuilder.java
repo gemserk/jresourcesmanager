@@ -19,6 +19,24 @@ public class SlickResourcesBuilder {
 		this.resourceManager = resourceManager;
 	}
 	
+	/**
+	 * Load images from a properties file.
+	 */
+	public void images(String imagePropertiesFile) {
+		PropertiesImageLoader propertiesImageLoader = new PropertiesImageLoader();
+		propertiesImageLoader.setResourceManager(resourceManager);
+		propertiesImageLoader.load(imagePropertiesFile);
+	}
+	
+	/**
+	 * Load animations from a properties file.
+	 */
+	public void animations(String animationPropertiesFile) {
+		PropertiesAnimationLoader propertiesAnimationLoader = new PropertiesAnimationLoader();
+		propertiesAnimationLoader.setResourceManager(resourceManager);
+		propertiesAnimationLoader.load(animationPropertiesFile);
+	}
+	
 	public void image(String id, String file) {
 		DataLoader dataLoader = new SlickImageLoader(file);
 		addCachedResourceLoader(id, dataLoader);

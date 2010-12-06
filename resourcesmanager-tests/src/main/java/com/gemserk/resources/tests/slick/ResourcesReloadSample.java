@@ -14,7 +14,7 @@ import org.newdawn.slick.Sound;
 import com.gemserk.resources.Resource;
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.ResourceManagerImpl;
-import com.gemserk.resources.ResourcesBuilder;
+import com.gemserk.resources.slick.SlickResourcesBuilder;
 
 public class ResourcesReloadSample extends BasicGame {
 
@@ -44,11 +44,13 @@ public class ResourcesReloadSample extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 
-		new ResourcesBuilder(resourceManager) {
+		new SlickResourcesBuilder(resourceManager) {
 			{
-				slick.image("CompanyLogo", "logo-gemserk-512x116-white.png");
-				slick.sound("FileReloadedSound", "assets/sounds/nextwave.wav");
-				slick.truetypefont("MyFont", "assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48);
+				image("CompanyLogo", "logo-gemserk-512x116-white.png");
+				sound("FileReloadedSound", "assets/sounds/nextwave.wav");
+				truetypefont("MyFont", "assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48);
+				
+				images("images.properties");
 			}
 		};
 
