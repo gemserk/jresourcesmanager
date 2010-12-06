@@ -22,14 +22,14 @@
 
 	<distributionManagement>
 		<repository>
-			<id>gemserk.releases</id>
-			<name>Gemserk Releases</name>
-			<url>https://maven.gemserk.com/nexus/content/repositories/releases/</url>
+			<id>googlecode.resourcesmanager.releases</id>
+			<name>GoogleCode resourcesmanager releases</name>
+			<url>dav:https://jresourcesmanager.googlecode.com/svn/maven/repository</url>
 		</repository>
 		<snapshotRepository>
-			<id>gemserk.snapshots</id>
-			<name>Gemserk Snapshots</name>
-			<url>https://maven.gemserk.com/nexus/content/repositories/snapshots/</url>
+			<id>googlecode.resourcesmanager.snapshots</id>
+			<name>GoogleCode resourcesmanager snapshots</name>
+			<url>dav:https://jresourcesmanager.googlecode.com/svn/maven/repository-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -66,6 +66,15 @@
 			</plugin>
 
 		</plugins>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav</artifactId>
+				<version>1.0-beta-2</version>
+			</extension>
+		</extensions>
+
 	</build>
 
 	<dependencyManagement>
