@@ -3,18 +3,20 @@ package com.gemserk.resources.datasources;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RemoteDataSource implements DataSource {
-	
+
 	protected static final Logger logger = LoggerFactory.getLogger(RemoteDataSource.class);
-	
+
 	private final String url;
-	
-	public String getUrl() {
+
+	String getUrl() {
 		return url;
 	}
 
@@ -38,6 +40,17 @@ public class RemoteDataSource implements DataSource {
 	@Override
 	public String getResourceName() {
 		return getUrl();
+	}
+
+	@Override
+	public URI getUri() {
+		try {
+			return new URL(getUrl()).toURI();
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		} catch (URISyntaxException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
