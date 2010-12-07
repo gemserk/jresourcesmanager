@@ -34,10 +34,10 @@
 	</distributionManagement>
 
 	<modules>
-		<module>${project.artifactId}-core</module>
-		<module>${project.artifactId}-java2dmodule</module>
-		<module>${project.artifactId}-slickmodule</module>
-		<module>${project.artifactId}-tests</module>
+		<module>resourcesmanager-core</module>
+		<module>resourcesmanager-java2dmodule</module>
+		<module>resourcesmanager-slickmodule</module>
+		<module>resourcesmanager-tests</module>
 	</modules>
 
 	<build>
