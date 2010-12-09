@@ -46,7 +46,7 @@ public class ResourcesReloadSample extends BasicGame {
 
 		new SlickResourcesBuilder(resourceManager) {
 			{
-				image("CompanyLogo", "logo-gemserk-512x116-white.png");
+//				image("CompanyLogo", "logo-gemserk-512x116-white.png");
 				sound("FileReloadedSound", "assets/sounds/nextwave.wav");
 				truetypefont("MyFont", "assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48);
 				

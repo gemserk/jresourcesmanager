@@ -2,6 +2,7 @@ package com.gemserk.resources.slick;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
 
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.datasources.ClassPathDataSource;
@@ -25,13 +26,13 @@ public class PropertiesAnimationLoader {
 
 	public void load(String animationPropertiesFile) {
 		try {
-			java.util.Properties animationProperties = new java.util.Properties();
-			InputStream animationInputStream = new ClassPathDataSource(animationPropertiesFile).getInputStream();
-			animationProperties.load(animationInputStream);
+			Properties properties = new Properties();
+			InputStream propertiesInputStream = new ClassPathDataSource(animationPropertiesFile).getInputStream();
+			properties.load(propertiesInputStream);
 
-			for (Object keyObj : animationProperties.keySet()) {
+			for (Object keyObj : properties.keySet()) {
 				String key = (String) keyObj;
-				String value = animationProperties.getProperty(key);
+				String value = properties.getProperty(key);
 
 				String[] values = value.split(",");
 				String file = values[0];

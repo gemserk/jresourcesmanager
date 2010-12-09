@@ -9,11 +9,11 @@ import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.datasources.ClassPathDataSource;
 import com.gemserk.resources.resourceloaders.CachedResourceLoader;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
-import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
+import com.gemserk.resources.slick.dataloaders.SlickSoundLoader;
 import com.google.inject.Inject;
 
 @SuppressWarnings("unchecked")
-public class PropertiesImageLoader {
+public class PropertiesSoundLoader {
 
 	ResourceManager resourceManager;
 
@@ -31,8 +31,8 @@ public class PropertiesImageLoader {
 			for (String imageKey : properties.stringPropertyNames()) {
 				String imageProperties = properties.getProperty(imageKey);
 				String[] values = imageProperties.split(",");
-
-				DataLoader dataLoader = new SlickImageLoader(values[0]);
+				
+				DataLoader dataLoader = new SlickSoundLoader(values[0]);
 				resourceManager.add(imageKey, new CachedResourceLoader(new ResourceLoaderImpl(dataLoader)));
 			}
 		} catch (IOException e) {
