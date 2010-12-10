@@ -3,6 +3,7 @@ package com.gemserk.resources.slick;
 
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.dataloaders.DataLoader;
+import com.gemserk.resources.monitor.FileMonitorResourceHelper;
 import com.gemserk.resources.monitor.FileUtils;
 import com.gemserk.resources.monitor.FilesMonitor;
 import com.gemserk.resources.monitor.FilesMonitorNullImpl;
@@ -35,9 +36,12 @@ public class SlickResourcesBuilder {
 	 * Load all images from a properties file.
 	 */
 	public void images(String propertiesFile) {
+		FileMonitorResourceHelper fileMonitorResourceHelper = new FileMonitorResourceHelper();
+		fileMonitorResourceHelper.setFilesMonitor(filesMonitor);
+
 		PropertiesImageLoader propertiesLoader = new PropertiesImageLoader();
 		propertiesLoader.setResourceManager(resourceManager);
-		propertiesLoader.setFilesMonitor(filesMonitor);
+		propertiesLoader.setFileMonitorResourceHelper(fileMonitorResourceHelper);
 		propertiesLoader.load(propertiesFile);
 	}
 
@@ -45,9 +49,12 @@ public class SlickResourcesBuilder {
 	 * Load all animations from a properties file.
 	 */
 	public void animations(String propertiesFile) {
+		FileMonitorResourceHelper fileMonitorResourceHelper = new FileMonitorResourceHelper();
+		fileMonitorResourceHelper.setFilesMonitor(filesMonitor);
+
 		PropertiesAnimationLoader propertiesLoader = new PropertiesAnimationLoader();
 		propertiesLoader.setResourceManager(resourceManager);
-		propertiesLoader.setFilesMonitor(filesMonitor);
+		propertiesLoader.setFileMonitorResourceHelper(fileMonitorResourceHelper);
 		propertiesLoader.load(propertiesFile);
 	}
 
@@ -55,9 +62,12 @@ public class SlickResourcesBuilder {
 	 * Load all sounds from a properties file.
 	 */
 	public void sounds(String propertiesFile) {
+		FileMonitorResourceHelper fileMonitorResourceHelper = new FileMonitorResourceHelper();
+		fileMonitorResourceHelper.setFilesMonitor(filesMonitor);
+
 		PropertiesSoundLoader propertiesLoader = new PropertiesSoundLoader();
 		propertiesLoader.setResourceManager(resourceManager);
-		propertiesLoader.setFilesMonitor(filesMonitor);
+		propertiesLoader.setFileMonitorResourceHelper(fileMonitorResourceHelper);
 		propertiesLoader.load(propertiesFile);
 	}
 

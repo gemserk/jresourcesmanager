@@ -37,7 +37,7 @@ public class PropertiesAnimationLoader extends PropertiesLoader {
 
 				// or the resource file itself
 				// resourcesMonitor.monitor(new ResourceMonitor(resourceManager.get(id), FileMonitorFactory.classPathFileMonitor(file)));
-				monitor(id, file);
+				fileMonitorResourceHelper.monitorClassPathFile(file, resourceManager.get(id));
 			}
 
 		} catch (IOException e) {

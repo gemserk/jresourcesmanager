@@ -33,7 +33,7 @@ public class PropertiesSoundLoader extends PropertiesLoader {
 
 				// or the resource file itself
 				// resourcesMonitor.monitor(new ResourceMonitor(resourceManager.get(id), FileMonitorFactory.classPathFileMonitor(file)));
-				monitor(id, file);
+				fileMonitorResourceHelper.monitorClassPathFile(file, resourceManager.get(id));
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("failed to load image mapping", e);
