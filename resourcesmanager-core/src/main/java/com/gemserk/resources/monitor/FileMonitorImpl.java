@@ -23,5 +23,10 @@ public class FileMonitorImpl implements FileMonitor {
 	public void reset() {
 		lastModified = file.lastModified();
 	}
+	
+	@Override
+	public File getFile() {
+		return file;
+	}
 
 }

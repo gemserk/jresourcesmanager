@@ -4,7 +4,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,13 +12,12 @@ import com.gemserk.resources.Resource;
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.ResourceManagerImpl;
 import com.gemserk.resources.ResourcesBuilder;
-import com.gemserk.resources.datasources.ClassPathDataSource;
 import com.gemserk.resources.datasources.DataSourceProvider;
 import com.gemserk.resources.datasources.DataSourceProvider.Source;
-import com.gemserk.resources.monitor.FileMonitorImpl;
-import com.gemserk.resources.monitor.ResourceMonitor;
-import com.gemserk.resources.monitor.ResourcesMonitor;
-import com.gemserk.resources.monitor.ResourcesMonitorImpl;
+import com.gemserk.resources.monitor.FileUtils;
+import com.gemserk.resources.monitor.FilesMonitor;
+import com.gemserk.resources.monitor.FilesMonitorImpl;
+import com.gemserk.resources.monitor.handlers.ReloadResourceWhenFileModified;
 
 public class ResourcesMonitorSample {
 
@@ -33,9 +31,8 @@ public class ResourcesMonitorSample {
 			}
 		};
 
-		final ResourcesMonitor resourcesMonitorImpl = new ResourcesMonitorImpl();
-		resourcesMonitorImpl.monitor(new ResourceMonitor(resourceManager.get("BlackCompanyLogo"), // 
-				new FileMonitorImpl(new File(new ClassPathDataSource("logo-gemserk-512x116.png").getUri()))));
+		final FilesMonitor filesMonitor = new FilesMonitorImpl();
+		filesMonitor.monitor(FileUtils.classPathFile("logo-gemserk-512x116.png"), new ReloadResourceWhenFileModified(resourceManager.get("BlackCompanyLogo")));
 
 		new Thread() {
 
@@ -43,7 +40,7 @@ public class ResourcesMonitorSample {
 
 				try {
 					while (true) {
-						resourcesMonitorImpl.reloadModifiedResources();
+						filesMonitor.checkModifiedFiles();
 						sleep(500);
 					}
 				} catch (InterruptedException e) {

@@ -14,8 +14,8 @@ import org.newdawn.slick.Sound;
 import com.gemserk.resources.Resource;
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.ResourceManagerImpl;
-import com.gemserk.resources.monitor.ResourcesMonitor;
-import com.gemserk.resources.monitor.ResourcesMonitorImpl;
+import com.gemserk.resources.monitor.FilesMonitor;
+import com.gemserk.resources.monitor.FilesMonitorImpl;
 import com.gemserk.resources.slick.SlickResourcesBuilder;
 
 public class ResourcesReloadSample extends BasicGame {
@@ -46,9 +46,9 @@ public class ResourcesReloadSample extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 
-		resourcesMonitor = new ResourcesMonitorImpl();
+		filesMonitor = new FilesMonitorImpl();
 
-		new SlickResourcesBuilder(resourceManager, resourcesMonitor) {
+		new SlickResourcesBuilder(resourceManager, filesMonitor) {
 			{
 				// image("CompanyLogo", "logo-gemserk-512x116-white.png");
 				// sound("FileReloadedSound", "assets/sounds/nextwave.wav");
@@ -63,7 +63,7 @@ public class ResourcesReloadSample extends BasicGame {
 		fileReloadedResource = resourceManager.get("FileReloadedSound");
 	}
 
-	private ResourcesMonitor resourcesMonitor;
+	private FilesMonitor filesMonitor;
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
@@ -74,7 +74,8 @@ public class ResourcesReloadSample extends BasicGame {
 	public void keyPressed(int key, char c) {
 
 		if (key == Input.KEY_R) {
-			resourcesMonitor.reloadModifiedResources();
+			// resourcesMonitor.reloadModifiedResources();
+			filesMonitor.checkModifiedFiles();
 			fileReloadedResource.get().play();
 		}
 
