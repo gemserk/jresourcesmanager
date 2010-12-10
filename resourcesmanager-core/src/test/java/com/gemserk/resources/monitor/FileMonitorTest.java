@@ -1,4 +1,4 @@
-package com.gemserk.resources;
+package com.gemserk.resources.monitor;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.*;
