@@ -5,13 +5,13 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import com.gemserk.resources.ResourceManager;
+import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.datasources.ClassPathDataSource;
-import com.gemserk.resources.resourceloaders.CachedResourceLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoader;
+import com.gemserk.resources.monitor.FileMonitorFactory;
+import com.gemserk.resources.monitor.ResourceMonitor;
+import com.gemserk.resources.monitor.ResourcesMonitor;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
-import com.gemserk.resources.slick.dataloaders.AnimationLoader;
-import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
-import com.gemserk.resources.slick.dataloaders.SpriteSheetLoader;
+import com.gemserk.resources.slick.dataloaders.SlickAnimationLoader;
 import com.google.inject.Inject;
 
 @SuppressWarnings("unchecked")
@@ -19,20 +19,27 @@ public class PropertiesAnimationLoader {
 
 	ResourceManager resourceManager;
 
+	ResourcesMonitor resourcesMonitor;
+
 	@Inject
 	public void setResourceManager(ResourceManager resourceManager) {
 		this.resourceManager = resourceManager;
 	}
 
-	public void load(String animationPropertiesFile) {
+	@Inject
+	public void setResourcesMonitor(ResourcesMonitor resourcesMonitor) {
+		this.resourcesMonitor = resourcesMonitor;
+	}
+
+	public void load(String propertiesFile) {
 		try {
 			Properties properties = new Properties();
-			InputStream propertiesInputStream = new ClassPathDataSource(animationPropertiesFile).getInputStream();
+			InputStream propertiesInputStream = new ClassPathDataSource(propertiesFile).getInputStream();
 			properties.load(propertiesInputStream);
 
 			for (Object keyObj : properties.keySet()) {
-				String key = (String) keyObj;
-				String value = properties.getProperty(key);
+				String id = (String) keyObj;
+				String value = properties.getProperty(id);
 
 				String[] values = value.split(",");
 				String file = values[0];
@@ -41,21 +48,18 @@ public class PropertiesAnimationLoader {
 				final int time = Integer.parseInt(values[3]);
 				final int framesCount = Integer.parseInt(values[4]);
 
-				SlickImageLoader imageLoader = new SlickImageLoader(file);
-				ResourceLoader imageResourceLoader = new CachedResourceLoader(new ResourceLoaderImpl(imageLoader));
-				// resourceManager.add(key + "_spriteSheetImage", imageResourceLoader);
+				DataLoader dataLoader = new SlickAnimationLoader(file, width, height, time, framesCount, false);
+				resourceManager.add(id, new ResourceLoaderImpl(dataLoader));
 
-				SpriteSheetLoader spriteSheetLoader = new SpriteSheetLoader(imageResourceLoader.load(), width, height);
-				ResourceLoader spriteSheetResourceLoader = new CachedResourceLoader(new ResourceLoaderImpl(spriteSheetLoader));
-				// resourceManager.add(key + "_spriteSheet", spriteSheetResourceLoader);
+				// // mark the resource for reloading whenever the properties file was modified
+				// resourcesMonitor.monitor(new ResourceMonitor(resourceManager.get(id), FileMonitorFactory.classPathFileMonitor(propertiesFile)));
 
-				AnimationLoader animationLoader = new AnimationLoader(spriteSheetResourceLoader.load(), time, framesCount, false);
-				ResourceLoader animationResourceLoader = new ResourceLoaderImpl(animationLoader);
-				resourceManager.add(key, animationResourceLoader);
+				// or the resource file itself
+				resourcesMonitor.monitor(new ResourceMonitor(resourceManager.get(id), FileMonitorFactory.classPathFileMonitor(file)));
 			}
 
 		} catch (IOException e) {
-			throw new RuntimeException("failed to load animations from " + animationPropertiesFile, e);
+			throw new RuntimeException("failed to load animations from " + propertiesFile, e);
 		}
 	}
 

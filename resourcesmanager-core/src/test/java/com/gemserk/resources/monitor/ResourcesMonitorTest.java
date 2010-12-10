@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import org.junit.Test;
 
 import com.gemserk.resources.monitor.ResourceMonitor;
-import com.gemserk.resources.monitor.ResourcesMonitor;
+import com.gemserk.resources.monitor.ResourcesMonitorImpl;
 
 public class ResourcesMonitorTest {
 
@@ -18,10 +18,10 @@ public class ResourcesMonitorTest {
 		expect(resourceMonitor.reloadIfModified()).andReturn(false);
 		replay(resourceMonitor);
 
-		ResourcesMonitor resourcesMonitor = new ResourcesMonitor();
+		ResourcesMonitor resourcesMonitorImpl = new ResourcesMonitorImpl();
 
-		resourcesMonitor.monitor(resourceMonitor);
-		resourcesMonitor.reloadModifiedResources();
+		resourcesMonitorImpl.monitor(resourceMonitor);
+		resourcesMonitorImpl.reloadModifiedResources();
 
 		verify(resourceMonitor);
 	}
@@ -36,11 +36,11 @@ public class ResourcesMonitorTest {
 		
 		replay(resourceMonitor, resourceMonitor2);
 
-		ResourcesMonitor resourcesMonitor = new ResourcesMonitor();
+		ResourcesMonitor resourcesMonitorImpl = new ResourcesMonitorImpl();
 
-		resourcesMonitor.monitor(resourceMonitor);
-		resourcesMonitor.monitor(resourceMonitor2);
-		resourcesMonitor.reloadModifiedResources();
+		resourcesMonitorImpl.monitor(resourceMonitor);
+		resourcesMonitorImpl.monitor(resourceMonitor2);
+		resourcesMonitorImpl.reloadModifiedResources();
 
 		verify(resourceMonitor, resourceMonitor2);
 	}

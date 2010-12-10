@@ -19,6 +19,7 @@ import com.gemserk.resources.datasources.DataSourceProvider.Source;
 import com.gemserk.resources.monitor.FileMonitorImpl;
 import com.gemserk.resources.monitor.ResourceMonitor;
 import com.gemserk.resources.monitor.ResourcesMonitor;
+import com.gemserk.resources.monitor.ResourcesMonitorImpl;
 
 public class ResourcesMonitorSample {
 
@@ -32,8 +33,8 @@ public class ResourcesMonitorSample {
 			}
 		};
 
-		final ResourcesMonitor resourcesMonitor = new ResourcesMonitor();
-		resourcesMonitor.monitor(new ResourceMonitor(resourceManager.get("BlackCompanyLogo"), // 
+		final ResourcesMonitor resourcesMonitorImpl = new ResourcesMonitorImpl();
+		resourcesMonitorImpl.monitor(new ResourceMonitor(resourceManager.get("BlackCompanyLogo"), // 
 				new FileMonitorImpl(new File(new ClassPathDataSource("logo-gemserk-512x116.png").getUri()))));
 
 		new Thread() {
@@ -42,7 +43,7 @@ public class ResourcesMonitorSample {
 
 				try {
 					while (true) {
-						resourcesMonitor.reloadModifiedResources();
+						resourcesMonitorImpl.reloadModifiedResources();
 						sleep(500);
 					}
 				} catch (InterruptedException e) {

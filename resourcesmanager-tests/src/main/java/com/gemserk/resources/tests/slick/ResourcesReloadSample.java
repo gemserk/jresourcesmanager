@@ -14,6 +14,8 @@ import org.newdawn.slick.Sound;
 import com.gemserk.resources.Resource;
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.ResourceManagerImpl;
+import com.gemserk.resources.monitor.ResourcesMonitor;
+import com.gemserk.resources.monitor.ResourcesMonitorImpl;
 import com.gemserk.resources.slick.SlickResourcesBuilder;
 
 public class ResourcesReloadSample extends BasicGame {
@@ -44,19 +46,24 @@ public class ResourcesReloadSample extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 
-		new SlickResourcesBuilder(resourceManager) {
+		resourcesMonitor = new ResourcesMonitorImpl();
+
+		new SlickResourcesBuilder(resourceManager, resourcesMonitor) {
 			{
-//				image("CompanyLogo", "logo-gemserk-512x116-white.png");
-				sound("FileReloadedSound", "assets/sounds/nextwave.wav");
+				// image("CompanyLogo", "logo-gemserk-512x116-white.png");
+				// sound("FileReloadedSound", "assets/sounds/nextwave.wav");
 				truetypefont("MyFont", "assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48);
-				
+
 				images("images.properties");
+				sounds("sounds.properties");
 			}
 		};
 
-		companyLogoResource = resourceManager.get("CompanyLogo");
+		companyLogoResource = resourceManager.get("WhiteLogo");
 		fileReloadedResource = resourceManager.get("FileReloadedSound");
 	}
+
+	private ResourcesMonitor resourcesMonitor;
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
@@ -67,12 +74,8 @@ public class ResourcesReloadSample extends BasicGame {
 	public void keyPressed(int key, char c) {
 
 		if (key == Input.KEY_R) {
+			resourcesMonitor.reloadModifiedResources();
 			fileReloadedResource.get().play();
-
-			resourceManager.get("CompanyLogo").reload();
-			resourceManager.get("MyFont").reload();
-			resourceManager.get("FileReloadedSound").reload();
-			
 		}
 
 	}
@@ -92,11 +95,11 @@ public class ResourcesReloadSample extends BasicGame {
 
 		Image image = companyLogoResource.get();
 		g.drawImage(image, 320 - image.getWidth() / 2, 240 - image.getHeight() / 2);
-		
+
 		Resource<Font> fontResource = resourceManager.get("MyFont");
 		g.setColor(Color.white);
 		g.setFont(fontResource.get());
-		g.drawString("Hello world",320 - image.getWidth() / 2, 100);
+		g.drawString("Hello world", 320 - image.getWidth() / 2, 100);
 	}
 
 }
