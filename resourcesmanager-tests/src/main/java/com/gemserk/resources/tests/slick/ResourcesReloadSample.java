@@ -14,6 +14,7 @@ import org.newdawn.slick.Sound;
 import com.gemserk.resources.Resource;
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.ResourceManagerImpl;
+import com.gemserk.resources.monitor.FileMonitorResourceHelperImpl;
 import com.gemserk.resources.monitor.FilesMonitor;
 import com.gemserk.resources.monitor.FilesMonitorImpl;
 import com.gemserk.resources.slick.SlickResourcesBuilder;
@@ -48,14 +49,15 @@ public class ResourcesReloadSample extends BasicGame {
 
 		filesMonitor = new FilesMonitorImpl();
 
-		new SlickResourcesBuilder(resourceManager, filesMonitor) {
+		FileMonitorResourceHelperImpl fileMonitorResourceHelper = new FileMonitorResourceHelperImpl();
+		
+		fileMonitorResourceHelper.setFilesMonitor(new FilesMonitorImpl());
+		
+		new SlickResourcesBuilder(resourceManager, fileMonitorResourceHelper) {
 			{
-				// image("CompanyLogo", "logo-gemserk-512x116-white.png");
-				// sound("FileReloadedSound", "assets/sounds/nextwave.wav");
-				truetypefont("MyFont", "assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48);
-
 				images("images.properties");
 				sounds("sounds.properties");
+				truetypefont("MyFont", "assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48);
 			}
 		};
 

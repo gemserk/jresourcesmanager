@@ -14,21 +14,20 @@ public class RemoteDataSource implements DataSource {
 
 	protected static final Logger logger = LoggerFactory.getLogger(RemoteDataSource.class);
 
-	private final String url;
+	private final String path;
 
-	String getUrl() {
-		return url;
-	}
+	private final String resourceName;
 
 	public RemoteDataSource(String url) {
-		this.url = url;
+		this.path = url;
+		this.resourceName = url;
 	}
 
 	public InputStream getInputStream() {
 		try {
 			if (logger.isInfoEnabled())
 				logger.info("loading stream from " + getResourceName());
-			return new URL(getUrl()).openStream();
+			return new URL(path).openStream();
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
@@ -39,18 +38,43 @@ public class RemoteDataSource implements DataSource {
 
 	@Override
 	public String getResourceName() {
-		return getUrl();
+		return resourceName;
 	}
 
 	@Override
 	public URI getUri() {
 		try {
-			return new URL(getUrl()).toURI();
+			return new URL(path).toURI();
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((resourceName == null) ? 0 : resourceName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RemoteDataSource other = (RemoteDataSource) obj;
+		if (resourceName == null) {
+			if (other.resourceName != null)
+				return false;
+		} else if (!resourceName.equals(other.resourceName))
+			return false;
+		return true;
 	}
 
 }

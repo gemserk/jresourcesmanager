@@ -16,21 +16,20 @@ public class FileSystemDataSource implements DataSource {
 
 	protected static final Logger logger = LoggerFactory.getLogger(FileSystemDataSource.class);
 
-	private final String file;
+	private final String path;
 
-	String getFile() {
-		return file;
-	}
+	private final String resourceName;
 
-	public FileSystemDataSource(String file) {
-		this.file = file;
+	public FileSystemDataSource(String path) {
+		this.path = path;
+		this.resourceName = "filesystem://" + path;
 	}
 
 	public InputStream getInputStream() {
 		try {
 			if (logger.isInfoEnabled())
 				logger.info("loading stream " + getResourceName());
-			return new FileInputStream(new File(getFile()));
+			return new FileInputStream(new File(path));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
@@ -38,18 +37,43 @@ public class FileSystemDataSource implements DataSource {
 
 	@Override
 	public String getResourceName() {
-		return "file://" + getFile();
+		return resourceName;
 	}
 
 	@Override
 	public URI getUri() {
 		try {
-			return new URL(getFile()).toURI();
+			return new URL(path).toURI();
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((resourceName == null) ? 0 : resourceName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FileSystemDataSource other = (FileSystemDataSource) obj;
+		if (resourceName == null) {
+			if (other.resourceName != null)
+				return false;
+		} else if (!resourceName.equals(other.resourceName))
+			return false;
+		return true;
 	}
 
 }

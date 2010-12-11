@@ -10,7 +10,8 @@ public class FilesMonitorImpl implements FilesMonitor {
 	private ArrayList<FileModifiedChecker> fileModifiedCheckers = new ArrayList<FileModifiedChecker>();
 
 	public void checkModifiedFiles() {
-		for (FileModifiedChecker fileModifiedChecker : fileModifiedCheckers)
+		ArrayList<FileModifiedChecker> tmpArraylist = new ArrayList<FileModifiedChecker>(fileModifiedCheckers);
+		for (FileModifiedChecker fileModifiedChecker : tmpArraylist)
 			fileModifiedChecker.callHandlerIfModified();
 	}
 

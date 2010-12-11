@@ -11,34 +11,58 @@ public class ClassPathDataSource implements DataSource {
 
 	protected static final Logger logger = LoggerFactory.getLogger(ClassPathDataSource.class);
 
-	private final String url;
+	private final String path;
 
-	String getUrl() {
-		return url;
-	}
+	private final String resourceName;
 
-	public ClassPathDataSource(String url) {
-		this.url = url;
+	public ClassPathDataSource(String path) {
+		this.path = path;
+		this.resourceName = "classpath://" + path;
 	}
 
 	public InputStream getInputStream() {
 		if (logger.isInfoEnabled())
 			logger.info("loading stream " + getResourceName());
-		return getClass().getClassLoader().getResourceAsStream(getUrl());
+		return getClass().getClassLoader().getResourceAsStream(path);
 	}
 
 	@Override
 	public String getResourceName() {
-		return "classpath://" + getUrl();
+		return resourceName;
 	}
 
 	@Override
 	public URI getUri() {
 		try {
-			return getClass().getClassLoader().getResource(getUrl()).toURI();
+			return getClass().getClassLoader().getResource(path).toURI();
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((resourceName == null) ? 0 : resourceName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClassPathDataSource other = (ClassPathDataSource) obj;
+		if (resourceName == null) {
+			if (other.resourceName != null)
+				return false;
+		} else if (!resourceName.equals(other.resourceName))
+			return false;
+		return true;
 	}
 
 }

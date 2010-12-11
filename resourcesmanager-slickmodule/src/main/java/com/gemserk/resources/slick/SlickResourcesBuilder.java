@@ -1,13 +1,9 @@
 package com.gemserk.resources.slick;
 
-
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.monitor.FileMonitorResourceHelper;
-import com.gemserk.resources.monitor.FileUtils;
-import com.gemserk.resources.monitor.FilesMonitor;
-import com.gemserk.resources.monitor.FilesMonitorNullImpl;
-import com.gemserk.resources.monitor.handlers.ReloadResourceWhenFileModified;
+import com.gemserk.resources.monitor.FileMonitorResourceHelperNullImpl;
 import com.gemserk.resources.resourceloaders.CachedResourceLoader;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickAngelCodeFontLoader;
@@ -21,24 +17,21 @@ public class SlickResourcesBuilder {
 
 	private ResourceManager resourceManager;
 
-	private FilesMonitor filesMonitor;
+	private FileMonitorResourceHelper fileMonitorResourceHelper;
 
 	public SlickResourcesBuilder(ResourceManager resourceManager) {
-		this(resourceManager, new FilesMonitorNullImpl());
+		this(resourceManager, new FileMonitorResourceHelperNullImpl());
 	}
 
-	public SlickResourcesBuilder(ResourceManager resourceManager, FilesMonitor filesMonitor) {
+	public SlickResourcesBuilder(ResourceManager resourceManager, FileMonitorResourceHelper fileMonitorResourceHelper) {
 		this.resourceManager = resourceManager;
-		this.filesMonitor = filesMonitor;
+		this.fileMonitorResourceHelper = fileMonitorResourceHelper;
 	}
 
 	/**
 	 * Load all images from a properties file.
 	 */
 	public void images(String propertiesFile) {
-		FileMonitorResourceHelper fileMonitorResourceHelper = new FileMonitorResourceHelper();
-		fileMonitorResourceHelper.setFilesMonitor(filesMonitor);
-
 		PropertiesImageLoader propertiesLoader = new PropertiesImageLoader();
 		propertiesLoader.setResourceManager(resourceManager);
 		propertiesLoader.setFileMonitorResourceHelper(fileMonitorResourceHelper);
@@ -49,9 +42,6 @@ public class SlickResourcesBuilder {
 	 * Load all animations from a properties file.
 	 */
 	public void animations(String propertiesFile) {
-		FileMonitorResourceHelper fileMonitorResourceHelper = new FileMonitorResourceHelper();
-		fileMonitorResourceHelper.setFilesMonitor(filesMonitor);
-
 		PropertiesAnimationLoader propertiesLoader = new PropertiesAnimationLoader();
 		propertiesLoader.setResourceManager(resourceManager);
 		propertiesLoader.setFileMonitorResourceHelper(fileMonitorResourceHelper);
@@ -62,9 +52,6 @@ public class SlickResourcesBuilder {
 	 * Load all sounds from a properties file.
 	 */
 	public void sounds(String propertiesFile) {
-		FileMonitorResourceHelper fileMonitorResourceHelper = new FileMonitorResourceHelper();
-		fileMonitorResourceHelper.setFilesMonitor(filesMonitor);
-
 		PropertiesSoundLoader propertiesLoader = new PropertiesSoundLoader();
 		propertiesLoader.setResourceManager(resourceManager);
 		propertiesLoader.setFileMonitorResourceHelper(fileMonitorResourceHelper);
@@ -72,7 +59,7 @@ public class SlickResourcesBuilder {
 	}
 
 	private void classpathMonitor(String id, String file) {
-		filesMonitor.monitor(FileUtils.classPathFile(file), new ReloadResourceWhenFileModified(resourceManager.get(id)));
+		fileMonitorResourceHelper.monitorClassPathFile(file, resourceManager.get(id));
 	}
 
 	public void image(String id, String file) {
