@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>com.gemserk.resources</groupId>
 		<artifactId>resourcesmanager</artifactId>
-		<version>0.0.8</version>
+		<version>0.0.9-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.gemserk.resources</groupId>
 	<artifactId>resourcesmanager-slickmodule</artifactId>
-	<version>0.0.8</version>
+	<version>0.0.9-SNAPSHOT</version>
 
 	<name>ResourceManager - Slick module</name>
 	<description>Resources Manager</description>
