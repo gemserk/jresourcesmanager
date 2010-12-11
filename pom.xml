@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gemserk.resources</groupId>
 	<artifactId>resourcesmanager</artifactId>
-	<version>0.0.8-SNAPSHOT</version>
+	<version>0.0.8</version>
 	<packaging>pom</packaging>
 
 	<name>ResourceManager</name>
@@ -15,9 +14,9 @@
 	</organization>
 
 	<scm>
-		<url>http://jresourcesmanager.googlecode.com/svn/trunk/</url>
-		<connection>scm:https://jresourcesmanager.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://jresourcesmanager.googlecode.com/svn/trunk/</developerConnection>
+		<url>http://jresourcesmanager.googlecode.com/svn/tags/resourcesmanager-0.0.8</url>
+		<connection>scm:https://jresourcesmanager.googlecode.com/svn/tags/resourcesmanager-0.0.8</connection>
+		<developerConnection>scm:svn:https://jresourcesmanager.googlecode.com/svn/tags/resourcesmanager-0.0.8</developerConnection>
 	</scm>
 
 	<distributionManagement>
