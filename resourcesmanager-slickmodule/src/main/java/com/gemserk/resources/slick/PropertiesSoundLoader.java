@@ -11,7 +11,7 @@ import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickSoundLoader;
 
 @SuppressWarnings("unchecked")
-public class PropertiesSoundLoader extends PropertiesLoader {
+public class PropertiesSoundLoader extends PropertiesBaseLoader {
 
 	public void load(String propertiesFile) {
 		try {

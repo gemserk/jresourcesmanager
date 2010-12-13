@@ -6,7 +6,7 @@ import com.gemserk.resources.monitor.FileMonitorResourceHelper;
 import com.google.inject.Inject;
 
 @SuppressWarnings("unchecked")
-public class PropertiesLoader {
+public class PropertiesBaseLoader {
 
 	protected ResourceManager resourceManager;
 

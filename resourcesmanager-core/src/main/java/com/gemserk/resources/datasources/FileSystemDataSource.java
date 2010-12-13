@@ -22,7 +22,7 @@ public class FileSystemDataSource implements DataSource {
 
 	public FileSystemDataSource(String path) {
 		this.path = path;
-		this.resourceName = "filesystem://" + path;
+		this.resourceName = "file://" + path;
 	}
 
 	public InputStream getInputStream() {

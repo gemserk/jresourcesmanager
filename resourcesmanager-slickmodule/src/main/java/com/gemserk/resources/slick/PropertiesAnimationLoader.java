@@ -10,7 +10,7 @@ import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickAnimationLoader;
 
 @SuppressWarnings("unchecked")
-public class PropertiesAnimationLoader extends PropertiesLoader {
+public class PropertiesAnimationLoader extends PropertiesBaseLoader {
 
 	public void load(String propertiesFile) {
 		try {

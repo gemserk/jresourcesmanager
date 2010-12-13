@@ -11,7 +11,7 @@ import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
 
 @SuppressWarnings("unchecked")
-public class PropertiesImageLoader extends PropertiesLoader {
+public class PropertiesImageLoader extends PropertiesBaseLoader {
 
 	public void load(String propertiesFile) {
 		try {
