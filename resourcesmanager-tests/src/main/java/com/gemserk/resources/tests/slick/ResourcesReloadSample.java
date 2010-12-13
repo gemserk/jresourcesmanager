@@ -58,14 +58,21 @@ public class ResourcesReloadSample extends BasicGame {
 				images("images.properties");
 				sounds("sounds.properties");
 				truetypefont("MyFont", "assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48);
+				image("WhiteLogo2", "file://assets/images/logo-gemserk-512x116-white.png");
+				
+				// image("WhiteLogo2", classPathDataSource("assets/fonts/Mugnuts.ttf"));
 			}
 		};
 
 		companyLogoResource = resourceManager.get("WhiteLogo");
 		fileReloadedResource = resourceManager.get("FileReloadedSound");
+		
+		businessCard = resourceManager.get("WhiteLogo2");
 	}
 
 	private FilesMonitor filesMonitor;
+
+	private Resource<Image> businessCard;
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
@@ -95,7 +102,10 @@ public class ResourcesReloadSample extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-
+		
+		Image background = businessCard.get();
+		g.drawImage(background, 320 - background.getWidth() / 2, 200 - background.getHeight() / 2);
+		
 		Image image = companyLogoResource.get();
 		g.drawImage(image, 320 - image.getWidth() / 2, 240 - image.getHeight() / 2);
 

@@ -5,20 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.gemserk.resources.datasources.ClassPathDataSource;
-import com.gemserk.resources.datasources.DataSource;
-import com.gemserk.resources.datasources.DataSourceParser;
-import com.gemserk.resources.datasources.FileSystemDataSource;
-import com.gemserk.resources.datasources.InvalidDataSourceException;
-import com.gemserk.resources.datasources.RemoteDataSource;
-
 public class DataSourceParserTest {
 
-	@Test(expected=InvalidDataSourceException.class)
-	public void shouldReturnFailWithExceptionWhenInvalidUrl() {
-		new DataSourceParser().parse("");
-	}
-	
 	@Test
 	public void shouldReturnClassPathDataSource() {
 		String path = "assets/images/image.png";
@@ -41,6 +29,16 @@ public class DataSourceParserTest {
 		DataSource dataSource = new DataSourceParser().parse("http://gemserk.com/" + path);
 		assertTrue(dataSource instanceof RemoteDataSource);
 		assertEquals("http://gemserk.com/" + path, dataSource.getResourceName());
+	}
+	
+	@Test
+	public void shouldReturnDefaultDataSource() {
+		String path = "assets/images/image.png";
+		
+		DataSource dataSource = new DataSourceParser().parse(path);
+		
+		assertTrue(dataSource instanceof ClassPathDataSource);
+		assertEquals("classpath://" + path, dataSource.getResourceName());
 	}
 
 }

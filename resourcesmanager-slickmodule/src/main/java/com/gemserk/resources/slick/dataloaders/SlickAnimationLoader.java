@@ -6,6 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import com.gemserk.resources.dataloaders.DataLoader;
+import com.gemserk.resources.datasources.DataSource;
 
 public class SlickAnimationLoader extends DataLoader<Animation> {
 
@@ -15,14 +16,14 @@ public class SlickAnimationLoader extends DataLoader<Animation> {
 
 	private int time;
 
-	private final String file;
-
 	private final int tw;
 
 	private final int th;
 
-	public SlickAnimationLoader(String file, int tw, int th, int time, int totalFrames, boolean autoUpdate) {
-		this.file = file;
+	private final DataSource dataSource;
+
+	public SlickAnimationLoader(DataSource dataSource, int tw, int th, int time, int totalFrames, boolean autoUpdate) {
+		this.dataSource = dataSource;
 		this.tw = tw;
 		this.th = th;
 		this.totalFrames = totalFrames;
@@ -33,7 +34,7 @@ public class SlickAnimationLoader extends DataLoader<Animation> {
 	@Override
 	public Animation load() {
 		try {
-			return createAnimation(new SpriteSheet(new Image(file), tw, th), totalFrames, time, autoUpdate);
+			return createAnimation(new SpriteSheet(new Image(dataSource.getInputStream(), dataSource.getResourceName(), false), tw, th), totalFrames, time, autoUpdate);
 		} catch (SlickException e) {
 			throw new RuntimeException(e);
 		}

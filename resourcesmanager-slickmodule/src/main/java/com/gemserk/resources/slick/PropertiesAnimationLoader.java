@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import com.gemserk.resources.PropertiesLoader;
 import com.gemserk.resources.dataloaders.DataLoader;
-import com.gemserk.resources.datasources.ClassPathDataSource;
+import com.gemserk.resources.datasources.DataSourceParser;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickAnimationLoader;
 
@@ -13,9 +13,11 @@ public class PropertiesAnimationLoader extends PropertiesBaseLoader {
 
 	PropertiesLoader propertiesLoader = new PropertiesLoader();
 
+	DataSourceParser dataSourceParser = new DataSourceParser();
+
 	public void load(String propertiesFile) {
 
-		Properties properties = propertiesLoader.load(new ClassPathDataSource(propertiesFile));
+		Properties properties = propertiesLoader.load(dataSourceParser.parse(propertiesFile));
 
 		for (Object keyObj : properties.keySet()) {
 			String id = (String) keyObj;
@@ -28,7 +30,7 @@ public class PropertiesAnimationLoader extends PropertiesBaseLoader {
 			final int time = Integer.parseInt(values[3]);
 			final int framesCount = Integer.parseInt(values[4]);
 
-			DataLoader dataLoader = new SlickAnimationLoader(file, width, height, time, framesCount, false);
+			DataLoader dataLoader = new SlickAnimationLoader(dataSourceParser.parse(file), width, height, time, framesCount, false);
 			resourceManager.add(id, new ResourceLoaderImpl(dataLoader));
 
 			// // mark the resource for reloading whenever the properties file was modified

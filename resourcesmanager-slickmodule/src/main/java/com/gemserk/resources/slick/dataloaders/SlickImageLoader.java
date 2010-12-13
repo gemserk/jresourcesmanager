@@ -6,28 +6,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.gemserk.resources.dataloaders.DataLoader;
-import com.gemserk.resources.datasources.ClassPathDataSource;
+import com.gemserk.resources.datasources.DataSource;
 
 public class SlickImageLoader extends DataLoader<Image> {
 
 	protected static final Logger logger = LoggerFactory.getLogger(SlickImageLoader.class);
 
-	private final String file;
+	private final DataSource dataSource;
 
-	public SlickImageLoader(String file) {
-		this.file = file;
+	public SlickImageLoader(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	@Override
 	public Image load() {
 		try {
 			if (logger.isInfoEnabled())
-				logger.info("Loading slick image from file " + file);
-			return new Image(new ClassPathDataSource(file).getInputStream(), file, false);
+				logger.info("Loading slick image from file " + dataSource.getResourceName());
+			return new Image(dataSource.getInputStream(), dataSource.getResourceName(), false);
 		} catch (SlickException e) {
 			if (logger.isErrorEnabled())
-				logger.error("Failed to load slick image from file " + file);
-			throw new RuntimeException("Failed to load slick image from file " + file, e);
+				logger.error("Failed to load slick image from file " + dataSource.getResourceName());
+			throw new RuntimeException("Failed to load slick image from file " + dataSource.getResourceName(), e);
 		}
 	}
 

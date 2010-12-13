@@ -2,6 +2,9 @@ package com.gemserk.resources.slick;
 
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.dataloaders.DataLoader;
+import com.gemserk.resources.datasources.DataSource;
+import com.gemserk.resources.datasources.DataSourceFactory;
+import com.gemserk.resources.datasources.DataSourceParser;
 import com.gemserk.resources.monitor.FileMonitorResourceHelper;
 import com.gemserk.resources.monitor.FileMonitorResourceHelperNullImpl;
 import com.gemserk.resources.resourceloaders.CachedResourceLoader;
@@ -18,6 +21,8 @@ public class SlickResourcesBuilder {
 	private ResourceManager resourceManager;
 
 	private FileMonitorResourceHelper fileMonitorResourceHelper;
+
+	private DataSourceParser dataSourceParser = new DataSourceParser();
 
 	public SlickResourcesBuilder(ResourceManager resourceManager) {
 		this(resourceManager, new FileMonitorResourceHelperNullImpl());
@@ -58,40 +63,46 @@ public class SlickResourcesBuilder {
 		propertiesLoader.load(propertiesFile);
 	}
 
-	private void classpathMonitor(String id, String file) {
-		fileMonitorResourceHelper.monitorClassPathFile(file, resourceManager.get(id));
+	public void image(String id, String url) {
+		image(id, dataSourceParser.parse(url));
 	}
 
-	public void image(String id, String file) {
-		DataLoader dataLoader = new SlickImageLoader(file);
+	public void image(String id, DataSource dataSource) {
+		DataLoader dataLoader = new SlickImageLoader(dataSource);
 		addCachedResourceLoader(id, dataLoader);
-		classpathMonitor(id, file);
 	}
 
-	public void animation(String id, String file, int th, int tw, int time, int totalFrames, boolean autoUpdate) {
+	public void animation(String id, String url, int th, int tw, int time, int totalFrames, boolean autoUpdate) {
+		animation(id, dataSourceParser.parse(url), th, tw, time, totalFrames, autoUpdate);
+	}
+
+	public void animation(String id, DataSource dataSource, int th, int tw, int time, int totalFrames, boolean autoUpdate) {
 		// animations resources are not cached, we want new resource each time...
-		DataLoader dataLoader = new SlickAnimationLoader(file, tw, th, time, totalFrames, autoUpdate);
+		DataLoader dataLoader = new SlickAnimationLoader(dataSource, tw, th, time, totalFrames, autoUpdate);
 		addResourceLoader(id, dataLoader);
-		classpathMonitor(id, file);
 	}
 
 	public void sound(String id, String file) {
 		DataLoader dataLoader = new SlickSoundLoader(file);
 		addCachedResourceLoader(id, dataLoader);
-		classpathMonitor(id, file);
 	}
 
-	public void truetypefont(String id, String file, int style, int size) {
-		DataLoader dataLoader = new SlickTrueTypeFontLoader(file, style, size);
+	public void truetypefont(String id, String url, int style, int size) {
+		truetypefont(id, dataSourceParser.parse(url), style, size);
+	}
+	
+	public void truetypefont(String id, DataSource dataSource, int style, int size) {
+		DataLoader dataLoader = new SlickTrueTypeFontLoader(dataSource, style, size);
 		addCachedResourceLoader(id, dataLoader);
-		classpathMonitor(id, file);
 	}
 
 	public void angelcodefont(String id, String fntFile, String imgFile) {
-		DataLoader dataLoader = new SlickAngelCodeFontLoader(fntFile, imgFile);
+		angelcodefont(id, dataSourceParser.parse(fntFile), dataSourceParser.parse(imgFile));
+	}
+
+	public void angelcodefont(String id, DataSource fontDataSource, DataSource imageDataSource) {
+		DataLoader dataLoader = new SlickAngelCodeFontLoader(fontDataSource, imageDataSource);
 		addCachedResourceLoader(id, dataLoader);
-		classpathMonitor(id, fntFile);
-		classpathMonitor(id, imgFile);
 	}
 
 	private void addCachedResourceLoader(String id, DataLoader dataLoader) {
@@ -100,6 +111,18 @@ public class SlickResourcesBuilder {
 
 	private void addResourceLoader(String id, DataLoader dataLoader) {
 		resourceManager.add(id, new ResourceLoaderImpl(dataLoader));
+	}
+
+	public DataSource classPathDataSource(String path) {
+		return DataSourceFactory.classPathDataSource(path);
+	}
+
+	public DataSource fileSystemDataSource(String path) {
+		return DataSourceFactory.fileSystemDataSource(path);
+	}
+
+	public DataSource remoteDataSource(String path) {
+		return DataSourceFactory.remoteDataSource(path);
 	}
 
 }

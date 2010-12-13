@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import com.gemserk.resources.PropertiesLoader;
 import com.gemserk.resources.dataloaders.DataLoader;
-import com.gemserk.resources.datasources.ClassPathDataSource;
+import com.gemserk.resources.datasources.DataSourceParser;
 import com.gemserk.resources.resourceloaders.CachedResourceLoader;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
@@ -14,9 +14,11 @@ public class PropertiesImageLoader extends PropertiesBaseLoader {
 
 	PropertiesLoader propertiesLoader = new PropertiesLoader();
 
+	DataSourceParser dataSourceParser = new DataSourceParser();
+
 	public void load(String propertiesFile) {
 
-		Properties properties = propertiesLoader.load(new ClassPathDataSource(propertiesFile));
+		Properties properties = propertiesLoader.load(dataSourceParser.parse(propertiesFile));
 
 		for (String id : properties.stringPropertyNames()) {
 			String imageProperties = properties.getProperty(id);
@@ -24,7 +26,7 @@ public class PropertiesImageLoader extends PropertiesBaseLoader {
 
 			String file = values[0];
 
-			DataLoader dataLoader = new SlickImageLoader(file);
+			DataLoader dataLoader = new SlickImageLoader(dataSourceParser.parse(file));
 			resourceManager.add(id, new CachedResourceLoader(new ResourceLoaderImpl(dataLoader)));
 
 			// // mark the resource for reloading whenever the properties file was modified

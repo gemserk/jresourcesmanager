@@ -4,7 +4,7 @@ import org.newdawn.slick.Font;
 import org.newdawn.slick.TrueTypeFont;
 
 import com.gemserk.resources.dataloaders.DataLoader;
-import com.gemserk.resources.datasources.ClassPathDataSource;
+import com.gemserk.resources.datasources.DataSource;
 
 public class SlickTrueTypeFontLoader extends DataLoader<Font> {
 
@@ -12,12 +12,12 @@ public class SlickTrueTypeFontLoader extends DataLoader<Font> {
 
 	FontResolver fontResolver;
 
-	public SlickTrueTypeFontLoader(String file, int style, int size) {
-		this(file, style, size, true);
+	public SlickTrueTypeFontLoader(DataSource dataSource, int style, int size) {
+		this(dataSource, style, size, true);
 	}
 
-	public SlickTrueTypeFontLoader(String file, int style, int size, boolean antiAlias) {
-		fontResolver = new FontResolverFileImpl(file, style, size);
+	public SlickTrueTypeFontLoader(DataSource dataSource, int style, int size, boolean antiAlias) {
+		fontResolver = new FontResolverDataSourceImpl(dataSource, style, size);
 		this.antiAlias = antiAlias;
 	}
 	
@@ -56,24 +56,24 @@ public class SlickTrueTypeFontLoader extends DataLoader<Font> {
 
 	}
 
-	class FontResolverFileImpl implements FontResolver {
-
-		final String file;
+	class FontResolverDataSourceImpl implements FontResolver {
 
 		final int style;
 
 		final int size;
 
-		FontResolverFileImpl(String file, int style, int size) {
-			this.file = file;
+		final DataSource dataSource;
+
+		FontResolverDataSourceImpl(DataSource dataSource, int style, int size) {
 			this.style = style;
 			this.size = size;
+			this.dataSource = dataSource;
 		}
 
 		@Override
 		public java.awt.Font resolve() {
 			try {
-				java.awt.Font font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new ClassPathDataSource(file).getInputStream());
+				java.awt.Font font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, dataSource.getInputStream());
 				return font.deriveFont((float) size).deriveFont(style);
 			} catch (Exception e) {
 				throw new RuntimeException(e);

@@ -23,6 +23,15 @@ public class PropertiesConceptTest {
 		void add(String id, ResourceLoader resourceLoader);
 
 	}
+	
+	class FileMonitorResourceRegistry implements ResourceRegistry {
+
+		@Override
+		public void add(String id, ResourceLoader resourceLoader) {
+			
+		}
+		
+	}
 
 	interface PropertiesResourcesLoader {
 
@@ -38,7 +47,7 @@ public class PropertiesConceptTest {
 				String imageProperties = properties.getProperty(id);
 				String[] values = imageProperties.split(",");
 				String file = values[0];
-				DataLoader dataLoader = new SlickImageLoader(file);
+				DataLoader dataLoader = new SlickImageLoader(new ClassPathDataSource(file));
 				ResourceLoader resourceLoader = new ResourceLoaderImpl(dataLoader);
 				resourceRegistry.add(id, resourceLoader);
 			}
