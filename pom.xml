@@ -112,16 +112,13 @@
 				<artifactId>logback-classic</artifactId>
 				<version>0.9.17</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>1.5.8</version>
 			</dependency>
-			<dependency>
-				<groupId>slick</groupId>
-				<artifactId>slick</artifactId>
-				<version>262</version>
-			</dependency>
+
 			<dependency>
 				<groupId>com.google.inject</groupId>
 				<artifactId>guice</artifactId>
