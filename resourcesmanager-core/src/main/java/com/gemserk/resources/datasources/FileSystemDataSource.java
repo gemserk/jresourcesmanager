@@ -9,7 +9,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class FileSystemDataSource implements DataSource {
+
+	protected static final Logger logger = LoggerFactory.getLogger(FileSystemDataSource.class);
 
 	private final String path;
 
@@ -22,6 +27,8 @@ public class FileSystemDataSource implements DataSource {
 
 	public InputStream getInputStream() {
 		try {
+			if (logger.isInfoEnabled())
+				logger.info("loading stream " + getResourceName());
 			return new FileInputStream(new File(path));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
