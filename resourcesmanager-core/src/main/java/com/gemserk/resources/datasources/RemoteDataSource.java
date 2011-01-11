@@ -7,12 +7,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class RemoteDataSource implements DataSource {
-
-	protected static final Logger logger = LoggerFactory.getLogger(RemoteDataSource.class);
 
 	private final String path;
 
@@ -25,8 +20,6 @@ public class RemoteDataSource implements DataSource {
 
 	public InputStream getInputStream() {
 		try {
-			if (logger.isInfoEnabled())
-				logger.info("loading stream from " + getResourceName());
 			return new URL(path).openStream();
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);

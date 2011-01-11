@@ -4,12 +4,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class ClassPathDataSource implements DataSource {
-
-	protected static final Logger logger = LoggerFactory.getLogger(ClassPathDataSource.class);
 
 	private final String path;
 
@@ -28,9 +23,6 @@ public class ClassPathDataSource implements DataSource {
 	}
 
 	public InputStream getInputStream() {
-		if (logger.isInfoEnabled())
-			logger.info("loading from thread stream " + getResourceName());
-		// return Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
 		return classLoader.getResourceAsStream(path);
 	}
 
@@ -42,7 +34,6 @@ public class ClassPathDataSource implements DataSource {
 	@Override
 	public URI getUri() {
 		try {
-			// return Thread.currentThread().getContextClassLoader().getResource(path).toURI();
 			return classLoader.getResource(path).toURI();
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);

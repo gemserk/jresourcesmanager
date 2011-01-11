@@ -3,13 +3,8 @@ package com.gemserk.resources.datasources;
 import java.io.InputStream;
 import java.net.URI;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class StaticDataSource implements DataSource {
 	
-	protected static final Logger logger = LoggerFactory.getLogger(StaticDataSource.class);
-
 	private final InputStream inputStream;
 
 	private final String resourceName;
@@ -31,8 +26,6 @@ public class StaticDataSource implements DataSource {
 
 	@Override
 	public InputStream getInputStream() {
-		if (logger.isInfoEnabled())
-			logger.info("returning static input stream " + getResourceName());
 		return inputStream;
 	}
 }
