@@ -15,15 +15,23 @@ public class ClassPathDataSource implements DataSource {
 
 	private final String resourceName;
 
+	private ClassLoader classLoader = ClassPathDataSource.class.getClassLoader();
+
 	public ClassPathDataSource(String path) {
+		this(path, ClassPathDataSource.class.getClassLoader());
+	}
+
+	public ClassPathDataSource(String path, ClassLoader classLoader) {
 		this.path = path;
 		this.resourceName = "classpath://" + path;
+		this.classLoader = classLoader;
 	}
 
 	public InputStream getInputStream() {
 		if (logger.isInfoEnabled())
-			logger.info("loading stream " + getResourceName());
-		return getClass().getClassLoader().getResourceAsStream(path);
+			logger.info("loading from thread stream " + getResourceName());
+		// return Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
+		return classLoader.getResourceAsStream(path);
 	}
 
 	@Override
@@ -34,7 +42,8 @@ public class ClassPathDataSource implements DataSource {
 	@Override
 	public URI getUri() {
 		try {
-			return getClass().getClassLoader().getResource(path).toURI();
+			// return Thread.currentThread().getContextClassLoader().getResource(path).toURI();
+			return classLoader.getResource(path).toURI();
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}

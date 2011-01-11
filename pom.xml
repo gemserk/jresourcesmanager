@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gemserk.resources</groupId>
 	<artifactId>resourcesmanager</artifactId>
@@ -13,22 +14,41 @@
 		<url>http://www.gemserk.com</url>
 	</organization>
 
+	<licenses>
+		<license>
+			<name>New BSD License</name>
+			<url>http://www.opensource.org/licenses/bsd-license.php</url>
+		</license>
+	</licenses>
+
 	<scm>
 		<url>http://jresourcesmanager.googlecode.com/svn/trunk/</url>
-		<connection>scm:https://jresourcesmanager.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://jresourcesmanager.googlecode.com/svn/trunk/</developerConnection>
+		<connection>scm:https://jresourcesmanager.googlecode.com/svn/trunk/
+		</connection>
+		<developerConnection>scm:svn:https://jresourcesmanager.googlecode.com/svn/trunk/
+		</developerConnection>
 	</scm>
+
+	<developers>
+		<developer>
+			<name>Ariel Coppes</name>
+			<organization>Gemserk</organization>
+			<email>ariel.coppes@gemserk.com</email>
+		</developer>
+	</developers>
 
 	<distributionManagement>
 		<repository>
 			<id>googlecode.resourcesmanager.releases</id>
 			<name>GoogleCode resourcesmanager releases</name>
-			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository</url>
+			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository
+			</url>
 		</repository>
 		<snapshotRepository>
 			<id>googlecode.resourcesmanager.snapshots</id>
 			<name>GoogleCode resourcesmanager snapshots</name>
-			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository-snapshots</url>
+			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository-snapshots
+			</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -80,15 +100,15 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 		</plugins>
 
 		<extensions>
-            <extension>
-                <groupId>org.jvnet.wagon-svn</groupId>
-                <artifactId>wagon-svn</artifactId>
-                <version>1.9</version>
-            </extension>
+			<extension>
+				<groupId>org.jvnet.wagon-svn</groupId>
+				<artifactId>wagon-svn</artifactId>
+				<version>1.9</version>
+			</extension>
 		</extensions>
 
 	</build>
@@ -112,7 +132,7 @@
 				<artifactId>logback-classic</artifactId>
 				<version>0.9.17</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
@@ -144,15 +164,15 @@
 			</dependency>
 
 			<dependency>
-				<groupId>lwjgl</groupId>
+				<groupId>org.lwjgl</groupId>
 				<artifactId>lwjgl</artifactId>
-				<version>2.5.0-GEMSERK</version>
+				<version>2.6.0-GEMSERK</version>
 			</dependency>
 
 			<dependency>
-				<groupId>lwjgl</groupId>
+				<groupId>org.lwjgl</groupId>
 				<artifactId>jinput</artifactId>
-				<version>2.5.0-GEMSERK</version>
+				<version>2.6.0-GEMSERK</version>
 			</dependency>
 
 		</dependencies>

@@ -95,6 +95,12 @@
 					<groupId>jcraft</groupId>
 					<artifactId>jorbis</artifactId>
 				</exclusion>
+
+				<exclusion>
+					<groupId>javax.jnlp</groupId>
+					<artifactId>jnlp</artifactId>
+				</exclusion>
+
 			</exclusions>
 		</dependency>
 	</dependencies>

@@ -67,11 +67,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>lwjgl</groupId>
+			<groupId>org.lwjgl</groupId>
 			<artifactId>lwjgl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>lwjgl</groupId>
+			<groupId>org.lwjgl</groupId>
 			<artifactId>jinput</artifactId>
 		</dependency>
 
