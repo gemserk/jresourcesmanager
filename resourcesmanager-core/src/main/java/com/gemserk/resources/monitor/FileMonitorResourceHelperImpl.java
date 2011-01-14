@@ -17,11 +17,11 @@ public class FileMonitorResourceHelperImpl implements FileMonitorResourceHelper 
 	}
 
 	public void monitorClassPathFile(String file, Resource resource) {
-		filesMonitor.monitor(FileUtils.classPathFile(file), new ReloadResourceWhenFileModified(resource));
+		new FileMonitorAction(filesMonitor).with(new ReloadResourceWhenFileModified(resource)).monitor(FileUtils.classPathFile(file));
 	}
 
 	public void monitorFileSystemFile(String file, Resource resource) {
-		filesMonitor.monitor(new File(file), new ReloadResourceWhenFileModified(resource));
+		new FileMonitorAction(filesMonitor).with(new ReloadResourceWhenFileModified(resource)).monitor(new File(file));
 	}
 
 }

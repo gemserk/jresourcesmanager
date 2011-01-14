@@ -5,7 +5,7 @@ import java.io.File;
 import com.gemserk.resources.Resource;
 
 @SuppressWarnings("unchecked")
-public class ReloadResourceWhenFileModified implements FileModifiedHandler {
+public class ReloadResourceWhenFileModified extends FileHandler {
 	
 	private final Resource resource;
 
@@ -14,7 +14,7 @@ public class ReloadResourceWhenFileModified implements FileModifiedHandler {
 	}
 
 	@Override
-	public void handleFileModified(File file) {
+	public void onFileModified(File file) {
 		resource.reload();
 	}
 	

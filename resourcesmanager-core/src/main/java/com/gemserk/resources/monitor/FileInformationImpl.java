@@ -2,16 +2,19 @@ package com.gemserk.resources.monitor;
 
 import java.io.File;
 
-
-public class FileMonitorImpl implements FileMonitor {
+/**
+ * @author acoppes
+ * A basic implementation of FileInformation which uses file date to know if the file was modified.
+ */
+public class FileInformationImpl implements FileInformation {
 
 	private final File file;
 
 	private long lastModified;
 
-	public FileMonitorImpl(File file) {
+	public FileInformationImpl(File file) {
 		this.file = file;
-		reset();
+		update();
 	}
 
 	@Override
@@ -20,7 +23,7 @@ public class FileMonitorImpl implements FileMonitor {
 	}
 
 	@Override
-	public void reset() {
+	public void update() {
 		lastModified = file.lastModified();
 	}
 	

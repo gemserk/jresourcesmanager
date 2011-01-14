@@ -1,13 +1,25 @@
 package com.gemserk.resources.monitor;
 
-import java.io.File;
+import com.gemserk.resources.monitor.handlers.FileHandler;
 
-public interface FileMonitor {
+public class FileMonitor {
 
-	boolean wasModified();
-
-	void reset();
+	private final FileInformation fileInformation;
 	
-	File getFile();
+	private final FileHandler fileHandler;
 
+	public FileMonitor(FileInformation fileInformation, FileHandler fileHandler) {
+		this.fileInformation = fileInformation;
+		this.fileHandler = fileHandler;
+	}
+
+	public boolean callHandlerIfModified() {
+		boolean wasModified = fileInformation.wasModified();
+		if (wasModified) {
+			fileHandler.onFileModified(fileInformation.getFile());
+			fileInformation.update();
+		}
+		return wasModified;
+	}
+	
 }

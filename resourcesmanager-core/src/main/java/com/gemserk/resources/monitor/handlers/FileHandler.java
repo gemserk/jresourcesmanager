@@ -2,8 +2,10 @@ package com.gemserk.resources.monitor.handlers;
 
 import java.io.File;
 
-public interface FileModifiedHandler {
+public class FileHandler {
 	
-	void handleFileModified(File file);
+	public void onFileModified(File file) {
+		
+	}
 	
 }

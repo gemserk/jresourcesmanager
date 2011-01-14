@@ -9,39 +9,39 @@ import java.io.File;
 
 import org.junit.Test;
 
-import com.gemserk.resources.monitor.handlers.FileModifiedHandler;
+import com.gemserk.resources.monitor.handlers.FileHandler;
 
 
 public class FileModifiedCheckerTest {
 	
 	@Test
 	public void shouldNotCallHanlerWhenFileNotModified() {
-		FileMonitor fileMonitor = createMock(FileMonitor.class);
-		FileModifiedHandler fileModifiedHandler = createMock(FileModifiedHandler.class);
-		expect(fileMonitor.wasModified()).andReturn(false);
-		replay(fileMonitor, fileModifiedHandler);
+		FileInformation fileInformation = createMock(FileInformation.class);
+		FileHandler fileHandler = createMock(FileHandler.class);
+		expect(fileInformation.wasModified()).andReturn(false);
+		replay(fileInformation, fileHandler);
 		
-		FileModifiedChecker fileModifiedChecker = new FileModifiedChecker(fileMonitor, fileModifiedHandler);
-		assertFalse(fileModifiedChecker.callHandlerIfModified());
+		FileMonitor fileMonitor = new FileMonitor(fileInformation, fileHandler);
+		assertFalse(fileMonitor.callHandlerIfModified());
 		
-		verify(fileMonitor, fileModifiedHandler);
+		verify(fileInformation, fileHandler);
 	}
 
 	@Test
 	public void shouldCallHandlerWhenFileModified() {
-		FileMonitor fileMonitor = createMock(FileMonitor.class);
+		FileInformation fileInformation = createMock(FileInformation.class);
 		File file = createMock(File.class);
-		FileModifiedHandler fileModifiedHandler = createMock(FileModifiedHandler.class);
-		expect(fileMonitor.wasModified()).andReturn(true);
-		expect(fileMonitor.getFile()).andReturn(file);
-		fileModifiedHandler.handleFileModified(file);
-		fileMonitor.reset();
-		replay(fileMonitor, fileModifiedHandler);
+		FileHandler fileHandler = createMock(FileHandler.class);
+		expect(fileInformation.wasModified()).andReturn(true);
+		expect(fileInformation.getFile()).andReturn(file);
+		fileHandler.onFileModified(file);
+		fileInformation.update();
+		replay(fileInformation, fileHandler);
 		
-		FileModifiedChecker fileModifiedChecker = new FileModifiedChecker(fileMonitor, fileModifiedHandler);
-		assertTrue(fileModifiedChecker.callHandlerIfModified());
+		FileMonitor fileMonitor = new FileMonitor(fileInformation, fileHandler);
+		assertTrue(fileMonitor.callHandlerIfModified());
 		
-		verify(fileMonitor, fileModifiedHandler);
+		verify(fileInformation, fileHandler);
 	}
 
 

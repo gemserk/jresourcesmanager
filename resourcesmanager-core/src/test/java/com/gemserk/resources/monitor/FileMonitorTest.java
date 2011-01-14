@@ -8,8 +8,8 @@ import java.io.File;
 
 import org.junit.Test;
 
-import com.gemserk.resources.monitor.FileMonitor;
-import com.gemserk.resources.monitor.FileMonitorImpl;
+import com.gemserk.resources.monitor.FileInformation;
+import com.gemserk.resources.monitor.FileInformationImpl;
 
 public class FileMonitorTest {
 
@@ -19,8 +19,8 @@ public class FileMonitorTest {
 		expect(file.lastModified()).andReturn(1L).times(2);
 		replay(file);
 
-		FileMonitor fileMonitor = new FileMonitorImpl(file);
-		assertEquals(false, fileMonitor.wasModified());
+		FileInformation fileInformation = new FileInformationImpl(file);
+		assertEquals(false, fileInformation.wasModified());
 
 		verify(file);
 	}
@@ -32,8 +32,8 @@ public class FileMonitorTest {
 		expect(file.lastModified()).andReturn(2L);
 		replay(file);
 
-		FileMonitor fileMonitor = new FileMonitorImpl(file);
-		assertEquals(true, fileMonitor.wasModified());
+		FileInformation fileInformation = new FileInformationImpl(file);
+		assertEquals(true, fileInformation.wasModified());
 
 		verify(file);
 	}

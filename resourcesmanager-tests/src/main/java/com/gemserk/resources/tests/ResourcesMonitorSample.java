@@ -14,6 +14,7 @@ import com.gemserk.resources.ResourceManagerImpl;
 import com.gemserk.resources.ResourcesBuilder;
 import com.gemserk.resources.datasources.DataSourceProvider;
 import com.gemserk.resources.datasources.DataSourceProvider.Source;
+import com.gemserk.resources.monitor.FileMonitorAction;
 import com.gemserk.resources.monitor.FileUtils;
 import com.gemserk.resources.monitor.FilesMonitor;
 import com.gemserk.resources.monitor.FilesMonitorImpl;
@@ -32,7 +33,10 @@ public class ResourcesMonitorSample {
 		};
 
 		final FilesMonitor filesMonitor = new FilesMonitorImpl();
-		filesMonitor.monitor(FileUtils.classPathFile("logo-gemserk-512x116.png"), new ReloadResourceWhenFileModified(resourceManager.get("BlackCompanyLogo")));
+
+		// filesMonitor.monitor(FileUtils.classPathFile("logo-gemserk-512x116.png"), new ReloadResourceWhenFileModified(resourceManager.get("BlackCompanyLogo")));
+
+		new FileMonitorAction(filesMonitor).with(new ReloadResourceWhenFileModified(resourceManager.get("BlackCompanyLogo"))).monitor(FileUtils.classPathFile("logo-gemserk-512x116.png"));
 
 		new Thread() {
 
@@ -83,5 +87,4 @@ public class ResourcesMonitorSample {
 		frame.setVisible(true);
 		frame.repaint();
 	}
-
 }

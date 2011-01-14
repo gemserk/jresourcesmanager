@@ -1,8 +1,5 @@
 package com.gemserk.resources.monitor;
 
-import java.io.File;
-
-import com.gemserk.resources.monitor.handlers.FileModifiedHandler;
 
 public interface FilesMonitor {
 
@@ -12,8 +9,8 @@ public interface FilesMonitor {
 	void checkModifiedFiles();
 
 	/**
-	 * Will monitor changes on specified file and call fileModifiedHandler whenever a modification has been detected.
+	 * Register a file monitor.
 	 */
-	void monitor(File file, FileModifiedHandler fileModifiedHandler);
+	void register(FileMonitor fileMonitor);
 
 }
