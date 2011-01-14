@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gemserk.resources</groupId>
 	<artifactId>resourcesmanager</artifactId>
-	<version>0.0.9</version>
+	<version>0.0.10-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>ResourceManager</name>
@@ -21,10 +21,10 @@
 	</licenses>
 
 	<scm>
-		<url>http://jresourcesmanager.googlecode.com/svn/tags/resourcesmanager-0.0.9</url>
-		<connection>scm:https://jresourcesmanager.googlecode.com/svn/tags/resourcesmanager-0.0.9
+		<url>http://jresourcesmanager.googlecode.com/svn/trunk/</url>
+		<connection>scm:https://jresourcesmanager.googlecode.com/svn/trunk/
 		</connection>
-		<developerConnection>scm:svn:https://jresourcesmanager.googlecode.com/svn/tags/resourcesmanager-0.0.9
+		<developerConnection>scm:svn:https://jresourcesmanager.googlecode.com/svn/trunk/
 		</developerConnection>
 	</scm>
 
