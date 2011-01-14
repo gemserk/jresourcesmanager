@@ -1,6 +1,5 @@
 package com.gemserk.resources.tests.slick;
 
-import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
@@ -12,8 +11,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
 import com.gemserk.resources.Resource;
-import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.ResourceManagerImpl;
+import com.gemserk.resources.ResourcesMonitorImpl;
 import com.gemserk.resources.monitor.FileMonitorResourceHelperImpl;
 import com.gemserk.resources.monitor.FilesMonitor;
 import com.gemserk.resources.monitor.FilesMonitorImpl;
@@ -21,7 +20,7 @@ import com.gemserk.resources.slick.SlickResourcesBuilder;
 
 public class ResourcesReloadSample extends BasicGame {
 
-	ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
+	ResourcesMonitorImpl<String> resourceManager = new ResourcesMonitorImpl<String>(new ResourceManagerImpl<String>());
 
 	Resource<Image> companyLogoResource;
 
@@ -33,15 +32,18 @@ public class ResourcesReloadSample extends BasicGame {
 
 	public static void main(String[] arguments) throws SlickException {
 
-		AppGameContainer app = new AppGameContainer(new ResourcesReloadSample(ResourcesReloadSample.class.getName()));
+		throw new RuntimeException("This sample must not be working right because a change was made to the slick builder, but I dont want to remove the sample yet.");
 
-		app.setDisplayMode(640, 480, false);
-		app.setAlwaysRender(true);
+		// AppGameContainer app = new AppGameContainer(new ResourcesReloadSample(ResourcesReloadSample.class.getName()));
+		//
+		// app.setDisplayMode(640, 480, false);
+		// app.setAlwaysRender(true);
+		//
+		// app.setVSync(true);
+		//
+		// app.setShowFPS(true);
+		// app.start();
 
-		app.setVSync(true);
-
-		app.setShowFPS(true);
-		app.start();
 	}
 
 	@Override
@@ -50,23 +52,23 @@ public class ResourcesReloadSample extends BasicGame {
 		filesMonitor = new FilesMonitorImpl();
 
 		FileMonitorResourceHelperImpl fileMonitorResourceHelper = new FileMonitorResourceHelperImpl();
-		
+
 		fileMonitorResourceHelper.setFilesMonitor(new FilesMonitorImpl());
-		
-		new SlickResourcesBuilder(resourceManager, fileMonitorResourceHelper) {
+
+		new SlickResourcesBuilder(resourceManager) {
 			{
 				images("images.properties");
 				sounds("sounds.properties");
 				truetypefont("MyFont", "assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48);
 				image("WhiteLogo2", "file://assets/images/logo-gemserk-512x116-white.png");
-				
+
 				// image("WhiteLogo2", classPathDataSource("assets/fonts/Mugnuts.ttf"));
 			}
 		};
 
 		companyLogoResource = resourceManager.get("WhiteLogo");
 		fileReloadedResource = resourceManager.get("FileReloadedSound");
-		
+
 		businessCard = resourceManager.get("WhiteLogo2");
 	}
 
@@ -102,10 +104,10 @@ public class ResourcesReloadSample extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		
+
 		Image background = businessCard.get();
 		g.drawImage(background, 320 - background.getWidth() / 2, 200 - background.getHeight() / 2);
-		
+
 		Image image = companyLogoResource.get();
 		g.drawImage(image, 320 - image.getWidth() / 2, 240 - image.getHeight() / 2);
 

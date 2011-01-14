@@ -28,13 +28,6 @@ public class PropertiesImageLoader extends PropertiesBaseLoader {
 
 			DataLoader dataLoader = new SlickImageLoader(dataSourceParser.parse(file));
 			resourceManager.add(id, new CachedResourceLoader(new ResourceLoaderImpl(dataLoader)));
-
-			// // mark the resource for reloading whenever the properties file was modified
-			// resourcesMonitor.monitor(new ResourceMonitor(resourceManager.get(id), FileMonitorFactory.classPathFileMonitor(propertiesFile)));
-
-			// or the resource file itself
-			// resourcesMonitor.monitor(new ResourceMonitor(resourceManager.get(id), FileMonitorFactory.classPathFileMonitor(file)));
-			fileMonitorResourceHelper.monitorClassPathFile(file, resourceManager.get(id));
 		}
 	}
 }

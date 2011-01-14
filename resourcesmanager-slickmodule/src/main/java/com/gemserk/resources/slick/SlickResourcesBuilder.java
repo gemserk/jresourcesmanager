@@ -5,8 +5,6 @@ import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.datasources.DataSource;
 import com.gemserk.resources.datasources.DataSourceFactory;
 import com.gemserk.resources.datasources.DataSourceParser;
-import com.gemserk.resources.monitor.FileMonitorResourceHelper;
-import com.gemserk.resources.monitor.FileMonitorResourceHelperNullImpl;
 import com.gemserk.resources.resourceloaders.CachedResourceLoader;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickAngelCodeFontLoader;
@@ -20,17 +18,10 @@ public class SlickResourcesBuilder {
 
 	private ResourceManager resourceManager;
 
-	private FileMonitorResourceHelper fileMonitorResourceHelper;
-
 	private DataSourceParser dataSourceParser = new DataSourceParser();
 
 	public SlickResourcesBuilder(ResourceManager resourceManager) {
-		this(resourceManager, new FileMonitorResourceHelperNullImpl());
-	}
-
-	public SlickResourcesBuilder(ResourceManager resourceManager, FileMonitorResourceHelper fileMonitorResourceHelper) {
 		this.resourceManager = resourceManager;
-		this.fileMonitorResourceHelper = fileMonitorResourceHelper;
 	}
 
 	/**
@@ -39,7 +30,6 @@ public class SlickResourcesBuilder {
 	public void images(String propertiesFile) {
 		PropertiesImageLoader propertiesLoader = new PropertiesImageLoader();
 		propertiesLoader.setResourceManager(resourceManager);
-		propertiesLoader.setFileMonitorResourceHelper(fileMonitorResourceHelper);
 		propertiesLoader.load(propertiesFile);
 	}
 
@@ -49,7 +39,6 @@ public class SlickResourcesBuilder {
 	public void animations(String propertiesFile) {
 		PropertiesAnimationLoader propertiesLoader = new PropertiesAnimationLoader();
 		propertiesLoader.setResourceManager(resourceManager);
-		propertiesLoader.setFileMonitorResourceHelper(fileMonitorResourceHelper);
 		propertiesLoader.load(propertiesFile);
 	}
 
@@ -59,7 +48,6 @@ public class SlickResourcesBuilder {
 	public void sounds(String propertiesFile) {
 		PropertiesSoundLoader propertiesLoader = new PropertiesSoundLoader();
 		propertiesLoader.setResourceManager(resourceManager);
-		propertiesLoader.setFileMonitorResourceHelper(fileMonitorResourceHelper);
 		propertiesLoader.load(propertiesFile);
 	}
 

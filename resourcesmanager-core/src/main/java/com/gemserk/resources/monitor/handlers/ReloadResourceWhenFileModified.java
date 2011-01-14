@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.gemserk.resources.monitor.handlers;
 
 import java.io.File;
