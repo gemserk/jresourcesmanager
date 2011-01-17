@@ -1,11 +1,9 @@
-/**
- * 
- */
 package com.gemserk.resources.slick.gamestates;
 
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.resourceloaders.ResourceLoader;
 
+@SuppressWarnings("unchecked")
 public class PreLoadResourceBuilder {
 
 	ResourceManager resourceManager;
@@ -17,7 +15,7 @@ public class PreLoadResourceBuilder {
 		this.taskQueue = taskQueue;
 	}
 
-	public void resource(String id, ResourceLoader resourceLoader) {
+	public void resource(Object id, ResourceLoader resourceLoader) {
 		resourceManager.add(id, resourceLoader);
 		taskQueue.add(new PreLoadResourceRunnable(resourceManager, id));
 	}
