@@ -1,0 +1,170 @@
+package com.gemserk.resources.tests.slick;
+
+import java.awt.Font;
+
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.gemserk.resources.Resource;
+import com.gemserk.resources.ResourceManager;
+import com.gemserk.resources.ResourceManagerImpl;
+import com.gemserk.resources.datasources.ClassPathDataSource;
+import com.gemserk.resources.resourceloaders.CachedResourceLoader;
+import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
+import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
+import com.gemserk.resources.slick.dataloaders.SlickSoundLoader;
+import com.gemserk.resources.slick.dataloaders.SlickTrueTypeFontLoader;
+import com.gemserk.resources.slick.gamestates.LoadingGameState;
+import com.gemserk.resources.slick.gamestates.PreLoadResourceBuilder;
+import com.gemserk.resources.slick.gamestates.TaskQueue;
+
+public class LoadingGameStateSample extends StateBasedGame {
+
+	protected Logger logger = LoggerFactory.getILoggerFactory().getLogger(LoadingGameStateSample.class.getName());
+
+	public static void main(String[] arguments) {
+
+		try {
+			LoadingGameStateSample loadingGameStateSample = new LoadingGameStateSample();
+
+			AppGameContainer app = new AppGameContainer(loadingGameStateSample);
+
+			// inicializo todos los subsistemas?
+
+			app.setDisplayMode(800, 600, false);
+			app.setAlwaysRender(true);
+			app.setShowFPS(false);
+
+			app.start();
+
+		} catch (Exception e) {
+			System.exit(0);
+		}
+	}
+
+	public LoadingGameStateSample() {
+		super("Load Game State Sample");
+	}
+
+	ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
+
+	@Override
+	public void initStatesList(GameContainer container) throws SlickException {
+		container.setVSync(true);
+
+		TaskQueue taskQueue = new TaskQueue();
+		
+		taskQueue.add(new SimulateLoadingTimeRunnable(200));
+		taskQueue.add(new SimulateLoadingTimeRunnable(700));
+		taskQueue.add(new SimulateLoadingTimeRunnable(300));
+		taskQueue.add(new SimulateLoadingTimeRunnable(1000));
+
+		new PreLoadResourceBuilder(resourceManager, taskQueue) {
+			{
+				resource("BusinessCard", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("assets/images/businesscard_front_landscape_ariel_fashionvictim_1.png")))));
+
+				resource("SoundSample", new CachedResourceLoader(new ResourceLoaderImpl(new SlickSoundLoader("assets/sounds/nextwave.wav"))));
+				resource("Font", new CachedResourceLoader(new ResourceLoaderImpl(new SlickTrueTypeFontLoader(new ClassPathDataSource("assets/fonts/Mugnuts.ttf"), Font.BOLD, 32))));
+
+				resource("BlackLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png")))));
+				resource("WhiteLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png")))));
+			}
+		};
+
+		addState(new TransitionGameState());
+		addState(new LoadingGameState(2, new TestGameState(), resourceManager.get("WhiteLogo"), taskQueue) {
+			{
+				setScreenBounds(new Rectangle(0, 0, 800, 600));
+			}
+		});
+
+	}
+
+	class SimulateLoadingTimeRunnable implements Runnable {
+		
+		int time;
+
+		SimulateLoadingTimeRunnable(int time) {
+			this.time = time;
+		}
+
+		@Override
+		public void run() {
+			try {
+				Thread.currentThread().sleep(time);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Only to make the fade in effect when application starts.
+	 */
+	class TransitionGameState extends BasicGameState {
+		@Override
+		public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+
+		}
+
+		@Override
+		public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+
+		}
+
+		@Override
+		public void init(GameContainer container, StateBasedGame game) throws SlickException {
+			enterState(2, new EmptyTransition(), new FadeInTransition(Color.black, 500));
+		}
+
+		@Override
+		public int getID() {
+			return 3;
+		}
+	}
+
+	public class TestGameState extends BasicGameState {
+
+		private Resource<Image> resourceImageA;
+
+		@Override
+		public void init(GameContainer container, StateBasedGame game) throws SlickException {
+			logger.debug("Init test game state");
+			resourceImageA = resourceManager.get("BusinessCard");
+		}
+
+		@Override
+		public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+			logger.debug("Enter test game state");
+		}
+
+		@Override
+		public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+			Image image = resourceImageA.get();
+			g.drawImage(image, 800 / 2 - image.getWidth() / 2, 600 / 2 - image.getHeight() / 2);
+		}
+
+		@Override
+		public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+
+		}
+
+		@Override
+		public int getID() {
+			return 1;
+		}
+
+	}
+
+}
