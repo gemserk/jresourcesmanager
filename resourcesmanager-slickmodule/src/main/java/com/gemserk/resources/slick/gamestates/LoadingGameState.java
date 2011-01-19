@@ -26,15 +26,12 @@ public class LoadingGameState extends BasicGameState {
 
 	Rectangle screenBounds;
 
-	public void setScreenBounds(Rectangle screenBounds) {
-		this.screenBounds = screenBounds;
-	}
-
-	public LoadingGameState(int id, BasicGameState nextGameState, Resource logoResource, TaskQueue taskQueue) {
+	public LoadingGameState(int id, BasicGameState nextGameState, Resource logoResource, TaskQueue taskQueue, Rectangle screenBounds) {
 		this.id = id;
 		this.nextGameState = nextGameState;
 		this.logoResource = logoResource;
 		this.taskQueue = taskQueue;
+		this.screenBounds = screenBounds;
 	}
 
 	@Override

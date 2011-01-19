@@ -82,25 +82,8 @@ public class LoadingGameStateSample extends StateBasedGame {
 			resourceManager.add("WhiteLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png")))));
 		}
 
-		// new PreLoadResourceBuilder(resourceManager, taskQueue) {
-		// {
-		// resource("BusinessCard", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("assets/images/businesscard_front_landscape_ariel_fashionvictim_1.png")))));
-		//
-		// resource("SoundSample", new CachedResourceLoader(new ResourceLoaderImpl(new SlickSoundLoader("assets/sounds/nextwave.wav"))));
-		// resource("Font", new CachedResourceLoader(new ResourceLoaderImpl(new SlickTrueTypeFontLoader(new ClassPathDataSource("assets/fonts/Mugnuts.ttf"), Font.BOLD, 32))));
-		//
-		// resource("BlackLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png")))));
-		// resource("WhiteLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png")))));
-		// }
-		// };
-
 		addState(new TransitionGameState());
-		addState(new LoadingGameState(2, new TestGameState(), resourceManager.get("WhiteLogo"), taskQueue) {
-			{
-				setScreenBounds(new Rectangle(0, 0, 800, 600));
-			}
-		});
-
+		addState(new LoadingGameState(2, new TestGameState(), resourceManager.get("WhiteLogo"), taskQueue, new Rectangle(0, 0, 800, 600)));
 	}
 
 	class SimulateLoadingTimeRunnable implements Runnable {
