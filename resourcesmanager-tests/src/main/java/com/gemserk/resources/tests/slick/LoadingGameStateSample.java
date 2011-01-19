@@ -27,6 +27,8 @@ import com.gemserk.resources.slick.dataloaders.SlickTrueTypeFontLoader;
 import com.gemserk.resources.slick.gamestates.LoadingGameState;
 import com.gemserk.resources.slick.gamestates.ResourceManagerLoaderProxyImpl;
 import com.gemserk.resources.slick.gamestates.TaskQueue;
+import com.gemserk.resources.slick.runnables.EnterNextStateRunnable;
+import com.gemserk.resources.slick.runnables.SimulateLoadingTimeRunnable;
 
 public class LoadingGameStateSample extends StateBasedGame {
 
@@ -59,7 +61,7 @@ public class LoadingGameStateSample extends StateBasedGame {
 	ResourceManager<String> resourceManager;
 
 	@Override
-	public void initStatesList(GameContainer container) throws SlickException {
+	public void initStatesList(final GameContainer container) throws SlickException {
 		container.setVSync(true);
 
 		TaskQueue taskQueue = new TaskQueue();
@@ -80,33 +82,18 @@ public class LoadingGameStateSample extends StateBasedGame {
 			resourceManager.add("BlackLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png")))));
 			resourceManager.add("WhiteLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png")))));
 		}
+		
+		taskQueue.add(new EnterNextStateRunnable(container, this, new TestGameState()));
 
 		addState(new TransitionGameState());
-		addState(new LoadingGameState(2, new TestGameState(), resourceManager.get("WhiteLogo"), taskQueue));
-	}
-
-	class SimulateLoadingTimeRunnable implements Runnable {
-
-		int time;
-
-		SimulateLoadingTimeRunnable(int time) {
-			this.time = time;
-		}
-
-		@Override
-		public void run() {
-			try {
-				Thread.currentThread().sleep(time);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+		addState(new LoadingGameState(2, new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png")).load(), taskQueue));
 	}
 
 	/**
 	 * Only to make the fade in effect when application starts.
 	 */
 	class TransitionGameState extends BasicGameState {
+		
 		@Override
 		public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 

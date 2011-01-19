@@ -1,4 +1,4 @@
-package com.gemserk.resources.slick.gamestates;
+package com.gemserk.resources.slick.runnables;
 
 import com.gemserk.resources.ResourceManager;
 
