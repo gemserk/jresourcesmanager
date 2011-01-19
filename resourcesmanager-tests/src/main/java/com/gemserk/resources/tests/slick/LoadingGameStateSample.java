@@ -8,7 +8,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EmptyTransition;
@@ -83,7 +82,7 @@ public class LoadingGameStateSample extends StateBasedGame {
 		}
 
 		addState(new TransitionGameState());
-		addState(new LoadingGameState(2, new TestGameState(), resourceManager.get("WhiteLogo"), taskQueue, new Rectangle(0, 0, 800, 600)));
+		addState(new LoadingGameState(2, new TestGameState(), resourceManager.get("WhiteLogo"), taskQueue));
 	}
 
 	class SimulateLoadingTimeRunnable implements Runnable {

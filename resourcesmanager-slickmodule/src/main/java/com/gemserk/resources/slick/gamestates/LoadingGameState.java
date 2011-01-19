@@ -5,7 +5,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -24,14 +23,11 @@ public class LoadingGameState extends BasicGameState {
 
 	BasicGameState nextGameState;
 
-	Rectangle screenBounds;
-
-	public LoadingGameState(int id, BasicGameState nextGameState, Resource logoResource, TaskQueue taskQueue, Rectangle screenBounds) {
+	public LoadingGameState(int id, BasicGameState nextGameState, Resource logoResource, TaskQueue taskQueue) {
 		this.id = id;
 		this.nextGameState = nextGameState;
 		this.logoResource = logoResource;
 		this.taskQueue = taskQueue;
-		this.screenBounds = screenBounds;
 	}
 
 	@Override
@@ -50,13 +46,17 @@ public class LoadingGameState extends BasicGameState {
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+
+		float width = container.getWidth();
+		float height = container.getHeight();
+		
 		g.setColor(Color.black);
-		g.fillRect(0, 0, screenBounds.getWidth(), screenBounds.getHeight());
+		g.fillRect(0, 0, width, height);
 		g.setColor(Color.white);
-		g.drawString("Loading..." + (int) getProgress().getPercentage() + "%", screenBounds.getWidth() / 2 - 40, screenBounds.getHeight() - 60);
+		g.drawString("Loading..." + (int) getProgress().getPercentage() + "%", width / 2 - 40, height - 60);
 
 		Image image = logoResource.get();
-		g.drawImage(image, screenBounds.getWidth() / 2 - image.getWidth() / 2, screenBounds.getHeight() / 2 - image.getHeight() / 2);
+		g.drawImage(image, width / 2 - image.getWidth() / 2, height / 2 - image.getHeight() / 2);
 	}
 
 	@Override

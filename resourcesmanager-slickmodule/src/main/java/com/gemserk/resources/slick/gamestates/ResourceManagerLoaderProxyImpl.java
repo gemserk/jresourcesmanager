@@ -34,7 +34,7 @@ public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 	@SuppressWarnings("unchecked")
 	public void add(K id, ResourceLoader resourceLoader) {
 		resourceManager.add(id, resourceLoader);
-		taskQueue.add(new PreLoadResourceRunnable(resourceManager, id));
+		taskQueue.add(new PreLoadResourceRunnable<K>(resourceManager, id));
 	}
 
 	public <T> Resource<T> get(K id) {

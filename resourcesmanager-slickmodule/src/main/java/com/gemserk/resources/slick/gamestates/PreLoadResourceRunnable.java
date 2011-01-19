@@ -2,13 +2,17 @@ package com.gemserk.resources.slick.gamestates;
 
 import com.gemserk.resources.ResourceManager;
 
-public class PreLoadResourceRunnable implements Runnable {
+/**
+ * @author arielsan
+ * Asks to the resource manager to load a resource.
+ */
+public class PreLoadResourceRunnable<K> implements Runnable {
 
-	Object resourceId;
+	K resourceId;
 
-	ResourceManager resourceManager;
+	ResourceManager<K> resourceManager;
 
-	public PreLoadResourceRunnable(ResourceManager resourceManager, Object resourceId) {
+	public PreLoadResourceRunnable(ResourceManager<K> resourceManager, K resourceId) {
 		this.resourceId = resourceId;
 		this.resourceManager = resourceManager;
 	}
