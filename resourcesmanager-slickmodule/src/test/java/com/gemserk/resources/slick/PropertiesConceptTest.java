@@ -8,7 +8,6 @@ import java.util.Properties;
 
 import org.junit.Test;
 
-import com.gemserk.resources.PropertiesLoader;
 import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.datasources.ClassPathDataSource;
 import com.gemserk.resources.resourceloaders.ResourceLoader;
@@ -71,38 +70,6 @@ public class PropertiesConceptTest {
 		propertiesResourcesLoader.load(properties, resourceRegistry);
 
 		verify(resourceRegistry);
-	}
-
-	class Something {
-
-		PropertiesLoader propertiesLoader;
-
-		ResourceRegistry resourceRegistry;
-
-		PropertiesResourcesLoader propertiesResourcesLoader;
-
-		public Something(PropertiesLoader propertiesLoader, ResourceRegistry resourceRegistry, PropertiesResourcesLoader propertiesResourcesLoader) {
-			super();
-			this.propertiesLoader = propertiesLoader;
-			this.resourceRegistry = resourceRegistry;
-			this.propertiesResourcesLoader = propertiesResourcesLoader;
-		}
-
-		public void loadFromClasspath(String file) {
-			propertiesResourcesLoader.load(propertiesLoader.load(new ClassPathDataSource(file)), resourceRegistry);
-		}
-
-	}
-	
-	@Test
-	public void test() {
-		
-		ResourceRegistry resourceRegistry = createMock(ResourceRegistry.class);
-		PropertiesResourcesLoader propertiesResourcesLoader = new SlickImagePropertiesLoader();
-		PropertiesLoader propertiesLoader = new PropertiesLoader();
-		
-		Something something = new Something(propertiesLoader, resourceRegistry, propertiesResourcesLoader);
-
 	}
 
 }

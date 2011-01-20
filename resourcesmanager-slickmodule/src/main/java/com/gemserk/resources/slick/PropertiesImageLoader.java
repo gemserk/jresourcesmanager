@@ -12,13 +12,12 @@ import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
 @SuppressWarnings("unchecked")
 public class PropertiesImageLoader extends PropertiesBaseLoader {
 
-	PropertiesLoader propertiesLoader = new PropertiesLoader();
-
 	DataSourceParser dataSourceParser = new DataSourceParser();
 
 	public void load(String propertiesFile) {
 
-		Properties properties = propertiesLoader.load(dataSourceParser.parse(propertiesFile));
+		PropertiesLoader propertiesLoader = new PropertiesLoader(dataSourceParser.parse(propertiesFile));
+		Properties properties = propertiesLoader.load();
 
 		for (String id : properties.stringPropertyNames()) {
 			String imageProperties = properties.getProperty(id);

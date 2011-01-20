@@ -3,14 +3,22 @@ package com.gemserk.resources;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.datasources.DataSource;
 
 /**
  * Create a Properties from a data source input stream.
  */
-public class PropertiesLoader {
+public class PropertiesLoader extends DataLoader<Properties> {
+	
+	private final DataSource dataSource;
 
-	public Properties load(DataSource dataSource) {
+	public PropertiesLoader(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	@Override
+	public Properties load() {
 		try {
 			Properties properties = new Properties();
 			properties.load(dataSource.getInputStream());

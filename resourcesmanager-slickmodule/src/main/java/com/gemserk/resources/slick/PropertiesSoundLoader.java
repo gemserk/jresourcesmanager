@@ -12,11 +12,11 @@ import com.gemserk.resources.slick.dataloaders.SlickSoundLoader;
 @SuppressWarnings("unchecked")
 public class PropertiesSoundLoader extends PropertiesBaseLoader {
 
-	PropertiesLoader propertiesLoader = new PropertiesLoader();
-
 	public void load(String propertiesFile) {
 
-		Properties properties = propertiesLoader.load(new ClassPathDataSource(propertiesFile));
+		// slick doesn't have sound constructor with input stream
+		PropertiesLoader propertiesLoader = new PropertiesLoader(new ClassPathDataSource(propertiesFile));
+		Properties properties = propertiesLoader.load();
 
 		for (String id : properties.stringPropertyNames()) {
 			String imageProperties = properties.getProperty(id);
