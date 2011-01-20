@@ -1,17 +1,25 @@
 package com.gemserk.resources.slick;
 
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Font;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Sound;
+
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.datasources.DataSource;
 import com.gemserk.resources.datasources.DataSourceFactory;
 import com.gemserk.resources.datasources.DataSourceParser;
 import com.gemserk.resources.resourceloaders.CachedResourceLoader;
+import com.gemserk.resources.resourceloaders.ResourceLoader;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickAngelCodeFontLoader;
 import com.gemserk.resources.slick.dataloaders.SlickAnimationLoader;
 import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
+import com.gemserk.resources.slick.dataloaders.SlickMusicLoader;
 import com.gemserk.resources.slick.dataloaders.SlickSoundLoader;
 import com.gemserk.resources.slick.dataloaders.SlickTrueTypeFontLoader;
+import com.gemserk.resources.slick.dataloaders.SlickUnicodeFontLoader;
 
 @SuppressWarnings("unchecked")
 public class SlickResourcesBuilder {
@@ -51,65 +59,75 @@ public class SlickResourcesBuilder {
 		propertiesLoader.load(propertiesFile);
 	}
 
-	public void image(String id, String url) {
-		image(id, dataSourceParser.parse(url));
+	public DataLoader<Image> image(String url) {
+		return image(dataSourceParser.parse(url));
 	}
 
-	public void image(String id, DataSource dataSource) {
-		DataLoader dataLoader = new SlickImageLoader(dataSource);
-		addCachedResourceLoader(id, dataLoader);
+	public DataLoader<Image> image(DataSource dataSource) {
+		return new SlickImageLoader(dataSource);
 	}
 
-	public void animation(String id, String url, int th, int tw, int time, int totalFrames, boolean autoUpdate) {
-		animation(id, dataSourceParser.parse(url), th, tw, time, totalFrames, autoUpdate);
+	public DataLoader<Animation> animation(String url, int th, int tw, int time, int totalFrames, boolean autoUpdate) {
+		return animation(dataSourceParser.parse(url), th, tw, time, totalFrames, autoUpdate);
 	}
 
-	public void animation(String id, DataSource dataSource, int th, int tw, int time, int totalFrames, boolean autoUpdate) {
-		// animations resources are not cached, we want new resource each time...
-		DataLoader dataLoader = new SlickAnimationLoader(dataSource, tw, th, time, totalFrames, autoUpdate);
-		addResourceLoader(id, dataLoader);
+	public DataLoader<Animation> animation(DataSource dataSource, int th, int tw, int time, int totalFrames, boolean autoUpdate) {
+		return new SlickAnimationLoader(dataSource, tw, th, time, totalFrames, autoUpdate);
 	}
 
-	public void sound(String id, String file) {
-		DataLoader dataLoader = new SlickSoundLoader(file);
-		addCachedResourceLoader(id, dataLoader);
+	public DataLoader<Sound> sound(String file) {
+		return new SlickSoundLoader(file);
 	}
 
-	public void truetypefont(String id, String url, int style, int size) {
-		truetypefont(id, dataSourceParser.parse(url), style, size);
-	}
-	
-	public void truetypefont(String id, DataSource dataSource, int style, int size) {
-		DataLoader dataLoader = new SlickTrueTypeFontLoader(dataSource, style, size);
-		addCachedResourceLoader(id, dataLoader);
+	public DataLoader music(String file) {
+		return new SlickMusicLoader(file);
 	}
 
-	public void angelcodefont(String id, String fntFile, String imgFile) {
-		angelcodefont(id, dataSourceParser.parse(fntFile), dataSourceParser.parse(imgFile));
+	public DataLoader<Font> trueTypeFont(String url, int style, int size) {
+		return trueTypeFont(dataSourceParser.parse(url), style, size);
 	}
 
-	public void angelcodefont(String id, DataSource fontDataSource, DataSource imageDataSource) {
-		DataLoader dataLoader = new SlickAngelCodeFontLoader(fontDataSource, imageDataSource);
-		addCachedResourceLoader(id, dataLoader);
+	public DataLoader<Font> trueTypeFont(DataSource dataSource, int style, int size) {
+		return new SlickTrueTypeFontLoader(dataSource, style, size);
 	}
 
-	private void addCachedResourceLoader(String id, DataLoader dataLoader) {
-		resourceManager.add(id, new CachedResourceLoader(new ResourceLoaderImpl(dataLoader)));
+	public DataLoader<Font> trueTypeFont(java.awt.Font font) {
+		return new SlickTrueTypeFontLoader(font);
 	}
 
-	private void addResourceLoader(String id, DataLoader dataLoader) {
-		resourceManager.add(id, new ResourceLoaderImpl(dataLoader));
+	public DataLoader<Font> unicodeFont(String ttfFile, String hieroFile) {
+		return new SlickUnicodeFontLoader(ttfFile, hieroFile);
 	}
 
-	public DataSource classPathDataSource(String path) {
+	public DataLoader<Font> angelCodeFont(String fntFile, String imgFile) {
+		return angelCodeFont(dataSourceParser.parse(fntFile), dataSourceParser.parse(imgFile));
+	}
+
+	public DataLoader<Font> angelCodeFont(DataSource fontDataSource, DataSource imageDataSource) {
+		return new SlickAngelCodeFontLoader(fontDataSource, imageDataSource);
+	}
+
+	public void resource(String id, ResourceLoader resourceLoader) {
+		resourceManager.add(id, resourceLoader);
+	}
+
+	public ResourceLoader loader(DataLoader dataLoader) {
+		return new ResourceLoaderImpl(dataLoader);
+	}
+
+	public ResourceLoader cached(ResourceLoader resourceLoader) {
+		return new CachedResourceLoader(resourceLoader);
+	}
+
+	public DataSource classpath(String path) {
 		return DataSourceFactory.classPathDataSource(path);
 	}
 
-	public DataSource fileSystemDataSource(String path) {
+	public DataSource filesystem(String path) {
 		return DataSourceFactory.fileSystemDataSource(path);
 	}
 
-	public DataSource remoteDataSource(String path) {
+	public DataSource remote(String path) {
 		return DataSourceFactory.remoteDataSource(path);
 	}
 
