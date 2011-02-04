@@ -31,7 +31,7 @@ public class FileSystemDataSource implements DataSource {
 				logger.info("loading stream " + getResourceName());
 			return new FileInputStream(new File(path));
 		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("File for " + resourceName + " not found", e);
 		}
 	}
 

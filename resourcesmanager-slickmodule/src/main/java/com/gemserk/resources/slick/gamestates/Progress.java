@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.gemserk.resources.slick.gamestates;
 
 public class Progress {

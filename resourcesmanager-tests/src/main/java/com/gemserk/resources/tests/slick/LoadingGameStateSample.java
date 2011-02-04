@@ -43,7 +43,7 @@ public class LoadingGameStateSample extends StateBasedGame {
 
 			// inicializo todos los subsistemas?
 
-			app.setDisplayMode(800, 600, false);
+			app.setDisplayMode(640, 480, false);
 			app.setAlwaysRender(true);
 			app.setShowFPS(false);
 
@@ -68,6 +68,7 @@ public class LoadingGameStateSample extends StateBasedGame {
 
 		resourceManager = new ResourceManagerLoaderProxyImpl<String>(new ResourceManagerImpl<String>(), taskQueue);
 
+		taskQueue.add(new SimulateLoadingTimeRunnable(5000));
 		taskQueue.add(new SimulateLoadingTimeRunnable(200));
 		taskQueue.add(new SimulateLoadingTimeRunnable(700));
 		taskQueue.add(new SimulateLoadingTimeRunnable(300));
