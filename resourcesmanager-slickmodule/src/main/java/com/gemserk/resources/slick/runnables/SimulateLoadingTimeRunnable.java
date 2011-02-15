@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.gemserk.resources.slick.runnables;
 
 public class SimulateLoadingTimeRunnable implements Runnable {
@@ -14,7 +11,7 @@ public class SimulateLoadingTimeRunnable implements Runnable {
 	@Override
 	public void run() {
 		try {
-			Thread.currentThread().sleep(time);
+			Thread.sleep(time);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
