@@ -68,10 +68,8 @@ public class LoadingGameStateSample extends StateBasedGame {
 
 		resourceManager = new ResourceManagerLoaderProxyImpl<String>(new ResourceManagerImpl<String>(), taskQueue);
 
-		taskQueue.add(new SimulateLoadingTimeRunnable(5000));
 		taskQueue.add(new SimulateLoadingTimeRunnable(200));
-		taskQueue.add(new SimulateLoadingTimeRunnable(700));
-		taskQueue.add(new SimulateLoadingTimeRunnable(300));
+		taskQueue.add(new SimulateLoadingTimeRunnable(5000));
 		taskQueue.add(new SimulateLoadingTimeRunnable(1000));
 
 		{
@@ -83,6 +81,9 @@ public class LoadingGameStateSample extends StateBasedGame {
 			resourceManager.add("BlackLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png")))));
 			resourceManager.add("WhiteLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png")))));
 		}
+
+		taskQueue.add(new SimulateLoadingTimeRunnable(700));
+		taskQueue.add(new SimulateLoadingTimeRunnable(300));
 		
 		taskQueue.add(new EnterNextStateRunnable(container, this, new TestGameState()));
 

@@ -47,7 +47,18 @@ public class LoadingGameState extends BasicGameState {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, width, height);
 		g.setColor(Color.white);
-		g.drawString("Loading..." + (int) getProgress().getPercentage() + "%", width / 2 - 40, height - 60);
+
+		String percentage = "" + (int) getProgress().getPercentage() + "% - ";
+		String message = percentage + "Loading...";
+
+		if (getProgress().getMessage() != null)
+			message = percentage + getProgress().getMessage();
+
+		if (getProgress().getSubProgress() != null && getProgress().getSubProgress().getMessage() != null)
+			message = percentage + getProgress().getSubProgress().getMessage();
+
+		int messageWidth = g.getFont().getWidth(message);
+		g.drawString(message, width / 2 - messageWidth / 2, height - 60);
 
 		g.drawImage(image, width / 2 - image.getWidth() / 2, height / 2 - image.getHeight() / 2);
 	}

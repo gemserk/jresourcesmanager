@@ -20,6 +20,10 @@ public class Progress {
 		if (current > total)
 			current = total;
 	}
+	
+	public void finish() {
+		this.increment(total);
+	}
 
 	public float getPercentage() {
 		return 100 * current / total;
@@ -37,5 +41,15 @@ public class Progress {
 	
 	public String getMessage() {
 		return message;
+	}
+	
+	private Progress subProgress;
+	
+	public void setSubProgress(Progress subProgress) {
+		this.subProgress = subProgress;
+	}
+	
+	public Progress getSubProgress() {
+		return subProgress;
 	}
 }
