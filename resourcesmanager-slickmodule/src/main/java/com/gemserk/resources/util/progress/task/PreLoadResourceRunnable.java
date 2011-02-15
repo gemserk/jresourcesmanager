@@ -16,6 +16,10 @@ public class PreLoadResourceRunnable<K> implements Runnable, ProgressTask {
 	ResourceManager<K> resourceManager;
 
 	private Progress progress;
+	
+	public K getResourceId() {
+		return resourceId;
+	}
 
 	public PreLoadResourceRunnable(ResourceManager<K> resourceManager, K resourceId) {
 		this.resourceId = resourceId;

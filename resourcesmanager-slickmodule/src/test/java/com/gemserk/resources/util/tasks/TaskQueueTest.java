@@ -63,5 +63,30 @@ public class TaskQueueTest {
 		assertThat(internalProgress1.getMessage(), IsEqual.equalTo("A"));
 
 	}
+	
+	@Test
+	public void shouldReturnCurrentTask() {
+
+		TaskQueue taskQueue = new TaskQueue();
+
+		Runnable task1 = new ProgressTaskImpl();
+		Runnable task2 = new ProgressTaskImpl();
+		
+		taskQueue.add(task1);
+		taskQueue.add(task2);
+		
+		assertThat(taskQueue.getCurrentTask(), IsNull.notNullValue());
+		assertThat(taskQueue.getCurrentTask(), IsSame.sameInstance(task1));
+
+		taskQueue.processNext();
+		
+		assertThat(taskQueue.getCurrentTask(), IsNull.notNullValue());
+		assertThat(taskQueue.getCurrentTask(), IsSame.sameInstance(task2));
+		
+		taskQueue.processNext();
+		
+		assertThat(taskQueue.getCurrentTask(), IsNull.nullValue());
+
+	}
 
 }

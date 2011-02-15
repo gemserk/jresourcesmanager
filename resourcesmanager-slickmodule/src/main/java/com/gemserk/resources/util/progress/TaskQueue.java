@@ -85,8 +85,12 @@ public class TaskQueue {
 	}
 
 	public Progress getProgress() {
-		// current task.getProgress?
+		// if subprogress... current task.getProgress?
 		return progress;
+	}
+
+	public Runnable getCurrentTask() {
+		return tasks.peek();
 	}
 
 }

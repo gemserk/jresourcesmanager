@@ -8,6 +8,10 @@ public class SimulateLoadingTimeRunnable implements Runnable, ProgressTask {
 	int time;
 
 	private Progress progress;
+	
+	public int getTime() {
+		return time;
+	}
 
 	public SimulateLoadingTimeRunnable(int time) {
 		this.time = time;

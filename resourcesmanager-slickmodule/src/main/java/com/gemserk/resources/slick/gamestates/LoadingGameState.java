@@ -10,6 +10,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import com.gemserk.resources.util.progress.Progress;
 import com.gemserk.resources.util.progress.TaskQueue;
+import com.gemserk.resources.util.progress.task.PreLoadResourceRunnable;
+import com.gemserk.resources.util.progress.task.SimulateLoadingTimeRunnable;
 
 public class LoadingGameState extends BasicGameState {
 
@@ -47,20 +49,28 @@ public class LoadingGameState extends BasicGameState {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, width, height);
 		g.setColor(Color.white);
-
+		
 		String percentage = "" + (int) getProgress().getPercentage() + "% - ";
-		String message = percentage + "Loading...";
 
-		if (getProgress().getMessage() != null)
-			message = percentage + getProgress().getMessage();
-
-		if (getProgress().getSubProgress() != null && getProgress().getSubProgress().getMessage() != null)
-			message = percentage + getProgress().getSubProgress().getMessage();
-
+		Runnable currentTask = taskQueue.getCurrentTask();
+		
+		String message = percentage + getMessageForTask(currentTask);
+		
 		int messageWidth = g.getFont().getWidth(message);
 		g.drawString(message, width / 2 - messageWidth / 2, height - 60);
 
 		g.drawImage(image, width / 2 - image.getWidth() / 2, height / 2 - image.getHeight() / 2);
+	}
+
+	// extract to an external class
+	@SuppressWarnings("rawtypes")
+	protected String getMessageForTask(Runnable currentTask) {
+		if (currentTask instanceof SimulateLoadingTimeRunnable) {
+			return "Simulating " + ((SimulateLoadingTimeRunnable)currentTask).getTime() + "ms of loading time...";
+		} else if (currentTask instanceof PreLoadResourceRunnable) {
+			return "Loading resource " + ((PreLoadResourceRunnable) currentTask).getResourceId();
+		}
+		return "Loading...";
 	}
 
 	@Override
