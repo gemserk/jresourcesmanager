@@ -3,7 +3,6 @@ package com.gemserk.resources.util.tasks;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
 
-import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.hamcrest.core.IsSame;
 import org.jmock.Expectations;
@@ -50,17 +49,11 @@ public class TaskQueueTest {
 			@Override
 			public void run() {
 				assertSame(internalProgress1, progress);
-				progress.setMessage("A");
 			}
 		});
 
-		assertThat(testProgress.getSubProgress(), IsNull.nullValue());
-		
 		while(!taskQueue.isDone()) 
 			taskQueue.processNext();
-		
-		assertThat(testProgress.getSubProgress(), IsSame.sameInstance(internalProgress1));
-		assertThat(internalProgress1.getMessage(), IsEqual.equalTo("A"));
 
 	}
 	

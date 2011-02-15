@@ -1,14 +1,10 @@
 package com.gemserk.resources.util.progress.task;
 
-import com.gemserk.resources.util.progress.Progress;
-import com.gemserk.resources.util.progress.ProgressTask;
 
-public class SimulateLoadingTimeRunnable implements Runnable, ProgressTask {
+public class SimulateLoadingTimeRunnable implements Runnable {
 
 	int time;
 
-	private Progress progress;
-	
 	public int getTime() {
 		return time;
 	}
@@ -20,16 +16,10 @@ public class SimulateLoadingTimeRunnable implements Runnable, ProgressTask {
 	@Override
 	public void run() {
 		try {
-			progress.setMessage("Waiting for some time...");
 			Thread.sleep(time);
-			progress.finish();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
-	@Override
-	public void setProgress(Progress progress) {
-		this.progress = progress;
-	}
 }

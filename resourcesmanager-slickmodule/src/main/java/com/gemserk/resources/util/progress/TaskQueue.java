@@ -72,9 +72,6 @@ public class TaskQueue {
 			ProgressTask progressTask = (ProgressTask) task;
 			Progress internalProgress = progressProvider.get(100);
 			progressTask.setProgress(internalProgress);
-			progress.setSubProgress(internalProgress);
-		} else {
-			progress.setSubProgress(null);
 		}
 		task.run();
 		progress.increment();

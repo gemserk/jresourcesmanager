@@ -33,23 +33,4 @@ public class Progress {
 		this.total = total;
 	}
 
-	private String message;
-	
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	
-	public String getMessage() {
-		return message;
-	}
-	
-	private Progress subProgress;
-	
-	public void setSubProgress(Progress subProgress) {
-		this.subProgress = subProgress;
-	}
-	
-	public Progress getSubProgress() {
-		return subProgress;
-	}
 }
