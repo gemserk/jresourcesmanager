@@ -1,4 +1,4 @@
-package com.gemserk.resources.slick.runnables;
+package com.gemserk.resources.slick.progress.task;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;

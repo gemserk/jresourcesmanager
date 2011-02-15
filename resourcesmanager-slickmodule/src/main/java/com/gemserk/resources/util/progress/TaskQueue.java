@@ -1,7 +1,8 @@
-package com.gemserk.resources.slick.gamestates;
+package com.gemserk.resources.util.progress;
 
 import java.util.LinkedList;
 import java.util.Queue;
+
 
 
 public class TaskQueue {

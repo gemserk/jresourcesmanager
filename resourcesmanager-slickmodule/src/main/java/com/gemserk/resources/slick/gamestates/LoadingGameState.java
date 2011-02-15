@@ -8,6 +8,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import com.gemserk.resources.util.progress.Progress;
+import com.gemserk.resources.util.progress.TaskQueue;
+
 public class LoadingGameState extends BasicGameState {
 
 	private final int id;

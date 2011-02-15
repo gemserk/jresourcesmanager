@@ -1,9 +1,13 @@
-package com.gemserk.resources.slick.gamestates;
+package com.gemserk.resources.util.tasks;
 
 import static org.junit.Assert.assertThat;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+
+import com.gemserk.resources.util.progress.Progress;
+import com.gemserk.resources.util.progress.ProgressTask;
+import com.gemserk.resources.util.progress.TaskQueue;
 
 public class TaskQueueTest {
 

@@ -1,4 +1,4 @@
-package com.gemserk.resources.slick.runnables;
+package com.gemserk.resources.util.progress.task;
 
 import com.gemserk.resources.ResourceManager;
 
