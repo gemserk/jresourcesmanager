@@ -8,10 +8,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import com.gemserk.resources.util.progress.Progress;
-import com.gemserk.resources.util.progress.TaskQueue;
-import com.gemserk.resources.util.progress.task.PreLoadResourceRunnable;
-import com.gemserk.resources.util.progress.task.SimulateLoadingTimeRunnable;
+import com.gemserk.resources.progress.Progress;
+import com.gemserk.resources.progress.TaskQueue;
+import com.gemserk.resources.progress.tasks.PreLoadResourceRunnable;
+import com.gemserk.resources.progress.tasks.SimulateLoadingTimeRunnable;
 
 public class LoadingGameState extends BasicGameState {
 

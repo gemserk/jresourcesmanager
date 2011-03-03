@@ -1,8 +1,12 @@
-package com.gemserk.resources.util.progress;
+package com.gemserk.resources.progress;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * @author acoppes
+ * Provides a way to process tasks with a progress associated.
+ */
 public class TaskQueue {
 
 	private final Queue<Runnable> tasks;
@@ -44,7 +48,6 @@ public class TaskQueue {
 	}
 
 	public Progress getProgress() {
-		// if subprogress... current task.getProgress?
 		return progress;
 	}
 

@@ -1,4 +1,4 @@
-package com.gemserk.resources.util.progress.task;
+package com.gemserk.resources.progress.tasks;
 
 
 public class SimulateLoadingTimeRunnable implements Runnable {

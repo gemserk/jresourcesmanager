@@ -10,7 +10,7 @@ import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gemserk.resources.util.progress.TaskQueue;
+import com.gemserk.resources.progress.TaskQueue;
 
 @RunWith(JMock.class)
 public class TaskQueueTest {

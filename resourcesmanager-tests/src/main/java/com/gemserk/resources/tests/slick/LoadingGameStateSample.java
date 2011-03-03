@@ -19,6 +19,8 @@ import com.gemserk.resources.Resource;
 import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.ResourceManagerImpl;
 import com.gemserk.resources.datasources.ClassPathDataSource;
+import com.gemserk.resources.progress.TaskQueue;
+import com.gemserk.resources.progress.tasks.SimulateLoadingTimeRunnable;
 import com.gemserk.resources.resourceloaders.CachedResourceLoader;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
@@ -27,8 +29,6 @@ import com.gemserk.resources.slick.dataloaders.SlickTrueTypeFontLoader;
 import com.gemserk.resources.slick.gamestates.LoadingGameState;
 import com.gemserk.resources.slick.gamestates.ResourceManagerLoaderProxyImpl;
 import com.gemserk.resources.slick.progress.task.EnterNextStateRunnable;
-import com.gemserk.resources.util.progress.TaskQueue;
-import com.gemserk.resources.util.progress.task.SimulateLoadingTimeRunnable;
 
 public class LoadingGameStateSample extends StateBasedGame {
 

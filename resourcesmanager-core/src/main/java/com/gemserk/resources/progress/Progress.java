@@ -1,4 +1,4 @@
-package com.gemserk.resources.util.progress;
+package com.gemserk.resources.progress;
 
 public class Progress {
 
