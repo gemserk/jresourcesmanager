@@ -19,8 +19,7 @@ public class Resource<T> {
 	}
 
 	public T get() {
-		if (data == null)
-			data = dataLoader.load();
+		load();
 		return data;
 	}
 
@@ -33,9 +32,24 @@ public class Resource<T> {
 	}
 
 	public void reload() {
-		if (data != null)
+		unload();
+		load();
+	}
+
+	private void load() {
+		if (!isLoaded())
+			data = dataLoader.load();
+	}
+
+	public void unload() {
+		if (isLoaded()) {
 			dataLoader.dispose(data);
-		set(dataLoader.load());
+			data = null;
+		}
+	}
+	
+	public boolean isLoaded() {
+		return data != null;
 	}
 
 }

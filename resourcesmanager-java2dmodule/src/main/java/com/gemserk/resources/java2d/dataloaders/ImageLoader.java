@@ -33,5 +33,11 @@ public class ImageLoader extends DataLoader<Image> {
 			throw new RuntimeException("Failed to read resource for " + dataSource.getResourceName(), e);
 		}
 	}
-
+	
+	@Override
+	public void dispose(Image t) {
+		super.dispose(t);
+		if (logger.isInfoEnabled())
+			logger.info("Image " + dataSource.getResourceName() + " will be automatically unloaded by gc.");
+	}
 }

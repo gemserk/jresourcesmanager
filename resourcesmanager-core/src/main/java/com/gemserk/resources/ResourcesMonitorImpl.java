@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.gemserk.resources.resourceloaders.ResourceLoader;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public class ResourcesMonitorImpl<K> implements ResourcesMonitor, ResourceManager<K> {
 	
 	ResourceManager<K> resourceManager;
@@ -34,6 +34,11 @@ public class ResourcesMonitorImpl<K> implements ResourcesMonitor, ResourceManage
 			Resource resource = monitoredResources.get(k);
 			resource.reload();
 		}
+	}
+
+	@Override
+	public void unloadAll() {
+		resourceManager.unloadAll();
 	}
 	
 }

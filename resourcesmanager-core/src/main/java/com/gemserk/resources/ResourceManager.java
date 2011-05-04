@@ -2,11 +2,13 @@ package com.gemserk.resources;
 
 import com.gemserk.resources.resourceloaders.ResourceLoader;
 
-@SuppressWarnings("unchecked")
 public interface ResourceManager<K> {
 
+	@SuppressWarnings("rawtypes")
 	void add(K id, ResourceLoader resourceLoader);
 
 	<T> Resource<T> get(K id);
+	
+	void unloadAll();
 
 }

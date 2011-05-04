@@ -33,7 +33,7 @@ public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 		this.taskQueue = taskQueue;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public void add(K id, ResourceLoader resourceLoader) {
 		resourceManager.add(id, resourceLoader);
 		taskQueue.add(new PreLoadResourceRunnable<K>(resourceManager, id));
@@ -41,6 +41,11 @@ public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 
 	public <T> Resource<T> get(K id) {
 		return resourceManager.get(id);
+	}
+
+	@Override
+	public void unloadAll() {
+		throw new UnsupportedOperationException("not implemented yet");
 	}
 
 }

@@ -28,6 +28,26 @@ public class ResourceManagerImplTest {
 		}
 
 	}
+	
+	class MockResource<T> extends Resource<T> {
+		
+		boolean unloadCalled = false;
+
+		public MockResource() {
+			super(new DataLoader<T>() {
+				@Override
+				public T load() {
+					return null;
+				}
+			});
+		}
+		
+		@Override
+		public void unload() {
+			unloadCalled = true;
+		}
+		
+	}
 
 	@Test
 	public void shouldReturnNullResourceIfResourceNotFound() {
@@ -91,5 +111,30 @@ public class ResourceManagerImplTest {
 		assertNotNull(fontResource2);
 		
 		assertSame(fontResource1, fontResource2);
+	}
+	
+	@Test
+	public void shouldCallUnloadToResourcesWhenUnloadAllCalled() {
+		
+		ResourceManager<String> resourceManagerImpl = new ResourceManagerImpl<String>();
+		
+		resourceManagerImpl.add("MyString", new ResourceLoader<String>() {
+
+			@Override
+			public Resource<String> load() {
+				return new MockResource<String>();
+			}
+		});
+		
+		MockResource<String> actualResource = (MockResource) resourceManagerImpl.get("MyString");
+		MockResource<String> actualResource2 = (MockResource) resourceManagerImpl.get("MyString");
+		
+		resourceManagerImpl.unloadAll();
+		
+		assertTrue(actualResource != actualResource2);
+		
+		assertTrue(actualResource.unloadCalled);
+		assertTrue(actualResource2.unloadCalled);
+		
 	}
 }

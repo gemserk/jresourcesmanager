@@ -12,7 +12,7 @@ import org.junit.Test;
 import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.dataloaders.StaticDataLoader;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class ResourceTest {
 
 	@Test
