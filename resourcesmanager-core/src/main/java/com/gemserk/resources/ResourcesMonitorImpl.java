@@ -38,7 +38,15 @@ public class ResourcesMonitorImpl<K> implements ResourcesMonitor, ResourceManage
 
 	@Override
 	public void unloadAll() {
+		// TODO: should do something with monitored resources...
 		resourceManager.unloadAll();
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	@Override
+	public <T> T getResourceValue(K id) {
+		Resource<T> resource = get(id);
+		return resource.get();
 	}
 	
 }

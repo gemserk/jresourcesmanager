@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.gemserk.resources.resourceloaders.ResourceLoader;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ResourceManagerImpl<K> implements ResourceManager<K> {
 
 	Map<K, ResourceLoader> resourceLoaders = new HashMap<K, ResourceLoader>();
@@ -19,6 +19,18 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 		return getResource(id);
 	}
 
+	@Override
+	public <T> T getResourceValue(K id) {
+		Resource<T> resource = get(id);
+		return resource.get();
+	}
+
+	@Override
+	public void unloadAll() {
+		for (int i = 0; i < resources.size(); i++)
+			resources.get(i).unload();
+	}
+
 	private Resource getResource(K id) {
 		Resource resource = resourceLoaders.get(id).load();
 		resources.add(resource);
@@ -27,12 +39,6 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 
 	public void add(K id, ResourceLoader resourceLoader) {
 		resourceLoaders.put(id, resourceLoader);
-	}
-
-	@Override
-	public void unloadAll() {
-		for (int i = 0; i < resources.size(); i++)
-			resources.get(i).unload();
 	}
 
 }

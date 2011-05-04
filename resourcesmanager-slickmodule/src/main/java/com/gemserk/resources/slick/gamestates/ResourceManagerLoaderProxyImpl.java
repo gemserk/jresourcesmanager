@@ -48,4 +48,9 @@ public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 		throw new UnsupportedOperationException("not implemented yet");
 	}
 
+	@Override
+	public <T> T getResourceValue(K id) {
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
 }

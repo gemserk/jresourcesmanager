@@ -31,6 +31,12 @@ public class ResourcesBuilderTest {
 				// TODO Auto-generated function stub
 				
 			}
+
+			@Override
+			public Object getResourceValue(Object id) {
+				return null;
+				
+			}
 		};
 
 		// ResourceManager resourceManager = createMock(ResourceManager.class);

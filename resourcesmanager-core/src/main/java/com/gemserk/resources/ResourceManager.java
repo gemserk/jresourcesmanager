@@ -9,6 +9,8 @@ public interface ResourceManager<K> {
 
 	<T> Resource<T> get(K id);
 	
+	<T> T getResourceValue(K id);
+	
 	void unloadAll();
 
 }
