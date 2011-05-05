@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.awt.Font;
 
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
 import com.gemserk.resources.dataloaders.DataLoader;
@@ -33,11 +35,11 @@ public class ResourceManagerImplTest {
 		
 		boolean unloadCalled = false;
 
-		public MockResource() {
+		public MockResource(final T t) {
 			super(new DataLoader<T>() {
 				@Override
 				public T load() {
-					return null;
+					return t;
 				}
 			});
 		}
@@ -122,7 +124,7 @@ public class ResourceManagerImplTest {
 
 			@Override
 			public Resource<String> load() {
-				return new MockResource<String>();
+				return new MockResource<String>("A");
 			}
 		});
 		
@@ -136,5 +138,29 @@ public class ResourceManagerImplTest {
 		assertTrue(actualResource.unloadCalled);
 		assertTrue(actualResource2.unloadCalled);
 		
+	}
+	
+	@Test
+	public void shouldReturnResourceValue() {
+		ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
+		
+		resourceManager.add("MyString", new ResourceLoader<String>() {
+
+			@Override
+			public Resource<String> load() {
+				return new MockResource<String>("VALUE");
+			}
+		});
+		
+		String resourceValue = resourceManager.getResourceValue("MyString");
+		assertThat(resourceValue, IsNull.notNullValue());
+		assertThat(resourceValue, IsEqual.equalTo("VALUE"));
+	}
+	
+	@Test
+	public void shouldReturnNullIfResourceForValueDoesntExist() {
+		ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
+		String resourceValue = resourceManager.getResourceValue("NULL");
+		assertThat(resourceValue, IsNull.nullValue());
 	}
 }

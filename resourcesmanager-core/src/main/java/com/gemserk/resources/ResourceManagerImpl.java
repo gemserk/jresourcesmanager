@@ -22,6 +22,8 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 	@Override
 	public <T> T getResourceValue(K id) {
 		Resource<T> resource = get(id);
+		if (resource == null)
+			return null;
 		return resource.get();
 	}
 
