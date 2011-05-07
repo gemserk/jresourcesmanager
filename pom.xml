@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gemserk.resources</groupId>
 	<artifactId>resourcesmanager</artifactId>
-	<version>0.0.11-SNAPSHOT</version>
+	<version>0.0.12-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>ResourceManager</name>
@@ -22,11 +21,9 @@
 	</licenses>
 
 	<scm>
-		<url>http://jresourcesmanager.googlecode.com/svn/trunk/</url>
-		<connection>scm:https://jresourcesmanager.googlecode.com/svn/trunk/
-		</connection>
-		<developerConnection>scm:svn:https://jresourcesmanager.googlecode.com/svn/trunk/
-		</developerConnection>
+		<url>https://github.com/gemserk/jresourcesmanager.git</url>
+		<connection>scm:git://github.com/gemserk/jresourcesmanager.git</connection>
+		<developerConnection>scm:git:git@github.com:gemserk/jresourcesmanager.git</developerConnection>
 	</scm>
 
 	<developers>
@@ -41,14 +38,12 @@
 		<repository>
 			<id>googlecode.resourcesmanager.releases</id>
 			<name>GoogleCode resourcesmanager releases</name>
-			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository
-			</url>
+			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository</url>
 		</repository>
 		<snapshotRepository>
 			<id>googlecode.resourcesmanager.snapshots</id>
 			<name>GoogleCode resourcesmanager snapshots</name>
-			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository-snapshots
-			</url>
+			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
