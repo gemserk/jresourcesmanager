@@ -22,11 +22,9 @@
 	</licenses>
 
 	<scm>
-		<url>http://jresourcesmanager.googlecode.com/svn/trunk/</url>
-		<connection>scm:https://jresourcesmanager.googlecode.com/svn/trunk/
-		</connection>
-		<developerConnection>scm:svn:https://jresourcesmanager.googlecode.com/svn/trunk/
-		</developerConnection>
+		<url>https://github.com/gemserk/jresourcesmanager.git</url>
+		<connection>scm:git://github.com/gemserk/jresourcesmanager.git</connection>
+		<developerConnection>scm:git:git@github.com:gemserk/jresourcesmanager.git</developerConnection>
 	</scm>
 
 	<developers>
@@ -41,14 +39,12 @@
 		<repository>
 			<id>googlecode.resourcesmanager.releases</id>
 			<name>GoogleCode resourcesmanager releases</name>
-			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository
-			</url>
+			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository</url>
 		</repository>
 		<snapshotRepository>
 			<id>googlecode.resourcesmanager.snapshots</id>
 			<name>GoogleCode resourcesmanager snapshots</name>
-			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository-snapshots
-			</url>
+			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
