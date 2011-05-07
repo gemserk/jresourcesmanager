@@ -8,24 +8,21 @@ import com.gemserk.resources.datasources.DataSourceProvider;
 import com.gemserk.resources.java2d.dataloaders.ImageLoader;
 import com.gemserk.resources.resourceloaders.CachedResourceLoader;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
-import com.google.inject.Inject;
 
 /**
  * Registers to ResourceManager images from a file, where each line contains id=imagefile.
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class PropertiesImageLoader {
 
-	ResourceManager resourceManager;
+	private ResourceManager resourceManager;
 
-	DataSourceProvider dataSourceProvider = new DataSourceProvider();
+	private DataSourceProvider dataSourceProvider = new DataSourceProvider();
 
-	@Inject
 	public void setResourceManager(ResourceManager resourceManagerImpl) {
 		this.resourceManager = resourceManagerImpl;
 	}
 
-	@Inject
 	public void setDataSourceProvider(DataSourceProvider dataSourceProvider) {
 		this.dataSourceProvider = dataSourceProvider;
 	}

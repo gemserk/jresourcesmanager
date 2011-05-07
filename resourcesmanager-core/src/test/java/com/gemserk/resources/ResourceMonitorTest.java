@@ -4,12 +4,11 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.assertSame;
 
-
 import org.junit.Test;
 
 import com.gemserk.resources.resourceloaders.ResourceLoader;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class ResourceMonitorTest {
 	
 	@Test

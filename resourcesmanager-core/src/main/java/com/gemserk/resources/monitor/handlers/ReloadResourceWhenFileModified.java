@@ -4,7 +4,7 @@ import java.io.File;
 
 import com.gemserk.resources.Resource;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public class ReloadResourceWhenFileModified extends FileHandler {
 	
 	private final Resource resource;

@@ -89,7 +89,7 @@ public class ResourceManagerImplTest {
 		assertSame(actualResource, actualResource2);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Test
 	public void addResourcesAndGetThemWithoutCaching() {
 		ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
@@ -115,6 +115,7 @@ public class ResourceManagerImplTest {
 		assertSame(fontResource1, fontResource2);
 	}
 	
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Test
 	public void shouldCallUnloadToResourcesWhenUnloadAllCalled() {
 		

@@ -1,7 +1,6 @@
 package com.gemserk.resources.datasources;
 
 import com.gemserk.resources.datasources.DataSourceProvider.Source;
-import com.google.inject.Inject;
 
 /**
  * Parses a String and return a corresponding DataSource. 
@@ -10,7 +9,6 @@ public class DataSourceParser {
 	
 	DataSourceProvider dataSourceProvider = new DataSourceProvider(Source.ClassPath);
 	
-	@Inject
 	public void setDataSourceProvider(DataSourceProvider dataSourceProvider) {
 		this.dataSourceProvider = dataSourceProvider;
 	}
