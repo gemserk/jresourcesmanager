@@ -75,6 +75,11 @@
 			<artifactId>jinput</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jorbis</artifactId>
+			<version>0.0.17</version>
+		</dependency>
 	</dependencies>
 
 </project>

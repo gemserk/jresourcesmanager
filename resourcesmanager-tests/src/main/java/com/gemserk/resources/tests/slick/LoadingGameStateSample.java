@@ -7,6 +7,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -24,6 +25,7 @@ import com.gemserk.resources.progress.tasks.SimulateLoadingTimeRunnable;
 import com.gemserk.resources.resourceloaders.CachedResourceLoader;
 import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
+import com.gemserk.resources.slick.dataloaders.SlickMusicLoader;
 import com.gemserk.resources.slick.dataloaders.SlickSoundLoader;
 import com.gemserk.resources.slick.dataloaders.SlickTrueTypeFontLoader;
 import com.gemserk.resources.slick.gamestates.LoadingGameState;
@@ -77,6 +79,8 @@ public class LoadingGameStateSample extends StateBasedGame {
 
 			// resourceManager.add("SoundSample", new CachedResourceLoader(new ResourceLoaderImpl(new SlickSoundLoader("assets/sounds/nextwave.wav"))));
 			resourceManager.add("SoundSample", new CachedResourceLoader(new ResourceLoaderImpl(new SlickSoundLoader(new ClassPathDataSource("assets/sounds/nextwave.wav")))));
+			resourceManager.add("GameMusicTrack", new CachedResourceLoader(new ResourceLoaderImpl(new SlickMusicLoader(new ClassPathDataSource("assets/tracks/game.ogg")))));
+			
 			resourceManager.add("Font", new CachedResourceLoader(new ResourceLoaderImpl(new SlickTrueTypeFontLoader(new ClassPathDataSource("assets/fonts/Mugnuts.ttf"), Font.BOLD, 32))));
 
 			resourceManager.add("BlackLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png")))));
@@ -126,6 +130,8 @@ public class LoadingGameStateSample extends StateBasedGame {
 		public void init(GameContainer container, StateBasedGame game) throws SlickException {
 			logger.debug("Init test game state");
 			resourceImageA = resourceManager.get("BusinessCard");
+			Resource<Music> music = resourceManager.get("GameMusicTrack");
+			music.get().play();
 		}
 
 		@Override

@@ -3,6 +3,7 @@ package com.gemserk.resources.slick;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.Sound;
 
 import com.gemserk.resources.ResourceManager;
@@ -79,8 +80,8 @@ public class SlickResourcesBuilder {
 		return new SlickSoundLoader(dataSource);
 	}
 
-	public DataLoader music(String file) {
-		return new SlickMusicLoader(file);
+	public DataLoader<Music> music(DataSource dataSource) {
+		return new SlickMusicLoader(dataSource);
 	}
 
 	public DataLoader<Font> trueTypeFont(String url, int style, int size) {
