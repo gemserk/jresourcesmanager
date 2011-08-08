@@ -24,7 +24,8 @@ public class PropertiesSoundLoader extends PropertiesBaseLoader {
 
 			String file = values[0];
 
-			DataLoader dataLoader = new SlickSoundLoader(file);
+//			DataLoader dataLoader = new SlickSoundLoader(file);
+			DataLoader dataLoader = new SlickSoundLoader(new ClassPathDataSource(file));
 			resourceManager.add(id, new CachedResourceLoader(new ResourceLoaderImpl(dataLoader)));
 		}
 	}

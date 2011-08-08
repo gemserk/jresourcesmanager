@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>slick</groupId>
 			<artifactId>slick</artifactId>
-			<version>274</version>
+			<version>275-GEMSERK</version>
 			<exclusions>
 
 				<exclusion>

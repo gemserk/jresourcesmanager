@@ -75,7 +75,8 @@ public class LoadingGameStateSample extends StateBasedGame {
 		{
 			resourceManager.add("BusinessCard", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("assets/images/businesscard_front_landscape_ariel_fashionvictim_1.png")))));
 
-			resourceManager.add("SoundSample", new CachedResourceLoader(new ResourceLoaderImpl(new SlickSoundLoader("assets/sounds/nextwave.wav"))));
+			// resourceManager.add("SoundSample", new CachedResourceLoader(new ResourceLoaderImpl(new SlickSoundLoader("assets/sounds/nextwave.wav"))));
+			resourceManager.add("SoundSample", new CachedResourceLoader(new ResourceLoaderImpl(new SlickSoundLoader(new ClassPathDataSource("assets/sounds/nextwave.wav")))));
 			resourceManager.add("Font", new CachedResourceLoader(new ResourceLoaderImpl(new SlickTrueTypeFontLoader(new ClassPathDataSource("assets/fonts/Mugnuts.ttf"), Font.BOLD, 32))));
 
 			resourceManager.add("BlackLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png")))));
@@ -84,7 +85,7 @@ public class LoadingGameStateSample extends StateBasedGame {
 
 		taskQueue.add(new SimulateLoadingTimeRunnable(700));
 		taskQueue.add(new SimulateLoadingTimeRunnable(300));
-		
+
 		taskQueue.add(new EnterNextStateRunnable(container, this, new TestGameState()));
 
 		addState(new TransitionGameState());
@@ -95,7 +96,7 @@ public class LoadingGameStateSample extends StateBasedGame {
 	 * Only to make the fade in effect when application starts.
 	 */
 	class TransitionGameState extends BasicGameState {
-		
+
 		@Override
 		public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 

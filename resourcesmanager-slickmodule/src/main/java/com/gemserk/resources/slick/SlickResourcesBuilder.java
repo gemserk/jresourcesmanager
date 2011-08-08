@@ -75,8 +75,8 @@ public class SlickResourcesBuilder {
 		return new SlickAnimationLoader(dataSource, tw, th, time, totalFrames, autoUpdate);
 	}
 
-	public DataLoader<Sound> sound(String file) {
-		return new SlickSoundLoader(file);
+	public DataLoader<Sound> sound(DataSource dataSource) {
+		return new SlickSoundLoader(dataSource);
 	}
 
 	public DataLoader music(String file) {
