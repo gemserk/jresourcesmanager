@@ -1,6 +1,8 @@
 package com.gemserk.resources.progress;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 /**
@@ -10,6 +12,7 @@ import java.util.Queue;
 public class TaskQueue {
 
 	private final Queue<Runnable> tasks;
+	private final Map<Runnable, String> taskNames;
 
 	private Progress progress;
 
@@ -28,11 +31,17 @@ public class TaskQueue {
 	public TaskQueue(Queue<Runnable> tasks, Progress progress) {
 		this.tasks = tasks;
 		this.progress = progress;
+		this.taskNames = new HashMap<Runnable, String>();
 	}
 
 	public void add(Runnable task) {
 		tasks.add(task);
 		progress.setTotal(tasks.size());
+	}
+	
+	public void add(Runnable task, String name) {
+		add(task);
+		taskNames.put(task, name);
 	}
 
 	public void processNext() {
@@ -41,6 +50,7 @@ public class TaskQueue {
 			return;
 		task.run();
 		progress.increment();
+		taskNames.remove(task);
 	}
 
 	public boolean isDone() {
@@ -53,6 +63,13 @@ public class TaskQueue {
 
 	public Runnable getCurrentTask() {
 		return tasks.peek();
+	}
+	
+	public String getCurrentTaskName() {
+		Runnable task = getCurrentTask();
+		if (!taskNames.containsKey(task))
+			return "";
+		return taskNames.get(task);
 	}
 
 }
