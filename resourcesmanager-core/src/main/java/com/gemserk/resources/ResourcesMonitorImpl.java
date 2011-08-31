@@ -48,5 +48,11 @@ public class ResourcesMonitorImpl<K> implements ResourcesMonitor, ResourceManage
 		Resource<T> resource = get(id);
 		return resource.get();
 	}
+
+	@Override
+	public void addVolatile(K id, DataLoader dataLoader) {
+		// TODO Auto-generated function stub
+		
+	}
 	
 }

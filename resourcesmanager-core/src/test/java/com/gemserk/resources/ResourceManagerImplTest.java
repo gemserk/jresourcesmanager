@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.awt.Font;
 
 import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsNot;
 import org.hamcrest.core.IsNull;
 import org.hamcrest.core.IsSame;
 import org.junit.Test;
@@ -119,20 +120,6 @@ public class ResourceManagerImplTest {
 	}
 
 	@Test
-	public void bugCachingResourcesTonsOfTimes() {
-
-		ResourceManagerImpl<String> resourceManager = new ResourceManagerImpl<String>();
-		resourceManager.add("A", new MockDataLoader<String>("data"));
-
-		assertThat(resourceManager.resources.size(), IsEqual.equalTo(0));
-		resourceManager.get("A");
-		assertThat(resourceManager.resources.size(), IsEqual.equalTo(1));
-		resourceManager.get("A");
-		assertThat(resourceManager.resources.size(), IsEqual.equalTo(1));
-
-	}
-	
-	@Test
 	public void shouldReturnCachedResource() {
 
 		ResourceManagerImpl<String> resourceManager = new ResourceManagerImpl<String>();
@@ -144,6 +131,63 @@ public class ResourceManagerImplTest {
 		
 		assertThat(resourceA, IsSame.sameInstance(resourceB));
 
+	}
+	
+	@Test
+	public void shouldUnloadResources() {
+		ResourceManagerImpl<String> resourceManager = new ResourceManagerImpl<String>();
+		
+		resourceManager.add("A", new MockDataLoader<String>("data1"));
+		
+		Resource<String> resource = resourceManager.get("A");
+		resource.load();
+		
+		assertThat(resource.isLoaded(), IsEqual.equalTo(true));
+
+		resourceManager.unloadAll();
+		
+		assertThat(resource.isLoaded(), IsEqual.equalTo(false));
+	}
+	
+	// and should not track it...
+	
+	@Test
+	public void shouldAddAndReturnVolatileResource() {
+		ResourceManagerImpl<String> resourceManager = new ResourceManagerImpl<String>();
+		
+		resourceManager.addVolatile("A", new MockDataLoader<String>("data1"));
+		
+		Resource<String> volatileResource1 = resourceManager.get("A");
+		
+		assertThat(volatileResource1, IsNull.notNullValue());
+	}
+	
+	@Test
+	public void shouldReturnDifferentResourceEachTimeIfVolatile() {
+		ResourceManagerImpl<String> resourceManager = new ResourceManagerImpl<String>();
+		
+		resourceManager.addVolatile("A", new MockDataLoader<String>("data1"));
+		
+		Resource<String> volatileResource1 = resourceManager.get("A");
+		Resource<String> volatileResource2 = resourceManager.get("A");
+		
+		assertThat(volatileResource1, IsNot.not(IsSame.sameInstance(volatileResource2)));
+	}
+	
+	@Test
+	public void shouldNotUnloadAVolatileResoruce() {
+		ResourceManagerImpl<String> resourceManager = new ResourceManagerImpl<String>();
+		
+		resourceManager.addVolatile("A", new MockDataLoader<String>("data1"));
+		
+		Resource<String> volatileResource1 = resourceManager.get("A");
+		volatileResource1.load();
+		
+		assertThat(volatileResource1.isLoaded(), IsEqual.equalTo(true));
+
+		resourceManager.unloadAll();
+		
+		assertThat(volatileResource1.isLoaded(), IsEqual.equalTo(true));
 	}
 
 }

@@ -53,4 +53,10 @@ public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 		throw new UnsupportedOperationException("not implemented yet");
 	}
 
+	@Override
+	public void addVolatile(K id, DataLoader dataLoader) {
+		// TODO Auto-generated function stub
+		
+	}
+
 }

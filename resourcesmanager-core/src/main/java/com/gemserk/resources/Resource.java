@@ -7,6 +7,10 @@ public class Resource<T> {
 	T data = null;
 
 	DataLoader<T> dataLoader;
+	
+	public Resource(Resource resource) {
+		this.dataLoader = resource.dataLoader;
+	}
 
 	public Resource(DataLoader<T> dataLoader) {
 		this(dataLoader, false);
