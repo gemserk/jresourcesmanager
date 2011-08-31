@@ -3,12 +3,14 @@ package com.gemserk.resources;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.same;
 import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 import com.gemserk.resources.dataloaders.DataLoader;
+import com.gemserk.resources.dataloaders.MockDataLoader;
 import com.gemserk.resources.dataloaders.StaticDataLoader;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
@@ -100,6 +102,45 @@ public class ResourceTest {
 	
 	@Test
 	public void shouldDisposeDataLoaderWhenSettingNewDataLoader() {
-		fail();
+		MockDataLoader dataLoaderA = new MockDataLoader("A");
+		MockDataLoader dataLoaderB = new MockDataLoader("B");
+		
+		Resource resource = new Resource(dataLoaderA, true);
+		
+		assertThat(dataLoaderA.loaded, IsEqual.equalTo(false));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(false));
+		
+		resource.load();
+		
+		assertThat(dataLoaderA.loaded, IsEqual.equalTo(true));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(false));
+		
+		resource.setDataLoader(dataLoaderB);
+
+		assertThat(dataLoaderA.loaded, IsEqual.equalTo(false));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(false));
+		
+		resource.load();
+		
+		assertThat(dataLoaderA.loaded, IsEqual.equalTo(false));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(true));
+	}
+	
+	@Test
+	public void shouldNotDisposeDataLoaderWhenSettingNewDataLoaderIfNeverLoaded() {
+		MockDataLoader dataLoaderA = new MockDataLoader("A");
+		MockDataLoader dataLoaderB = new MockDataLoader("B");
+		
+		Resource resource = new Resource(dataLoaderA, true);
+		
+		assertThat(dataLoaderA.loaded, IsEqual.equalTo(false));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(false));
+		
+		resource.setDataLoader(dataLoaderB);
+		
+		resource.load();
+		
+		assertThat(dataLoaderA.unloadCalled, IsEqual.equalTo(false));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(true));
 	}
 }

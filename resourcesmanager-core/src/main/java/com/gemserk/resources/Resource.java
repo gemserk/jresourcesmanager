@@ -26,9 +26,12 @@ public class Resource<T> {
 	public void set(T data) {
 		this.data = data;
 	}
-	
+
 	public void setDataLoader(DataLoader<T> dataLoader) {
+		if (isLoaded())
+			this.dataLoader.dispose(data);
 		this.dataLoader = dataLoader;
+		this.data = null;
 	}
 
 	public void reload() {
@@ -36,7 +39,7 @@ public class Resource<T> {
 		load();
 	}
 
-	private void load() {
+	public void load() {
 		if (!isLoaded())
 			data = dataLoader.load();
 	}
@@ -47,7 +50,7 @@ public class Resource<T> {
 			data = null;
 		}
 	}
-	
+
 	public boolean isLoaded() {
 		return data != null;
 	}
