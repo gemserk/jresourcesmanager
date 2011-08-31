@@ -6,65 +6,14 @@ import java.awt.Font;
 
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
+import org.hamcrest.core.IsSame;
 import org.junit.Test;
 
 import com.gemserk.resources.dataloaders.DataLoader;
+import com.gemserk.resources.dataloaders.MockDataLoader;
 import com.gemserk.resources.dataloaders.StaticDataLoader;
-import com.gemserk.resources.resourceloaders.CachedResourceLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 
 public class ResourceManagerImplTest {
-
-	class StringMockResourceLoader implements ResourceLoader<String> {
-
-		private final String string;
-
-		public StringMockResourceLoader(String string) {
-			this.string = string;
-		}
-
-		@Override
-		public Resource<String> load() {
-			return new Resource<String>(new StaticDataLoader<String>(string));
-		}
-
-	}
-	
-	class MockResourceLoader<T> implements ResourceLoader<T> {
-		
-		private final Resource<T> t;
-
-		public MockResourceLoader(Resource<T> t) {
-			this.t = t;
-		}
-
-		@Override
-		public Resource<T> load() {
-			return t;
-		}
-		
-	}
-	
-	class MockResource<T> extends Resource<T> {
-		
-		boolean unloadCalled = false;
-
-		public MockResource(final T t) {
-			super(new DataLoader<T>() {
-				@Override
-				public T load() {
-					return t;
-				}
-			});
-		}
-		
-		@Override
-		public void unload() {
-			unloadCalled = true;
-		}
-		
-	}
 
 	@Test
 	public void shouldReturnNullResourceIfResourceNotFound() {
@@ -77,7 +26,7 @@ public class ResourceManagerImplTest {
 	public void shouldReturnRegisteredResourceWithId() {
 		ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
 
-		resourceManager.add("MyCompanyLogo", new ResourceLoaderImpl<String>(new StaticDataLoader<String>("data")));
+		resourceManager.add("MyCompanyLogo", new StaticDataLoader<String>("data"));
 
 		Resource<String> actualResource = resourceManager.get("MyCompanyLogo");
 		assertNotNull(actualResource);
@@ -86,9 +35,8 @@ public class ResourceManagerImplTest {
 
 	@Test
 	public void shouldReturnResourceLoadedFromLoader() {
-		ResourceLoader<String> resourceLoader = new StringMockResourceLoader("HELLO");
 		ResourceManager<String> resourceManagerImpl = new ResourceManagerImpl<String>();
-		resourceManagerImpl.add("MyString", resourceLoader);
+		resourceManagerImpl.add("MyString", new StaticDataLoader<String>("HELLO"));
 		Resource<String> actualResource = resourceManagerImpl.get("MyString");
 		assertNotNull(actualResource);
 		assertEquals("HELLO", actualResource.get());
@@ -96,29 +44,29 @@ public class ResourceManagerImplTest {
 
 	@Test
 	public void shouldReturnResourceLoadedFromLoader2() {
-		ResourceLoader<String> resourceLoader = new CachedResourceLoader<String>(new StringMockResourceLoader("HELLO"));
+		// ResourceLoader<String> resourceLoader = new CachedResourceLoader<String>(new StringMockResourceLoader("HELLO"));
 		ResourceManager<String> resourceManagerImpl = new ResourceManagerImpl<String>();
-		resourceManagerImpl.add("MyString", resourceLoader);
+		resourceManagerImpl.add("MyString", new StaticDataLoader<String>("HELLO"));
 		Resource<String> actualResource = resourceManagerImpl.get("MyString");
 		Resource<String> actualResource2 = resourceManagerImpl.get("MyString");
 		assertSame(actualResource, actualResource2);
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Test
 	public void addResourcesAndGetThemWithoutCaching() {
 		ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
 
-		resourceManager.add("HelloWorldString", new ResourceLoaderImpl<String>(new StaticDataLoader<String>("HELLO")));
-		resourceManager.add("HelloWorldFont", new CachedResourceLoader(new ResourceLoaderImpl(new DataLoader<Font>() {
+		resourceManager.add("HelloWorldString", new StaticDataLoader<String>("HELLO"));
+		resourceManager.add("HelloWorldFont", new DataLoader<Font>() {
 			@Override
 			public Font load() {
 				return new Font("Arial", Font.BOLD, 26);
 			}
-		})));
-		
-		//....
-		
+		});
+
+		// ....
+
 		Resource<String> stringResource = resourceManager.get("HelloWorldString");
 		Resource<Font> fontResource1 = resourceManager.get("HelloWorldFont");
 		Resource<Font> fontResource2 = resourceManager.get("HelloWorldFont");
@@ -126,72 +74,76 @@ public class ResourceManagerImplTest {
 		assertNotNull(stringResource);
 		assertNotNull(fontResource1);
 		assertNotNull(fontResource2);
-		
+
 		assertSame(fontResource1, fontResource2);
 	}
-	
-	@SuppressWarnings({"unchecked", "rawtypes"})
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Test
 	public void shouldCallUnloadToResourcesWhenUnloadAllCalled() {
-		
-		ResourceManager<String> resourceManagerImpl = new ResourceManagerImpl<String>();
-		
-		resourceManagerImpl.add("MyString", new ResourceLoader<String>() {
 
-			@Override
-			public Resource<String> load() {
-				return new MockResource<String>("A");
-			}
-		});
+		ResourceManager<String> resourceManagerImpl = new ResourceManagerImpl<String>();
+
+		MockDataLoader dataLoader = new MockDataLoader("A");
 		
-		MockResource<String> actualResource = (MockResource) resourceManagerImpl.get("MyString");
-		MockResource<String> actualResource2 = (MockResource) resourceManagerImpl.get("MyString");
+		resourceManagerImpl.add("MyString", dataLoader);
+
+		Resource<String> actualResource = resourceManagerImpl.get("MyString");
+		
+		actualResource.get();
+		
+		assertThat(dataLoader.loaded, IsEqual.equalTo(true));
 		
 		resourceManagerImpl.unloadAll();
-		
-		assertTrue(actualResource != actualResource2);
-		
-		assertTrue(actualResource.unloadCalled);
-		assertTrue(actualResource2.unloadCalled);
-		
+
+		assertThat(dataLoader.loaded, IsEqual.equalTo(false));
+
 	}
-	
+
 	@Test
 	public void shouldReturnResourceValue() {
 		ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
-		
-		resourceManager.add("MyString", new ResourceLoader<String>() {
 
-			@Override
-			public Resource<String> load() {
-				return new MockResource<String>("VALUE");
-			}
-		});
-		
+		resourceManager.add("MyString", new MockDataLoader<String>("VALUE"));
+
 		String resourceValue = resourceManager.getResourceValue("MyString");
 		assertThat(resourceValue, IsNull.notNullValue());
 		assertThat(resourceValue, IsEqual.equalTo("VALUE"));
 	}
-	
+
 	@Test
 	public void shouldReturnNullIfResourceForValueDoesntExist() {
 		ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
 		String resourceValue = resourceManager.getResourceValue("NULL");
 		assertThat(resourceValue, IsNull.nullValue());
 	}
-	
+
 	@Test
 	public void bugCachingResourcesTonsOfTimes() {
-		
+
 		ResourceManagerImpl<String> resourceManager = new ResourceManagerImpl<String>();
-		resourceManager.add("A", new MockResourceLoader<Object>(new MockResource<Object>("DATA")));
-		
+		resourceManager.add("A", new MockDataLoader<String>("data"));
+
 		assertThat(resourceManager.resources.size(), IsEqual.equalTo(0));
 		resourceManager.get("A");
 		assertThat(resourceManager.resources.size(), IsEqual.equalTo(1));
 		resourceManager.get("A");
 		assertThat(resourceManager.resources.size(), IsEqual.equalTo(1));
-		
+
 	}
 	
+	@Test
+	public void shouldReturnCachedResource() {
+
+		ResourceManagerImpl<String> resourceManager = new ResourceManagerImpl<String>();
+		
+		resourceManager.add("A", new MockDataLoader<String>("data1"));
+		
+		Resource<Object> resourceA = resourceManager.get("A");
+		Resource<Object> resourceB = resourceManager.get("A");
+		
+		assertThat(resourceA, IsSame.sameInstance(resourceB));
+
+	}
+
 }

@@ -5,8 +5,6 @@ import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.datasources.DataSourceProvider;
 import com.gemserk.resources.java2d.dataloaders.ImageLoader;
 import com.gemserk.resources.java2d.dataloaders.TrueTypeFontLoader;
-import com.gemserk.resources.resourceloaders.CachedResourceLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class Java2dResourcesBuilder {
@@ -31,7 +29,7 @@ public class Java2dResourcesBuilder {
 	}
 	
 	private void addCachedResourceLoader(String id, DataLoader dataLoader) {
-		resourceManager.add(id, new CachedResourceLoader(new ResourceLoaderImpl(dataLoader)));
+		resourceManager.add(id, dataLoader);
 	}
 	
 }

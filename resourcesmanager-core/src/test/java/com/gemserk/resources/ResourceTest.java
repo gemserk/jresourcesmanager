@@ -3,8 +3,7 @@ package com.gemserk.resources;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.same;
 import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
@@ -97,5 +96,10 @@ public class ResourceTest {
 		assertEquals(data2, reloadableResource.get());
 
 		verify(dataLoader);
+	}
+	
+	@Test
+	public void shouldDisposeDataLoaderWhenSettingNewDataLoader() {
+		fail();
 	}
 }

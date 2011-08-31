@@ -6,8 +6,6 @@ import java.util.Properties;
 
 import com.gemserk.resources.datasources.DataSourceProvider;
 import com.gemserk.resources.java2d.dataloaders.ImageLoader;
-import com.gemserk.resources.resourceloaders.CachedResourceLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 
 /**
  * Registers to ResourceManager images from a file, where each line contains id=imagefile.
@@ -38,7 +36,7 @@ public class PropertiesImageLoader {
 				String[] values = imageProperties.split(",");
 
 				ImageLoader dataLoader = new ImageLoader(dataSourceProvider.get(values[0]));
-				resourceManager.add(imageKey, new CachedResourceLoader(new ResourceLoaderImpl(dataLoader)));
+				resourceManager.add(imageKey, dataLoader);
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("failed to load image mapping", e);

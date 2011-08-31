@@ -2,9 +2,9 @@ package com.gemserk.resources.slick.gamestates;
 
 import com.gemserk.resources.Resource;
 import com.gemserk.resources.ResourceManager;
+import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.progress.TaskQueue;
 import com.gemserk.resources.progress.tasks.PreLoadResourceRunnable;
-import com.gemserk.resources.resourceloaders.ResourceLoader;
 
 public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 
@@ -34,8 +34,8 @@ public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public void add(K id, ResourceLoader resourceLoader) {
-		resourceManager.add(id, resourceLoader);
+	public void add(K id, DataLoader dataLoader) {
+		resourceManager.add(id, dataLoader);
 		taskQueue.add(new PreLoadResourceRunnable<K>(resourceManager, id));
 	}
 

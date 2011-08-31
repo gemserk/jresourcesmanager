@@ -108,8 +108,8 @@ public class SlickResourcesBuilder {
 		return new SlickAngelCodeFontLoader(fontDataSource, imageDataSource);
 	}
 
-	public void resource(String id, ResourceLoader resourceLoader) {
-		resourceManager.add(id, resourceLoader);
+	public void resource(String id, DataLoader dataLoader) {
+		resourceManager.add(id, dataLoader);
 	}
 
 	public ResourceLoader loader(DataLoader dataLoader) {

@@ -1,6 +1,6 @@
 package com.gemserk.resources;
 
-import com.gemserk.resources.resourceloaders.ResourceLoader;
+import com.gemserk.resources.dataloaders.DataLoader;
 
 /**
  * Provides a common way to handle Resources creation and destruction.
@@ -10,7 +10,7 @@ import com.gemserk.resources.resourceloaders.ResourceLoader;
 public interface ResourceManager<K> {
 
 	@SuppressWarnings("rawtypes")
-	void add(K id, ResourceLoader resourceLoader);
+	void add(K id, DataLoader dataLoader);
 
 	/**
 	 * Returns a Resource identified by id.

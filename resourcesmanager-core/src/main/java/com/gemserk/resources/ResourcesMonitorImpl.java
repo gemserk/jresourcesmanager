@@ -3,7 +3,7 @@ package com.gemserk.resources;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.gemserk.resources.resourceloaders.ResourceLoader;
+import com.gemserk.resources.dataloaders.DataLoader;
 
 @SuppressWarnings("rawtypes")
 public class ResourcesMonitorImpl<K> implements ResourcesMonitor, ResourceManager<K> {
@@ -17,8 +17,8 @@ public class ResourcesMonitorImpl<K> implements ResourcesMonitor, ResourceManage
 	}
 
 	@Override
-	public void add(K id, ResourceLoader resourceLoader) {
-		resourceManager.add(id, resourceLoader);
+	public void add(K id, DataLoader dataLoader) {
+		resourceManager.add(id, dataLoader);
 	}
 
 	@Override

@@ -5,12 +5,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.gemserk.resources.resourceloaders.ResourceLoader;
+import com.gemserk.resources.dataloaders.DataLoader;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ResourceManagerImpl<K> implements ResourceManager<K> {
 
-	Map<K, ResourceLoader> resourceLoaders = new HashMap<K, ResourceLoader>();
+	Map<K, Resource> resourceLoaders = new HashMap<K, Resource>();
 
 	Set<Resource> resources = new HashSet<Resource>();
 
@@ -35,13 +35,13 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 	}
 
 	private Resource getResource(K id) {
-		Resource resource = resourceLoaders.get(id).load();
+		Resource resource = resourceLoaders.get(id);
 		resources.add(resource);
 		return resource;
 	}
 
-	public void add(K id, ResourceLoader resourceLoader) {
-		resourceLoaders.put(id, resourceLoader);
+	public void add(K id, DataLoader dataLoader) {
+		resourceLoaders.put(id, new Resource(dataLoader, true));
 	}
 
 }

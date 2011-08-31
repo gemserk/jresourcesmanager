@@ -19,7 +19,6 @@ import com.gemserk.resources.ResourceManagerImpl;
 import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.datasources.ClassPathDataSource;
 import com.gemserk.resources.java2d.dataloaders.ImageLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 
 @SuppressWarnings("unchecked")
 public class JFrameCustomResourceLoaderSample {
@@ -60,9 +59,9 @@ public class JFrameCustomResourceLoaderSample {
 
 		final ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
 
-		resourceManager.add("WhiteLogo", new ResourceLoaderImpl<Image>(new ImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png"))));
+		resourceManager.add("WhiteLogo", new ImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png")));
 		// register a loader for a custom resource which uses the WhiteLogo and creates a new image with green pixels instead white.
-		resourceManager.add("GreenLogo", new ResourceLoaderImpl<Image>(new CustomGreenLogo(resourceManager.get("WhiteLogo"))));
+		resourceManager.add("GreenLogo", new CustomGreenLogo(resourceManager.get("WhiteLogo")));
 
 		JFrame frame = new JFrame() {
 			private static final long serialVersionUID = 5404072814427863051L;
