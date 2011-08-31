@@ -31,6 +31,21 @@ public class ResourceManagerImplTest {
 
 	}
 	
+	class MockResourceLoader<T> implements ResourceLoader<T> {
+		
+		private final Resource<T> t;
+
+		public MockResourceLoader(Resource<T> t) {
+			this.t = t;
+		}
+
+		@Override
+		public Resource<T> load() {
+			return t;
+		}
+		
+	}
+	
 	class MockResource<T> extends Resource<T> {
 		
 		boolean unloadCalled = false;
@@ -164,4 +179,19 @@ public class ResourceManagerImplTest {
 		String resourceValue = resourceManager.getResourceValue("NULL");
 		assertThat(resourceValue, IsNull.nullValue());
 	}
+	
+	@Test
+	public void bugCachingResourcesTonsOfTimes() {
+		
+		ResourceManagerImpl<String> resourceManager = new ResourceManagerImpl<String>();
+		resourceManager.add("A", new MockResourceLoader<Object>(new MockResource<Object>("DATA")));
+		
+		assertThat(resourceManager.resources.size(), IsEqual.equalTo(0));
+		resourceManager.get("A");
+		assertThat(resourceManager.resources.size(), IsEqual.equalTo(1));
+		resourceManager.get("A");
+		assertThat(resourceManager.resources.size(), IsEqual.equalTo(1));
+		
+	}
+	
 }

@@ -1,8 +1,9 @@
 package com.gemserk.resources;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import com.gemserk.resources.resourceloaders.ResourceLoader;
 
@@ -11,7 +12,7 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 
 	Map<K, ResourceLoader> resourceLoaders = new HashMap<K, ResourceLoader>();
 
-	ArrayList<Resource> resources = new ArrayList<Resource>();
+	Set<Resource> resources = new HashSet<Resource>();
 
 	public <T> Resource<T> get(K id) {
 		if (!resourceLoaders.containsKey(id))
@@ -29,8 +30,8 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 
 	@Override
 	public void unloadAll() {
-		for (int i = 0; i < resources.size(); i++)
-			resources.get(i).unload();
+		for (Resource resource : resources)
+			resource.unload();
 	}
 
 	private Resource getResource(K id) {
