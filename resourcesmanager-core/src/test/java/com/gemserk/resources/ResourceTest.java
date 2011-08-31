@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsSame;
 import org.junit.Test;
 
 import com.gemserk.resources.dataloaders.DataLoader;
@@ -143,4 +144,25 @@ public class ResourceTest {
 		assertThat(dataLoaderA.unloadCalled, IsEqual.equalTo(false));
 		assertThat(dataLoaderB.loaded, IsEqual.equalTo(true));
 	}
+	
+	@Test
+	public void shouldCacheDataLoadedFromDataLoaderAndReturnSameData() {
+		
+		DataLoader dataLoaderA = new DataLoader<String>() {
+
+			@Override
+			public String load() {
+				return new String("A");
+			}
+		};
+		
+		Resource<String> resource = new Resource<String>(dataLoaderA, true);
+		
+		String dataA = resource.get();
+		String dataB = resource.get();
+		
+		assertThat(dataA, IsSame.sameInstance(dataB));
+		
+	}
+	
 }
