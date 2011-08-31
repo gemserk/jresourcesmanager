@@ -26,7 +26,7 @@ public class ClonedSlickAnimationLoader extends DataLoader<Animation> {
 	}
 	
 	@Override
-	public void dispose(Animation t) {
+	public void unload(Animation t) {
 		animation = null;
 	}
 

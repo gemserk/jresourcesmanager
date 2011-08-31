@@ -5,9 +5,9 @@ public abstract class DataLoader<T> {
 	public abstract T load();
 	
 	/**
-	 * To implement custom dispose logic, called when reloading an item from resource manager.
+	 * To implement custom unload logic, for example if using an OpenGL texture, etc.
 	 */
-	public void dispose(T t) {
+	public void unload(T t) {
 		
 	}
 

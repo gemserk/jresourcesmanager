@@ -18,7 +18,7 @@ public class MockDataLoader<T> extends DataLoader<T> {
 		return t;
 	}
 
-	public void dispose(T t) {
+	public void unload(T t) {
 		unloadCalled = true;
 		loaded = false;
 	}

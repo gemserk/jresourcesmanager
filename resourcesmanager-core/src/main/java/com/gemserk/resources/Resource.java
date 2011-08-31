@@ -29,7 +29,7 @@ public class Resource<T> {
 
 	public void setDataLoader(DataLoader<T> dataLoader) {
 		if (isLoaded())
-			this.dataLoader.dispose(data);
+			this.dataLoader.unload(data);
 		this.dataLoader = dataLoader;
 		this.data = null;
 	}
@@ -46,7 +46,7 @@ public class Resource<T> {
 
 	public void unload() {
 		if (isLoaded()) {
-			dataLoader.dispose(data);
+			dataLoader.unload(data);
 			data = null;
 		}
 	}

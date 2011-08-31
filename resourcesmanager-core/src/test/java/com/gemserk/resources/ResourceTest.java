@@ -87,7 +87,7 @@ public class ResourceTest {
 
 		DataLoader<String> dataLoader = createMock(DataLoader.class);
 		expect(dataLoader.load()).andReturn(data1);
-		dataLoader.dispose(same(data1));
+		dataLoader.unload(same(data1));
 		expect(dataLoader.load()).andReturn(data2);
 		replay(dataLoader);
 
