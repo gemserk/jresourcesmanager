@@ -16,7 +16,6 @@ import javax.swing.JFrame;
 import com.gemserk.resources.Resource;
 import com.gemserk.resources.datasources.ClassPathDataSource;
 import com.gemserk.resources.java2d.dataloaders.ImageLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 
 public class JFrameResourceReloadSample {
 
@@ -25,9 +24,9 @@ public class JFrameResourceReloadSample {
 		ImageLoader whiteLogoImageLoader = new ImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png"));
 		ImageLoader blackLogoImageLoader = new ImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png"));
 
-		final Resource<Image> whiteLogoImagerResource = new ResourceLoaderImpl<Image>(whiteLogoImageLoader).load();
-		final Resource<Image> blackLogoImageResource = new ResourceLoaderImpl<Image>(blackLogoImageLoader).load();
-
+		final Resource<Image> whiteLogoImagerResource = new Resource<Image>(whiteLogoImageLoader, false);
+		final Resource<Image> blackLogoImageResource =new Resource<Image>(blackLogoImageLoader, false);
+		
 		JFrame frame = new JFrame() {
 			{
 

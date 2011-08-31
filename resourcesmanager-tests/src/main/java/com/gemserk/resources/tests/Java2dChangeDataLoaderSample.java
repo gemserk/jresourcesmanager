@@ -16,7 +16,6 @@ import javax.swing.JFrame;
 import com.gemserk.resources.Resource;
 import com.gemserk.resources.datasources.ClassPathDataSource;
 import com.gemserk.resources.java2d.dataloaders.ImageLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 
 public class Java2dChangeDataLoaderSample {
 
@@ -30,7 +29,7 @@ public class Java2dChangeDataLoaderSample {
 		final ImageLoader whiteLogoImageLoader = new ImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png"));
 		final ImageLoader blackLogoImageLoader = new ImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png"));
 
-		final Resource<Image> imagerResource = new ResourceLoaderImpl<Image>(whiteLogoImageLoader).load();
+		final Resource<Image> imagerResource = new Resource<Image>(whiteLogoImageLoader, false);
 
 		JFrame frame = new JFrame() {
 			{
