@@ -35,8 +35,8 @@ public class ImageLoader extends DataLoader<Image> {
 	}
 	
 	@Override
-	public void dispose(Image t) {
-		super.dispose(t);
+	public void unload(Image t) {
+		super.unload(t);
 		if (logger.isInfoEnabled())
 			logger.info("Image " + dataSource.getResourceName() + " will be automatically unloaded by gc.");
 	}

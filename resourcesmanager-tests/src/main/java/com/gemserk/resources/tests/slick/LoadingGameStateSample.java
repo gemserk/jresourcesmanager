@@ -22,8 +22,6 @@ import com.gemserk.resources.ResourceManagerImpl;
 import com.gemserk.resources.datasources.ClassPathDataSource;
 import com.gemserk.resources.progress.TaskQueue;
 import com.gemserk.resources.progress.tasks.SimulateLoadingTimeRunnable;
-import com.gemserk.resources.resourceloaders.CachedResourceLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
 import com.gemserk.resources.slick.dataloaders.SlickMusicLoader;
 import com.gemserk.resources.slick.dataloaders.SlickSoundLoader;
@@ -75,16 +73,16 @@ public class LoadingGameStateSample extends StateBasedGame {
 		taskQueue.add(new SimulateLoadingTimeRunnable(1000));
 
 		{
-			resourceManager.add("BusinessCard", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("assets/images/businesscard_front_landscape_ariel_fashionvictim_1.png")))));
+			resourceManager.add("BusinessCard", new SlickImageLoader(new ClassPathDataSource("assets/images/businesscard_front_landscape_ariel_fashionvictim_1.png")));
 
 			// resourceManager.add("SoundSample", new CachedResourceLoader(new ResourceLoaderImpl(new SlickSoundLoader("assets/sounds/nextwave.wav"))));
-			resourceManager.add("SoundSample", new CachedResourceLoader(new ResourceLoaderImpl(new SlickSoundLoader(new ClassPathDataSource("assets/sounds/nextwave.wav")))));
-			resourceManager.add("GameMusicTrack", new CachedResourceLoader(new ResourceLoaderImpl(new SlickMusicLoader(new ClassPathDataSource("assets/tracks/game.ogg")))));
+			resourceManager.add("SoundSample", new SlickSoundLoader(new ClassPathDataSource("assets/sounds/nextwave.wav")));
+			resourceManager.add("GameMusicTrack", new SlickMusicLoader(new ClassPathDataSource("assets/tracks/game.ogg")));
 			
-			resourceManager.add("Font", new CachedResourceLoader(new ResourceLoaderImpl(new SlickTrueTypeFontLoader(new ClassPathDataSource("assets/fonts/Mugnuts.ttf"), Font.BOLD, 32))));
+			resourceManager.add("Font", new SlickTrueTypeFontLoader(new ClassPathDataSource("assets/fonts/Mugnuts.ttf"), Font.BOLD, 32));
 
-			resourceManager.add("BlackLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png")))));
-			resourceManager.add("WhiteLogo", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png")))));
+			resourceManager.add("BlackLogo", new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png")));
+			resourceManager.add("WhiteLogo", new SlickImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png")));
 		}
 
 		taskQueue.add(new SimulateLoadingTimeRunnable(700));

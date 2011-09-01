@@ -32,7 +32,7 @@ public class SlickImageLoader extends DataLoader<Image> {
 	}
 
 	@Override
-	public void dispose(Image image) {
+	public void unload(Image image) {
 		try {
 			image.destroy();
 		} catch (SlickException e) {

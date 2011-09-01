@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>com.gemserk.resources</groupId>
 		<artifactId>resourcesmanager</artifactId>
-		<version>0.0.12</version>
+		<version>0.1.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.gemserk.resources</groupId>
 	<artifactId>resourcesmanager-java2dmodule</artifactId>
-	<version>0.0.12</version>
+	<version>0.1.0-SNAPSHOT</version>
 
 	<name>ResourceManager - Java2d module</name>
 	<description>Resources Manager</description>

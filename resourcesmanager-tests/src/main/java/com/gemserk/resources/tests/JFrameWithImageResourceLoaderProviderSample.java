@@ -17,7 +17,6 @@ import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.ResourceManagerImpl;
 import com.gemserk.resources.datasources.ClassPathDataSource;
 import com.gemserk.resources.java2d.dataloaders.ImageLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 
 public class JFrameWithImageResourceLoaderProviderSample {
 
@@ -28,7 +27,7 @@ public class JFrameWithImageResourceLoaderProviderSample {
 		// registers a loader which tries to load an image by using the resource "id" as a file in the classpath
 		// resourceManagerImpl.registerLoaderProvider(Image.class, new ImageLoaderProvider(new DataSourceProvider(Source.ClassPath)));
 
-		resourceManager.add("BusinessCard", new ResourceLoaderImpl<Image>(new ImageLoader(new ClassPathDataSource("assets/images/businesscard_front_landscape_ariel_fashionvictim_1.png"))));
+		resourceManager.add("BusinessCard", new ImageLoader(new ClassPathDataSource("assets/images/businesscard_front_landscape_ariel_fashionvictim_1.png")));
 
 		JFrame frame = new JFrame() {
 			{

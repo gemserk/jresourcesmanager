@@ -6,7 +6,7 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 
-import com.gemserk.resources.resourceloaders.ResourceLoader;
+import com.gemserk.resources.dataloaders.DataLoader;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class ResourceMonitorTest {
@@ -18,9 +18,9 @@ public class ResourceMonitorTest {
 
 		ResourceManager resourceManager = createMock(ResourceManager.class);
 		Resource resource = createMock(Resource.class);
-		ResourceLoader resourceLoader = createMock(ResourceLoader.class);
+		DataLoader dataLoader = createMock(DataLoader.class);
 		
-		resourceManager.add(resourceId, resourceLoader);
+		resourceManager.add(resourceId, dataLoader);
 		
 		expect(resourceManager.get(resourceId)).andReturn(resource);
 		resource.reload();
@@ -29,7 +29,7 @@ public class ResourceMonitorTest {
 		
 		ResourcesMonitorImpl resourcesMonitorImpl = new ResourcesMonitorImpl(resourceManager);
 		
-		resourcesMonitorImpl.add(resourceId, resourceLoader);
+		resourcesMonitorImpl.add(resourceId, dataLoader);
 		Resource actualResource = resourcesMonitorImpl.get(resourceId);
 		
 		assertSame(resource, actualResource);

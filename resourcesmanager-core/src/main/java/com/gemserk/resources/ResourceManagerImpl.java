@@ -1,23 +1,26 @@
 package com.gemserk.resources;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.gemserk.resources.resourceloaders.ResourceLoader;
+import com.gemserk.resources.dataloaders.DataLoader;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ResourceManagerImpl<K> implements ResourceManager<K> {
 
-	Map<K, ResourceLoader> resourceLoaders = new HashMap<K, ResourceLoader>();
-
-	Set<Resource> resources = new HashSet<Resource>();
+	Map<K, Resource> resources = new HashMap<K, Resource>();
 
 	public <T> Resource<T> get(K id) {
-		if (!resourceLoaders.containsKey(id))
+		if (!resources.containsKey(id))
 			return null;
-		return getResource(id);
+		Resource resource = resources.get(id);
+		
+		// returns a new resource not tracked by the resource manager.
+		if (resource instanceof VolatileResource)
+			return resource.clone();
+		
+		return resource;
 	}
 
 	@Override
@@ -30,18 +33,18 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 
 	@Override
 	public void unloadAll() {
-		for (Resource resource : resources)
-			resource.unload();
+		Set<K> keySet = resources.keySet();
+		for (K k : keySet) 
+			resources.get(k).unload();
 	}
 
-	private Resource getResource(K id) {
-		Resource resource = resourceLoaders.get(id).load();
-		resources.add(resource);
-		return resource;
+	public void add(K id, DataLoader dataLoader) {
+		resources.put(id, new Resource(dataLoader, true));
 	}
 
-	public void add(K id, ResourceLoader resourceLoader) {
-		resourceLoaders.put(id, resourceLoader);
+	@Override
+	public void addVolatile(K id, DataLoader dataLoader) {
+		resources.put(id, new VolatileResource(dataLoader, true));
 	}
 
 }

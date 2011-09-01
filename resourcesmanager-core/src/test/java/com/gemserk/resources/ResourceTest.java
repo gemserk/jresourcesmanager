@@ -7,9 +7,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsSame;
 import org.junit.Test;
 
 import com.gemserk.resources.dataloaders.DataLoader;
+import com.gemserk.resources.dataloaders.MockDataLoader;
 import com.gemserk.resources.dataloaders.StaticDataLoader;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
@@ -33,7 +35,7 @@ public class ResourceTest {
 		expect(dataLoader.load()).andReturn(data);
 		replay(dataLoader);
 		
-		new Resource<String>(dataLoader);
+		new Resource<String>(dataLoader, false);
 		
 		verify(dataLoader);
 	}
@@ -86,7 +88,7 @@ public class ResourceTest {
 
 		DataLoader<String> dataLoader = createMock(DataLoader.class);
 		expect(dataLoader.load()).andReturn(data1);
-		dataLoader.dispose(same(data1));
+		dataLoader.unload(same(data1));
 		expect(dataLoader.load()).andReturn(data2);
 		replay(dataLoader);
 
@@ -98,4 +100,69 @@ public class ResourceTest {
 
 		verify(dataLoader);
 	}
+	
+	@Test
+	public void shouldDisposeDataLoaderWhenSettingNewDataLoader() {
+		MockDataLoader dataLoaderA = new MockDataLoader("A");
+		MockDataLoader dataLoaderB = new MockDataLoader("B");
+		
+		Resource resource = new Resource(dataLoaderA, true);
+		
+		assertThat(dataLoaderA.loaded, IsEqual.equalTo(false));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(false));
+		
+		resource.load();
+		
+		assertThat(dataLoaderA.loaded, IsEqual.equalTo(true));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(false));
+		
+		resource.setDataLoader(dataLoaderB);
+
+		assertThat(dataLoaderA.loaded, IsEqual.equalTo(false));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(false));
+		
+		resource.load();
+		
+		assertThat(dataLoaderA.loaded, IsEqual.equalTo(false));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(true));
+	}
+	
+	@Test
+	public void shouldNotDisposeDataLoaderWhenSettingNewDataLoaderIfNeverLoaded() {
+		MockDataLoader dataLoaderA = new MockDataLoader("A");
+		MockDataLoader dataLoaderB = new MockDataLoader("B");
+		
+		Resource resource = new Resource(dataLoaderA, true);
+		
+		assertThat(dataLoaderA.loaded, IsEqual.equalTo(false));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(false));
+		
+		resource.setDataLoader(dataLoaderB);
+		
+		resource.load();
+		
+		assertThat(dataLoaderA.unloadCalled, IsEqual.equalTo(false));
+		assertThat(dataLoaderB.loaded, IsEqual.equalTo(true));
+	}
+	
+	@Test
+	public void shouldCacheDataLoadedFromDataLoaderAndReturnSameData() {
+		
+		DataLoader dataLoaderA = new DataLoader<String>() {
+
+			@Override
+			public String load() {
+				return new String("A");
+			}
+		};
+		
+		Resource<String> resource = new Resource<String>(dataLoaderA, true);
+		
+		String dataA = resource.get();
+		String dataB = resource.get();
+		
+		assertThat(dataA, IsSame.sameInstance(dataB));
+		
+	}
+	
 }

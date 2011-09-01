@@ -16,7 +16,6 @@ import com.gemserk.resources.ResourceManagerImpl;
 import com.gemserk.resources.datasources.FileSystemDataSource;
 import com.gemserk.resources.java2d.dataloaders.DerivedFontLoader;
 import com.gemserk.resources.java2d.dataloaders.TrueTypeFontLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 
 public class JFrameCustomFontResourceLoaderSample {
 
@@ -24,9 +23,9 @@ public class JFrameCustomFontResourceLoaderSample {
 
 		final ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
 
-		resourceManager.add("ZombieRockers", new ResourceLoaderImpl<Font>(new TrueTypeFontLoader(new FileSystemDataSource("assets/fonts/Mugnuts.ttf")), true));
+		resourceManager.add("ZombieRockers", new TrueTypeFontLoader(new FileSystemDataSource("assets/fonts/Mugnuts.ttf")));
 		Resource<Font> fontResource = resourceManager.get("ZombieRockers");
-		resourceManager.add("ZombieRockersPlain48px", new ResourceLoaderImpl<Font>(new DerivedFontLoader(fontResource, 48, Font.PLAIN)));
+		resourceManager.add("ZombieRockersPlain48px", new DerivedFontLoader(fontResource, 48, Font.PLAIN));
 
 		JFrame frame = new JFrame() {
 			{

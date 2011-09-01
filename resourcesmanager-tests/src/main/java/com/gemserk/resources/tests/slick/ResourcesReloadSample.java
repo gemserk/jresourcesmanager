@@ -59,8 +59,8 @@ public class ResourcesReloadSample extends BasicGame {
 			{
 				images("images.properties");
 				sounds("sounds.properties");
-				resource("Font", cached(loader(trueTypeFont("assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48))));
-				resource("WhiteLogo2", cached(loader(image("file://assets/images/logo-gemserk-512x116-white.png"))));
+				resource("Font", trueTypeFont("assets/fonts/Mugnuts.ttf", java.awt.Font.BOLD, 48));
+				resource("WhiteLogo2", image("file://assets/images/logo-gemserk-512x116-white.png"));
 			}
 		};
 

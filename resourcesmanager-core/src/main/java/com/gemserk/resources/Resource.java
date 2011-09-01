@@ -7,12 +7,12 @@ public class Resource<T> {
 	T data = null;
 
 	DataLoader<T> dataLoader;
-
-	public Resource(DataLoader<T> dataLoader) {
-		this(dataLoader, false);
+	
+	Resource(DataLoader<T> dataLoader) {
+		this(dataLoader, true);
 	}
 
-	public Resource(DataLoader<T> dataLoader, boolean deferred) {
+	Resource(DataLoader<T> dataLoader, boolean deferred) {
 		this.dataLoader = dataLoader;
 		if (!deferred)
 			reload();
@@ -26,9 +26,12 @@ public class Resource<T> {
 	public void set(T data) {
 		this.data = data;
 	}
-	
+
 	public void setDataLoader(DataLoader<T> dataLoader) {
+		if (isLoaded())
+			this.dataLoader.unload(data);
 		this.dataLoader = dataLoader;
+		this.data = null;
 	}
 
 	public void reload() {
@@ -36,20 +39,25 @@ public class Resource<T> {
 		load();
 	}
 
-	private void load() {
+	public void load() {
 		if (!isLoaded())
 			data = dataLoader.load();
 	}
 
 	public void unload() {
 		if (isLoaded()) {
-			dataLoader.dispose(data);
+			dataLoader.unload(data);
 			data = null;
 		}
 	}
-	
+
 	public boolean isLoaded() {
 		return data != null;
+	}
+	
+	@Override
+	public Resource clone() {
+		return new Resource(dataLoader);
 	}
 
 }

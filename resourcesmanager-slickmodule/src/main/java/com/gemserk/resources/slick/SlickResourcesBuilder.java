@@ -11,9 +11,6 @@ import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.datasources.DataSource;
 import com.gemserk.resources.datasources.DataSourceFactory;
 import com.gemserk.resources.datasources.DataSourceParser;
-import com.gemserk.resources.resourceloaders.CachedResourceLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 import com.gemserk.resources.slick.dataloaders.SlickAngelCodeFontLoader;
 import com.gemserk.resources.slick.dataloaders.SlickAnimationLoader;
 import com.gemserk.resources.slick.dataloaders.SlickImageLoader;
@@ -108,16 +105,8 @@ public class SlickResourcesBuilder {
 		return new SlickAngelCodeFontLoader(fontDataSource, imageDataSource);
 	}
 
-	public void resource(String id, ResourceLoader resourceLoader) {
-		resourceManager.add(id, resourceLoader);
-	}
-
-	public ResourceLoader loader(DataLoader dataLoader) {
-		return new ResourceLoaderImpl(dataLoader);
-	}
-
-	public ResourceLoader cached(ResourceLoader resourceLoader) {
-		return new CachedResourceLoader(resourceLoader);
+	public void resource(String id, DataLoader dataLoader) {
+		resourceManager.add(id, dataLoader);
 	}
 
 	public DataSource classpath(String path) {

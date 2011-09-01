@@ -16,8 +16,6 @@ import com.gemserk.resources.ResourceManager;
 import com.gemserk.resources.ResourceManagerImpl;
 import com.gemserk.resources.datasources.RemoteDataSource;
 import com.gemserk.resources.java2d.dataloaders.ImageLoader;
-import com.gemserk.resources.resourceloaders.CachedResourceLoader;
-import com.gemserk.resources.resourceloaders.ResourceLoaderImpl;
 
 public class JFrameRemoteResourceLoaderSample {
 
@@ -27,7 +25,7 @@ public class JFrameRemoteResourceLoaderSample {
 
 		// loads a resource from a remote source
 
-		resourceManager.add("BusinessCard", new CachedResourceLoader(new ResourceLoaderImpl<Image>(new ImageLoader(new RemoteDataSource("http://www.gemserk.com/things/businesscards/businesscard_front_landscape_ariel_fashionvictim_1.png")), true)));
+		resourceManager.add("BusinessCard", new ImageLoader(new RemoteDataSource("http://www.gemserk.com/things/businesscards/businesscard_front_landscape_ariel_fashionvictim_1.png")));
 
 		JFrame frame = new JFrame() {
 			{
