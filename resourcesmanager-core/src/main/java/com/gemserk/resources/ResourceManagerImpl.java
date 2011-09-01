@@ -18,7 +18,7 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 		
 		// returns a new resource not tracked by the resource manager.
 		if (resource instanceof VolatileResource)
-			return new VolatileResource(resource);
+			return resource.clone();
 		
 		return resource;
 	}

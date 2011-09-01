@@ -11,15 +11,11 @@ import com.gemserk.resources.dataloaders.DataLoader;
  */
 class VolatileResource<T> extends Resource<T> {
 
-	public VolatileResource(Resource resource) {
-		super(resource);
-	}
-
-	public VolatileResource(DataLoader<T> dataLoader) {
+	VolatileResource(DataLoader<T> dataLoader) {
 		super(dataLoader);
 	}
 
-	public VolatileResource(DataLoader<T> dataLoader, boolean deferred) {
+	VolatileResource(DataLoader<T> dataLoader, boolean deferred) {
 		super(dataLoader, deferred);
 	}
 }

@@ -8,15 +8,11 @@ public class Resource<T> {
 
 	DataLoader<T> dataLoader;
 	
-	public Resource(Resource resource) {
-		this.dataLoader = resource.dataLoader;
+	Resource(DataLoader<T> dataLoader) {
+		this(dataLoader, true);
 	}
 
-	public Resource(DataLoader<T> dataLoader) {
-		this(dataLoader, false);
-	}
-
-	public Resource(DataLoader<T> dataLoader, boolean deferred) {
+	Resource(DataLoader<T> dataLoader, boolean deferred) {
 		this.dataLoader = dataLoader;
 		if (!deferred)
 			reload();
@@ -57,6 +53,11 @@ public class Resource<T> {
 
 	public boolean isLoaded() {
 		return data != null;
+	}
+	
+	@Override
+	public Resource clone() {
+		return new Resource(dataLoader);
 	}
 
 }

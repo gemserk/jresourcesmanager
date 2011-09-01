@@ -35,7 +35,7 @@ public class ResourceTest {
 		expect(dataLoader.load()).andReturn(data);
 		replay(dataLoader);
 		
-		new Resource<String>(dataLoader);
+		new Resource<String>(dataLoader, false);
 		
 		verify(dataLoader);
 	}
