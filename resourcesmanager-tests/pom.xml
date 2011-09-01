@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>com.gemserk.resources</groupId>
 		<artifactId>resourcesmanager</artifactId>
-		<version>0.0.12-removeloader-SNAPSHOT</version>
+		<version>0.1.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.gemserk.resources</groupId>
 	<artifactId>resourcesmanager-tests</artifactId>
-	<version>0.0.12-removeloader-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 
 	<name>ResourceManager - Tests module</name>
 	<description>Resources Manager</description>
