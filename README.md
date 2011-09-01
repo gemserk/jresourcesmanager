@@ -81,7 +81,7 @@ By declaring a resource you are not loading it yet, it only defines how should b
 
 An interesting point is Resources are cached in ResourceManager, so if you ask for the Resource identified by mySound in two different parts of the code, both will be accessing the same Resource. That means if you reload it for some reason, the data will be updated in the Resource and you will be implicitly aware of the change without having to do anything to reload the resource.
 
-The following video named [Dynamic Resources Reloading][http://www.youtube.com/watch?v=cik0SBRPpiA] shows a resource being modified by an external application and being reloaded.
+The following video named [Dynamic Resources Reloading](http://www.youtube.com/watch?v=cik0SBRPpiA) shows a resource being modified by an external application and being reloaded.
 
 Contributing
 ------------
