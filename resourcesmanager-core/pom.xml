@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>com.gemserk.resources</groupId>
 		<artifactId>resourcesmanager</artifactId>
-		<version>0.0.12-SNAPSHOT</version>
+		<version>0.0.12</version>
 	</parent>
 
 	<groupId>com.gemserk.resources</groupId>
 	<artifactId>resourcesmanager-core</artifactId>
-	<version>0.0.12-SNAPSHOT</version>
+	<version>0.0.12</version>
 
 	<name>ResourceManager - Core module</name>
 	<description>Resources Manager</description>
