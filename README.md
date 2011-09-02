@@ -12,7 +12,7 @@ Features
 How to use it
 ------------
 
-There are three classes to know, DataLoader<T>, Resource<T> and ResourceManager.
+To know how to use the project, you should know a bit about the following classes.
 
 ### DataLoader 
 
@@ -42,6 +42,7 @@ This class provides the logic of loading and unloading a resource, it is used by
 	}
 
 The module named resourcesmanager-slick provides DataLoader implementations for some of the Slick assets like Sound, Image and Fonts, the module named resourcesmanager-java2d provides DataLoader implementations to load java2d Images and others.
+
 
 ### Resource
 
@@ -80,6 +81,26 @@ By declaring a resource you are not loading it yet, it only defines how should b
 	Sound sound = mySound.get();
 	// calling get() a second time will return the same already loaded data.
 	Sound sound = mySound.get();
+
+### DataSource
+
+Provides an abstract way to get a stream to the data itself, this class is not necessary in the process but could be useful to reuse DataLoader logic in an easy way, here is the API:
+
+	DataSource {
+
+		InputStream getInputStream();
+
+		String getResourceName();
+	
+		URI getUri();
+
+	}
+
+There are three implementations, ClassPathDataSource provides access to class path information, FileSystemDataSource provides access to data in the file system, RemoteDataSource provides information to a remote resource, from the web. The idea of this class is to make DataLoaders to use DataSource instead of a String which represents the file path so you could easily change from one source to another when declaring a resource data loader, for example:
+
+	new SlickSoundLoader(new ClassPathDataSource("data/sounds/mysound.ogg"))
+	// reuse data loader logic by changing the data source
+	new SlickSoundLoader(new RemoteDataSource("http://www.gemserk.com/mygame/sounds/mysound.ogg"))
 
 ### Dynamic resource reloading
 
