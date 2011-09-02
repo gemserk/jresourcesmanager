@@ -110,6 +110,11 @@ The following video named [Dynamic Resources Reloading](http://www.youtube.com/w
 
 Also there is an example resourcemanager-tests/src/main/java/com/gemserk/resources/tests/ResourcesReloadExample.java which shows how to change a Resource data on the fly.
 
+TODO List
+------------
+
+* Data monitoring, there is a basic data monitoring but it could be great to improve it and add as part of the API maybe, so you could know some image in the your file system was modified.
+
 Contributing
 ------------
 
