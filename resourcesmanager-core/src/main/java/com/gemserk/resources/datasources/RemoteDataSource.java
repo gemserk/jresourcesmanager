@@ -10,6 +10,12 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Provides access to data located on the web by implementing the DataSource interface.
+ * 
+ * @author acoppes
+ * 
+ */
 public class RemoteDataSource implements DataSource {
 
 	protected static final Logger logger = LoggerFactory.getLogger(RemoteDataSource.class);

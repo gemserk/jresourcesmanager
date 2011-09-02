@@ -7,6 +7,12 @@ import java.net.URISyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Provides access to data located in classpath by implementing the DataSource interface.
+ * 
+ * @author acoppes
+ * 
+ */
 public class ClassPathDataSource implements DataSource {
 
 	protected static final Logger logger = LoggerFactory.getLogger(ClassPathDataSource.class);

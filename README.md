@@ -88,15 +88,15 @@ Provides an abstract way to get a stream to the data itself, this class is not n
 
 	DataSource {
 
+		// Returns a stream with the data.
 		InputStream getInputStream();
 
+		// Returns how the data is identified by this DataSource
 		String getResourceName();
 	
-		URI getUri();
-
 	}
 
-There are three implementations, ClassPathDataSource provides access to class path information, FileSystemDataSource provides access to data in the file system, RemoteDataSource provides information to a remote resource, from the web. The idea of this class is to make DataLoaders to use DataSource instead of a String which represents the file path so you could easily change from one source to another when declaring a resource data loader, for example:
+There are three implementations (you could add your own), ClassPathDataSource provides access to class path information, FileSystemDataSource provides access to data in the file system, RemoteDataSource provides information to a remote resource, from the web. The idea of this class is to make DataLoaders to use DataSource instead of a String which represents the file path so you could easily change from one source to another when declaring a resource data loader, for example:
 
 	new SlickSoundLoader(new ClassPathDataSource("data/sounds/mysound.ogg"))
 	// reuse data loader logic by changing the data source

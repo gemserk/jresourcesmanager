@@ -12,6 +12,12 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Provides access to data in the file system (outside the classpath), by implementing the DataSource interface.
+ * 
+ * @author acoppes
+ * 
+ */
 public class FileSystemDataSource implements DataSource {
 
 	protected static final Logger logger = LoggerFactory.getLogger(FileSystemDataSource.class);
