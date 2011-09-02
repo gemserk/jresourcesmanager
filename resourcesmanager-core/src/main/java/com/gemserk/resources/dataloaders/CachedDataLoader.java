@@ -3,7 +3,7 @@ package com.gemserk.resources.dataloaders;
 /**
  * A DataLoader that returns a cached object instance from another DataLoader. 
  */
-public class CachedDataLoader<T> extends DataLoader<T> {
+class CachedDataLoader<T> extends DataLoader<T> {
 
 	private final DataLoader<T> dataLoader;
 
