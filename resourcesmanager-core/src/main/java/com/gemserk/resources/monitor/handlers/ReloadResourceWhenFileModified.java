@@ -2,11 +2,16 @@ package com.gemserk.resources.monitor.handlers;
 
 import java.io.File;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.gemserk.resources.Resource;
 
 @SuppressWarnings("rawtypes")
 public class ReloadResourceWhenFileModified extends FileHandler {
-	
+
+	protected static final Logger logger = LoggerFactory.getLogger(ReloadResourceWhenFileModified.class);
+
 	private final Resource resource;
 
 	public ReloadResourceWhenFileModified(Resource resource) {
@@ -16,6 +21,8 @@ public class ReloadResourceWhenFileModified extends FileHandler {
 	@Override
 	public void onFileModified(File file) {
 		resource.reload();
+		if (logger.isInfoEnabled())
+			logger.info("Reloading resource from file " + file);
 	}
-	
+
 }

@@ -8,17 +8,18 @@ import com.gemserk.resources.slick.SlickResourcesBuilder;
 /**
  * Provides an easier way to add resources to ResourceManager for java2d application.
  */
-@SuppressWarnings("unchecked")
 public class ResourcesBuilder {
 
 	protected SlickResourcesBuilder slick;
 	
 	protected Java2dResourcesBuilder java2d;
 	
+	@SuppressWarnings("rawtypes")
 	public ResourcesBuilder(ResourceManager resourceManager) {
 		this(resourceManager, new DataSourceProvider(Source.ClassPath));
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public ResourcesBuilder(ResourceManager resourceManager, DataSourceProvider dataSourceProvider) {
 		this.slick = new SlickResourcesBuilder(resourceManager);
 		this.java2d = new Java2dResourcesBuilder(resourceManager, dataSourceProvider);
