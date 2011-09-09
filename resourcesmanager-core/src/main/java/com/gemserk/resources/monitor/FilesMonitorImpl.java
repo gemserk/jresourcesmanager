@@ -3,7 +3,10 @@ package com.gemserk.resources.monitor;
 import java.io.File;
 import java.util.ArrayList;
 
+import com.gemserk.resources.Resource;
+import com.gemserk.resources.datasources.DataSource;
 import com.gemserk.resources.monitor.handlers.FileHandler;
+import com.gemserk.resources.monitor.handlers.ReloadResourceWhenFileModified;
 
 public class FilesMonitorImpl implements FilesMonitor {
 	
@@ -22,6 +25,11 @@ public class FilesMonitorImpl implements FilesMonitor {
 	@Override
 	public void register(FileMonitor fileMonitor) {
 		fileMonitors.add(fileMonitor);
+	}
+
+	@Override
+	public void monitor(DataSource dataSource, Resource<?> resource) {
+		new FileMonitorAction(this).with(new ReloadResourceWhenFileModified(resource)).monitor(new File(dataSource.getUri()));
 	}
 	
 }

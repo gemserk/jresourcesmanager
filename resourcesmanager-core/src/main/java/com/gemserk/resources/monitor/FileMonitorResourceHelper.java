@@ -4,10 +4,8 @@ import com.gemserk.resources.Resource;
 
 public interface FileMonitorResourceHelper {
 
-	@SuppressWarnings("rawtypes")
-	void monitorClassPathFile(String file, Resource resource);
+	void monitorClassPathFile(String file, Resource<?> resource);
 
-	@SuppressWarnings("rawtypes")
-	void monitorFileSystemFile(String file, Resource resource);
+	void monitorFileSystemFile(String file, Resource<?> resource);
 
 }
