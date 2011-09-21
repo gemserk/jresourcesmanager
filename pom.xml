@@ -4,14 +4,35 @@
 	<artifactId>resourcesmanager</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
 	<name>ResourceManager</name>
 	<description>Resources Manager</description>
+
+	<url>https://github.com/gemserk/jresourcesmanager</url>
 
 	<organization>
 		<name>Gemserk</name>
 		<url>http://www.gemserk.com</url>
 	</organization>
+
+	<developers>
+		<developer>
+			<id>ariel.coppes</id>
+			<email>ariel.coppes@gemserk.com</email>
+			<organization>Gemserk</organization>
+			<name>Ariel Coppes</name>
+		</developer>
+		<developer>
+			<id>ruben.garat</id>
+			<email>ruben.garat@gemserk.com</email>
+			<organization>Gemserk</organization>
+			<name>Ruben Garat</name>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/gemserk/jresourcesmanager/issues</url>
+	</issueManagement>
 
 	<licenses>
 		<license>
@@ -26,25 +47,17 @@
 		<developerConnection>scm:git:git@github.com:gemserk/jresourcesmanager.git</developerConnection>
 	</scm>
 
-	<developers>
-		<developer>
-			<name>Ariel Coppes</name>
-			<organization>Gemserk</organization>
-			<email>ariel.coppes@gemserk.com</email>
-		</developer>
-	</developers>
-
 	<distributionManagement>
-		<repository>
-			<id>googlecode.resourcesmanager.releases</id>
-			<name>GoogleCode resourcesmanager releases</name>
-			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository</url>
-		</repository>
 		<snapshotRepository>
-			<id>googlecode.resourcesmanager.snapshots</id>
-			<name>GoogleCode resourcesmanager snapshots</name>
-			<url>svn:https://jresourcesmanager.googlecode.com/svn/maven/repository-snapshots</url>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
 	</distributionManagement>
 
 	<modules>
@@ -117,15 +130,31 @@
 
 		</plugins>
 
-		<extensions>
-			<extension>
-				<groupId>org.jvnet.wagon-svn</groupId>
-				<artifactId>wagon-svn</artifactId>
-				<version>1.9</version>
-			</extension>
-		</extensions>
-
 	</build>
+
+	<profiles>
+		<profile>
+			<id>gpgsign</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.1</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>install</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<dependencyManagement>
 		<dependencies>
@@ -134,61 +163,41 @@
 				<artifactId>junit</artifactId>
 				<version>4.7</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.easymock</groupId>
 				<artifactId>easymockclassextension</artifactId>
 				<version>2.4</version>
 			</dependency>
-
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>0.9.17</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>1.5.8</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.google.inject</groupId>
 				<artifactId>guice</artifactId>
 				<version>2.0</version>
 			</dependency>
-
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>${project.artifactId}-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>${project.artifactId}-slickmodule</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>${project.artifactId}-java2dmodule</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
-			<dependency>
-				<groupId>org.lwjgl</groupId>
-				<artifactId>lwjgl</artifactId>
-				<version>2.6.0-GEMSERK</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.lwjgl</groupId>
-				<artifactId>jinput</artifactId>
-				<version>2.6.0-GEMSERK</version>
-			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 

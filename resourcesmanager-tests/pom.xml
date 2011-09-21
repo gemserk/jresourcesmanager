@@ -20,6 +20,11 @@
 		<url>http://www.gemserk.com</url>
 	</organization>
 
+	<properties>
+		<lwjgl.version>2.6.0-GEMSERK</lwjgl.version>
+		<jinput.version>2.6.0-GEMSERK</jinput.version>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -78,10 +83,12 @@
 		<dependency>
 			<groupId>org.lwjgl</groupId>
 			<artifactId>lwjgl</artifactId>
+			<version>${lwjgl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.lwjgl</groupId>
 			<artifactId>jinput</artifactId>
+			<version>${jinput.version}</version>
 		</dependency>
 
 		<dependency>
