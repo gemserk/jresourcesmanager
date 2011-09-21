@@ -8,11 +8,11 @@ public class Resource<T> {
 
 	DataLoader<T> dataLoader;
 	
-	Resource(DataLoader<T> dataLoader) {
+	public Resource(DataLoader<T> dataLoader) {
 		this(dataLoader, true);
 	}
 
-	Resource(DataLoader<T> dataLoader, boolean deferred) {
+	public Resource(DataLoader<T> dataLoader, boolean deferred) {
 		this.dataLoader = dataLoader;
 		if (!deferred)
 			reload();
