@@ -11,12 +11,15 @@ public class ResourceStatusMonitor {
 
 	Resource<?> monitoredResource;
 	boolean loaded;
-	boolean unloaded;
+
+	boolean wasLoaded;
+	boolean wasUnloaded;
 
 	public void setMonitoredResource(Resource<?> monitoredResource) {
 		this.monitoredResource = monitoredResource;
 		loaded = monitoredResource.isLoaded();
-		unloaded = !loaded;
+		wasLoaded = false;
+		wasUnloaded = false;
 	}
 
 	public ResourceStatusMonitor(Resource<?> monitoredResource) {
@@ -27,22 +30,23 @@ public class ResourceStatusMonitor {
 	 * Returns true whenever the Resource was loaded.
 	 */
 	public boolean wasLoaded() {
-		return loaded;
+		return wasLoaded;
 	}
 
 	/**
 	 * Returns true whenever the Resource was loaded.
 	 */
 	public boolean wasUnloaded() {
-		return unloaded;
+		return wasUnloaded;
 	}
 
 	/**
 	 * Call to update the monitor by checking the Resource latest status and to know if it was loaded or unloaded.
 	 */
 	public void checkChanges() {
-		loaded = !loaded && monitoredResource.isLoaded();
-		unloaded = !unloaded && !monitoredResource.isLoaded();
+		wasLoaded = !loaded && monitoredResource.isLoaded();
+		wasUnloaded = loaded && !monitoredResource.isLoaded();
+		loaded = monitoredResource.isLoaded();
 	}
 
 }

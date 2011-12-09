@@ -36,6 +36,9 @@ public class ResourceStatusMonitorTest {
 		resourceStatusMonitor.checkChanges();
 		
 		assertThat(resourceStatusMonitor.wasLoaded(), IsEqual.equalTo(false));
+		
+		resourceStatusMonitor.checkChanges();
+		assertThat(resourceStatusMonitor.wasLoaded(), IsEqual.equalTo(false));
 	}
 	
 	@Test
@@ -73,6 +76,9 @@ public class ResourceStatusMonitorTest {
 
 		resource.unload();
 		resourceStatusMonitor.checkChanges();
+		resourceStatusMonitor.checkChanges();
+		assertThat(resourceStatusMonitor.wasUnloaded(), IsEqual.equalTo(false));
+
 		resourceStatusMonitor.checkChanges();
 		assertThat(resourceStatusMonitor.wasUnloaded(), IsEqual.equalTo(false));
 	}
