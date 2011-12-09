@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import com.gemserk.resources.Resource;
 import com.gemserk.resources.datasources.DataSource;
-import com.gemserk.resources.monitor.handlers.FileHandler;
+import com.gemserk.resources.monitor.handlers.FileStatusChangedHandler;
 import com.gemserk.resources.monitor.handlers.ReloadResourceWhenFileModified;
 
 public class FilesMonitorImpl implements FilesMonitor {
@@ -18,8 +18,8 @@ public class FilesMonitorImpl implements FilesMonitor {
 			fileMonitor.callHandlerIfModified();
 	}
 
-	public void monitor(File file, FileHandler fileHandler) {
-		register(new FileMonitor(new FileInformationImpl(file), fileHandler));
+	public void monitor(File file, FileStatusChangedHandler fileStatusChangedHandler) {
+		register(new FileMonitor(new FileInformationImpl(file), fileStatusChangedHandler));
 	}
 
 	@Override

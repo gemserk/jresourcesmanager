@@ -2,25 +2,25 @@ package com.gemserk.resources.monitor;
 
 import java.io.File;
 
-import com.gemserk.resources.monitor.handlers.FileHandler;
+import com.gemserk.resources.monitor.handlers.FileStatusChangedHandler;
 
 public class FileMonitorAction {
 
 	private final FilesMonitor filesMonitor;
 	
-	private FileHandler fileHandler;
+	private FileStatusChangedHandler fileStatusChangedHandler;
 
 	public FileMonitorAction(FilesMonitor filesMonitor) {
 		this.filesMonitor = filesMonitor;
 	}
 	
-	public FileMonitorAction with(FileHandler fileHandler) {
-		this.fileHandler = fileHandler;
+	public FileMonitorAction with(FileStatusChangedHandler fileStatusChangedHandler) {
+		this.fileStatusChangedHandler = fileStatusChangedHandler;
 		return this;
 	}
 	
 	public void monitor(File file) {
-		filesMonitor.register(new FileMonitor(new FileInformationImpl(file), fileHandler));
+		filesMonitor.register(new FileMonitor(new FileInformationImpl(file), fileStatusChangedHandler));
 	}
 	
 }

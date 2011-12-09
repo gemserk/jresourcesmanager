@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.gemserk.resources.Resource;
 
 @SuppressWarnings("rawtypes")
-public class ReloadResourceWhenFileModified extends FileHandler {
+public class ReloadResourceWhenFileModified extends FileStatusChangedHandlerAdapter {
 
 	protected static final Logger logger = LoggerFactory.getLogger(ReloadResourceWhenFileModified.class);
 

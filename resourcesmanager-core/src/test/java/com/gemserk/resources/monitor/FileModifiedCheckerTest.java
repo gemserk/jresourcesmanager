@@ -9,7 +9,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-import com.gemserk.resources.monitor.handlers.FileHandler;
+import com.gemserk.resources.monitor.handlers.FileStatusChangedHandler;
 
 
 public class FileModifiedCheckerTest {
@@ -17,31 +17,31 @@ public class FileModifiedCheckerTest {
 	@Test
 	public void shouldNotCallHanlerWhenFileNotModified() {
 		FileInformation fileInformation = createMock(FileInformation.class);
-		FileHandler fileHandler = createMock(FileHandler.class);
+		FileStatusChangedHandler fileStatusChangedHandler = createMock(FileStatusChangedHandler.class);
 		expect(fileInformation.wasModified()).andReturn(false);
-		replay(fileInformation, fileHandler);
+		replay(fileInformation, fileStatusChangedHandler);
 		
-		FileMonitor fileMonitor = new FileMonitor(fileInformation, fileHandler);
+		FileMonitor fileMonitor = new FileMonitor(fileInformation, fileStatusChangedHandler);
 		assertFalse(fileMonitor.callHandlerIfModified());
 		
-		verify(fileInformation, fileHandler);
+		verify(fileInformation, fileStatusChangedHandler);
 	}
 
 	@Test
 	public void shouldCallHandlerWhenFileModified() {
 		FileInformation fileInformation = createMock(FileInformation.class);
 		File file = createMock(File.class);
-		FileHandler fileHandler = createMock(FileHandler.class);
+		FileStatusChangedHandler fileStatusChangedHandler = createMock(FileStatusChangedHandler.class);
 		expect(fileInformation.wasModified()).andReturn(true);
 		expect(fileInformation.getFile()).andReturn(file);
-		fileHandler.onFileModified(file);
+		fileStatusChangedHandler.onFileModified(file);
 		fileInformation.update();
-		replay(fileInformation, fileHandler);
+		replay(fileInformation, fileStatusChangedHandler);
 		
-		FileMonitor fileMonitor = new FileMonitor(fileInformation, fileHandler);
+		FileMonitor fileMonitor = new FileMonitor(fileInformation, fileStatusChangedHandler);
 		assertTrue(fileMonitor.callHandlerIfModified());
 		
-		verify(fileInformation, fileHandler);
+		verify(fileInformation, fileStatusChangedHandler);
 	}
 
 
