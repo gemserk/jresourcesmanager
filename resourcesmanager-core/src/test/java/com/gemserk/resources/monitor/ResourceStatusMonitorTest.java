@@ -48,5 +48,44 @@ public class ResourceStatusMonitorTest {
 		resourceStatusMonitor.checkChanges();
 		assertThat(resourceStatusMonitor.wasLoaded(), IsEqual.equalTo(false));
 	}
+	
+	@Test
+	public void shouldDetectWhenResourceWasUnloaded() {
+		MockResource resource = new MockResource(new MockDataLoader("DATA"));
+		resource.load();
+		
+		ResourceStatusMonitor resourceStatusMonitor = new ResourceStatusMonitor(resource);
+
+		resourceStatusMonitor.checkChanges();
+		assertThat(resourceStatusMonitor.wasUnloaded(), IsEqual.equalTo(false));
+
+		resource.unload();
+		resourceStatusMonitor.checkChanges();
+		assertThat(resourceStatusMonitor.wasUnloaded(), IsEqual.equalTo(true));
+	}
+	
+	@Test
+	public void shouldDetectWhenResourceWasUnloadedOnlyOnce() {
+		MockResource resource = new MockResource(new MockDataLoader("DATA"));
+		resource.load();
+		
+		ResourceStatusMonitor resourceStatusMonitor = new ResourceStatusMonitor(resource);
+
+		resource.unload();
+		resourceStatusMonitor.checkChanges();
+		resourceStatusMonitor.checkChanges();
+		assertThat(resourceStatusMonitor.wasUnloaded(), IsEqual.equalTo(false));
+	}
+	
+	@Test
+	public void shouldNotDetectWhenResourceWasUnloadedIfWasNotLoaded() {
+		MockResource resource = new MockResource(new MockDataLoader("DATA"));
+		resource.unload();
+		
+		ResourceStatusMonitor resourceStatusMonitor = new ResourceStatusMonitor(resource);
+
+		resourceStatusMonitor.checkChanges();
+		assertThat(resourceStatusMonitor.wasUnloaded(), IsEqual.equalTo(false));
+	}
 
 }
