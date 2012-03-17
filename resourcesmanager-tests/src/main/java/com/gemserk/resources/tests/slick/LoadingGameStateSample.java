@@ -41,8 +41,6 @@ public class LoadingGameStateSample extends StateBasedGame {
 
 			AppGameContainer app = new AppGameContainer(loadingGameStateSample);
 
-			// inicializo todos los subsistemas?
-
 			app.setDisplayMode(640, 480, false);
 			app.setAlwaysRender(true);
 			app.setShowFPS(false);
