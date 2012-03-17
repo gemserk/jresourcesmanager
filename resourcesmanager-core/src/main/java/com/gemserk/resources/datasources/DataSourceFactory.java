@@ -1,5 +1,7 @@
 package com.gemserk.resources.datasources;
 
+import java.io.InputStream;
+
 /**
  * Provides factory methods to build DataSources.
  * 
@@ -38,4 +40,15 @@ public class DataSourceFactory {
 		return new RemoteDataSource(url);
 	}
 
+	/**
+	 * Returns a generic DataSource implementation which uses an InputStream.
+	 * 
+	 * @param inputStream
+	 *            The InputStream where the data is located.
+	 * @param resourceName
+	 *            How the data is identified.
+	 */
+	public static DataSource genericDataSource(InputStream inputStream, String resourceName) {
+		return new GenericDataSource(inputStream, resourceName);
+	}
 }

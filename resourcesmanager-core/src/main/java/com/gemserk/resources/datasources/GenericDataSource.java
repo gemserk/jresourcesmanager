@@ -6,15 +6,21 @@ import java.net.URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class StaticDataSource implements DataSource {
-	
-	protected static final Logger logger = LoggerFactory.getLogger(StaticDataSource.class);
+/**
+ * Generic implementation of DataSource interface which uses directly an InputStream.
+ * 
+ * @author acoppes
+ * 
+ */
+public class GenericDataSource implements DataSource {
+
+	protected static final Logger logger = LoggerFactory.getLogger(GenericDataSource.class);
 
 	private final InputStream inputStream;
 
 	private final String resourceName;
 
-	public StaticDataSource(InputStream inputStream, String resourceName) {
+	public GenericDataSource(InputStream inputStream, String resourceName) {
 		this.inputStream = inputStream;
 		this.resourceName = resourceName;
 	}

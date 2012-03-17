@@ -9,18 +9,18 @@ import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsSame;
 import org.junit.Test;
 
-public class StaticDataSourceTest {
+public class GenericDataSourceTest {
 	
 	@Test
 	public void testGetInputStream() {
 		InputStream inputStream = createMock(InputStream.class);
-		StaticDataSource staticDataSource = new StaticDataSource(inputStream, "resource");
+		GenericDataSource staticDataSource = new GenericDataSource(inputStream, "resource");
 		assertThat(staticDataSource.getInputStream(), IsSame.sameInstance(inputStream));
 	}
 	
 	@Test
 	public void testGetResourceName() {
-		StaticDataSource staticDataSource = new StaticDataSource(null, "resource");
+		GenericDataSource staticDataSource = new GenericDataSource(null, "resource");
 		assertThat(staticDataSource.getResourceName(), IsEqual.equalTo("resource"));
 	}
 

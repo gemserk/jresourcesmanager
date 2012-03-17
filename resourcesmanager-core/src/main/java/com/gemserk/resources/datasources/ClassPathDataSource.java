@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Provides access to data located in classpath by implementing the DataSource interface.
+ * Provides a way to access data located in the application classpath.
  * 
  * @author acoppes
  * 
