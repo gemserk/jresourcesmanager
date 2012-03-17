@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.net.URI;
 
 /**
- * Provides a way to abstract where the real data is located.
+ * Provides a way to abstract the location of the real data.
  * 
  * @author acoppes
  * 

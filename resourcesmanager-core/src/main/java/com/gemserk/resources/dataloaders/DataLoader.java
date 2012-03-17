@@ -12,7 +12,7 @@ public abstract class DataLoader<T> {
 	 * Implements how to load the data.
 	 */
 	public abstract T load();
-
+	
 	/**
 	 * Implements how to unload the data, if it is nod automatic and you need to unload stuff by hand.
 	 */

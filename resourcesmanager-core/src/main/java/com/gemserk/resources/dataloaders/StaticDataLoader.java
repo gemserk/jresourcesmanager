@@ -1,7 +1,7 @@
 package com.gemserk.resources.dataloaders;
 
 /**
- * A DataLoader that always returns the same object instance.
+ * A DataLoader that always returns the same fixed instance
  */
 public class StaticDataLoader<T> extends DataLoader<T> {
 

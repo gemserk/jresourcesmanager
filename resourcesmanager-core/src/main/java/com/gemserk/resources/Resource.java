@@ -2,12 +2,18 @@ package com.gemserk.resources;
 
 import com.gemserk.resources.dataloaders.DataLoader;
 
+/**
+ * This class provides an indirection to data to be used. It lets you know state of that data like if it is loaded or not, and probably more in the future.
+ * 
+ * @author acoppes
+ * 
+ */
 public class Resource<T> {
 
 	T data = null;
 
 	DataLoader<T> dataLoader;
-	
+
 	protected Resource(DataLoader<T> dataLoader) {
 		this(dataLoader, true);
 	}
@@ -34,16 +40,25 @@ public class Resource<T> {
 		this.data = null;
 	}
 
+	/**
+	 * Reloads the internal data by calling unload and load().
+	 */
 	public void reload() {
 		unload();
 		load();
 	}
 
+	/**
+	 * Loads the data if it wasn't loaded yet, it does nothing otherwise.
+	 */
 	public void load() {
 		if (!isLoaded())
 			data = dataLoader.load();
 	}
 
+	/**
+	 * Unloads the data by calling the DataLoader.unload(t) method.
+	 */
 	public void unload() {
 		if (isLoaded()) {
 			dataLoader.unload(data);
@@ -51,13 +66,16 @@ public class Resource<T> {
 		}
 	}
 
+	/**
+	 * Returns true if the data is loaded, false otherwise.
+	 */
 	public boolean isLoaded() {
 		return data != null;
 	}
-	
+
 	@Override
-	public Resource clone() {
-		return new Resource(dataLoader);
+	public Resource<T> clone() {
+		return new Resource<T>(dataLoader);
 	}
 
 }
