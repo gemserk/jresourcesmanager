@@ -3,11 +3,11 @@
 	<parent>
 		<groupId>com.gemserk.resources</groupId>
 		<artifactId>resourcesmanager</artifactId>
-		<version>0.1.1-SNAPSHOT</version>
+		<version>0.2.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.gemserk.resources</groupId>
 	<artifactId>resourcesmanager-core</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<name>ResourceManager - Core module</name>
 	<description>Resources Manager</description>
 	<packaging>jar</packaging>
