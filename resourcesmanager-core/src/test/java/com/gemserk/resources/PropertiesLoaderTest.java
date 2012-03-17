@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import org.junit.Test;
 
+import com.gemserk.resources.dataloaders.PropertiesDataLoader;
 import com.gemserk.resources.datasources.DataSource;
 
 public class PropertiesLoaderTest {
@@ -22,7 +23,7 @@ public class PropertiesLoaderTest {
 		expect(propertiesDataSource.getInputStream()).andReturn(inputStream);
 		replay(propertiesDataSource);
 
-		PropertiesLoader propertiesLoader = new PropertiesLoader(propertiesDataSource);
+		PropertiesDataLoader propertiesLoader = new PropertiesDataLoader(propertiesDataSource);
 		Properties properties = propertiesLoader.load();
 		assertNotNull(properties);
 

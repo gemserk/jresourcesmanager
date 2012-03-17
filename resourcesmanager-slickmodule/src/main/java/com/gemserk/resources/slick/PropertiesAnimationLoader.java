@@ -2,8 +2,8 @@ package com.gemserk.resources.slick;
 
 import java.util.Properties;
 
-import com.gemserk.resources.PropertiesLoader;
 import com.gemserk.resources.dataloaders.DataLoader;
+import com.gemserk.resources.dataloaders.PropertiesDataLoader;
 import com.gemserk.resources.datasources.DataSourceParser;
 import com.gemserk.resources.slick.dataloaders.ClonedSlickAnimationLoader;
 import com.gemserk.resources.slick.dataloaders.SlickAnimationLoader;
@@ -15,7 +15,7 @@ public class PropertiesAnimationLoader extends PropertiesBaseLoader {
 
 	public void load(String propertiesFile) {
 
-		PropertiesLoader propertiesLoader = new PropertiesLoader(dataSourceParser.parse(propertiesFile));
+		PropertiesDataLoader propertiesLoader = new PropertiesDataLoader(dataSourceParser.parse(propertiesFile));
 		Properties properties = propertiesLoader.load();
 
 		for (Object keyObj : properties.keySet()) {

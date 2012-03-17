@@ -2,8 +2,8 @@ package com.gemserk.resources.slick;
 
 import java.util.Properties;
 
-import com.gemserk.resources.PropertiesLoader;
 import com.gemserk.resources.dataloaders.DataLoader;
+import com.gemserk.resources.dataloaders.PropertiesDataLoader;
 import com.gemserk.resources.datasources.ClassPathDataSource;
 import com.gemserk.resources.slick.dataloaders.SlickSoundLoader;
 
@@ -13,7 +13,7 @@ public class PropertiesSoundLoader extends PropertiesBaseLoader {
 	public void load(String propertiesFile) {
 
 		// slick doesn't have sound constructor with input stream
-		PropertiesLoader propertiesLoader = new PropertiesLoader(new ClassPathDataSource(propertiesFile));
+		PropertiesDataLoader propertiesLoader = new PropertiesDataLoader(new ClassPathDataSource(propertiesFile));
 		Properties properties = propertiesLoader.load();
 
 		for (String id : properties.stringPropertyNames()) {

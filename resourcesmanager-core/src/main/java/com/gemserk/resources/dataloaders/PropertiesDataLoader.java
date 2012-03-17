@@ -1,19 +1,18 @@
-package com.gemserk.resources;
+package com.gemserk.resources.dataloaders;
 
 import java.io.IOException;
 import java.util.Properties;
 
-import com.gemserk.resources.dataloaders.DataLoader;
 import com.gemserk.resources.datasources.DataSource;
 
 /**
  * Create a Properties from a data source input stream.
  */
-public class PropertiesLoader extends DataLoader<Properties> {
+public class PropertiesDataLoader extends DataLoader<Properties> {
 	
 	private final DataSource dataSource;
 
-	public PropertiesLoader(DataSource dataSource) {
+	public PropertiesDataLoader(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
