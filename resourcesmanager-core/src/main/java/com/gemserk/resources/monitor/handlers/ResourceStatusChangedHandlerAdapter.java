@@ -7,11 +7,13 @@ import com.gemserk.resources.Resource;
  */
 public class ResourceStatusChangedHandlerAdapter implements ResourceStatusChangedHandler {
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void onLoaded(Resource resource) {
 
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void onUnloaded(Resource resource) {
 

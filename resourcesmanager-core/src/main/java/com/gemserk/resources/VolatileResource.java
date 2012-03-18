@@ -7,7 +7,6 @@ import com.gemserk.resources.dataloaders.DataLoader;
  * 
  * @author acoppes
  * 
- * @param <T>
  */
 class VolatileResource<T> extends Resource<T> {
 

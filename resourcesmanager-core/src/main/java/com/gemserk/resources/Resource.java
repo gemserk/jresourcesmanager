@@ -3,6 +3,7 @@ package com.gemserk.resources;
 import com.gemserk.resources.dataloaders.DataLoader;
 
 /**
+ * 
  * This class provides an indirection to data to be used. It lets you know state of that data like if it is loaded or not, and probably more in the future.
  * 
  * @author acoppes
@@ -24,6 +25,9 @@ public class Resource<T> {
 			reload();
 	}
 
+	/**
+	 * Returns the data stored by the Resource.
+	 */
 	public T get() {
 		load();
 		return data;

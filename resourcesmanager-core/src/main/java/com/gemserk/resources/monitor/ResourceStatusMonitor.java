@@ -3,7 +3,7 @@ package com.gemserk.resources.monitor;
 import com.gemserk.resources.Resource;
 
 /**
- * Provides a way to monitor the status changes (load and unload) of a Resource to possible take actions, for example, call a ResourceStatusChangedHandler.
+ * Provides a way to monitor the Resource status changes, for example, to know when a Resource was loaded or unloaded.
  * 
  * @author acoppes
  */
