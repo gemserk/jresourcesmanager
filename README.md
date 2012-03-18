@@ -1,10 +1,11 @@
-This project provides a way to manage your application resources in a common way.
+This project provides a way to manage your application resources/assets in a common way.
 
 Features
 ------------
 
 * User defined resource types (a Font, a String, an Image)
-* User defined data loaders, a way to use the user defined resource types.
+* User defined ways to load each resource type.
+* Can be used with any framework, for example, LibGDX, Slick2D, etc.
 * Dynamic resource reloading in a transparent way
 * Resource cache
 * Simple and easy to use.
@@ -16,7 +17,7 @@ To know how to use the project, you should know a bit about the following classe
 
 ### DataLoader 
 
-This class provides the logic of loading and unloading a resource, it is used by the ResourceManager when building a new Resource. This class should be implemented to define the load and unload custom logic, for example, if you want to load a Slick2D Sound, you could implement something like this:
+This class provides the logic of loading and unloading a resource, it is used by the ResourceManager when building a new Resource. This class should be implemented to define both load and unload logic, for example, if you want to load a Slick2D Sound, you could implement something like this:
 
 	public class SlickSoundLoader extends DataLoader<Sound> {
 
@@ -36,13 +37,12 @@ This class provides the logic of loading and unloading a resource, it is used by
 		}
 
 		public void unload(Sound s) {
-			// release the data in some way, most of the time just this method is not implemented.
+			// release the data in some way, this method implementation is not required.
 		}
 	
 	}
 
 The module named resourcesmanager-slick provides DataLoader implementations for some of the Slick assets like Sound, Image and Fonts, the module named resourcesmanager-java2d provides DataLoader implementations to load java2d Images and others.
-
 
 ### Resource
 
@@ -74,12 +74,12 @@ This class provides a way to declare resources by declaring an id and how the Re
 	ResourceManager resourceManager = new ResourceManagerImpl();
 	resourceManager.add("MyResourceID", new SlickSoundLoader("data/sounds/mysound.ogg"));
 
-By declaring a resource you are not loading it yet, it only defines how should be loaded when you want to get the data:
+By declaring a resource you are not loading it yet, it only defines how the resource should be loaded when you ask for it:
 
 	Resource<Sound> mySound = resourceManager.get("MyResourceID");
 	// here is where the data is loaded for the first time.
 	Sound sound = mySound.get();
-	// calling get() a second time will return the same already loaded data.
+	// calling get() a second time will return the same, already loaded, data.
 	Sound sound = mySound.get();
 
 ### DataSource
@@ -104,7 +104,7 @@ There are three implementations (you could add your own), ClassPathDataSource pr
 
 ### Dynamic resource reloading
 
-An interesting point is Resources are cached in ResourceManager, so if you ask for the Resource identified by mySound in two different parts of the code, both will be accessing the same Resource. That means if you reload it for some reason, the data will be updated in the Resource and you will be implicitly aware of the change in your code without having to do anything extra.
+An interesting point is Resources are cached in ResourceManager, so if you ask for the Resource identified by mySound in two different points of your code, both will be accessing the same Resource and the same data. That means if you reload a Resource for some reason, the data will be updated in the Resource and you will be implicitly aware of the change in your code without having to do anything extra.
 
 The following video named [Dynamic Resources Reloading](http://www.youtube.com/watch?v=cik0SBRPpiA) shows a resource being modified by an external application and being reloaded.
 
@@ -120,3 +120,7 @@ Contributing
 
 Feel free to add issues, make forks or contact us directly if you have suggestions, bug reports or enhancements.
 
+Tags
+------------
+
+java, resources, assets, manager
