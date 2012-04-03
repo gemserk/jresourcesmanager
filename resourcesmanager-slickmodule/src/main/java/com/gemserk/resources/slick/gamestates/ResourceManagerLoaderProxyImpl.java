@@ -65,7 +65,12 @@ public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 	}
 
 	@Override
-	public <T> Resource<T> getFromIndex(int index) {
+	public <T> Resource<T> getResourceFromIndex(int index) {
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	@Override
+	public K getKeyFromIndex(int index) {
 		throw new UnsupportedOperationException("not implemented yet");
 	}
 

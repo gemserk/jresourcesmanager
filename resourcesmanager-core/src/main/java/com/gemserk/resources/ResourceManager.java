@@ -60,6 +60,11 @@ public interface ResourceManager<K> {
 	 * @param index
 	 *            The index of the Resource.
 	 */
-	<T> Resource<T> getFromIndex(int index);
+	<T> Resource<T> getResourceFromIndex(int index);
+
+	/**
+	 * Returns the key for the resource in the specified index.
+	 */
+	K getKeyFromIndex(int index);
 
 }

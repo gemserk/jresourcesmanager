@@ -59,8 +59,13 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 	}
 
 	@Override
-	public <T> Resource<T> getFromIndex(int index) {
+	public <T> Resource<T> getResourceFromIndex(int index) {
 		return resources.get(resourcesList.get(index));
+	}
+
+	@Override
+	public K getKeyFromIndex(int index) {
+		return resourcesList.get(index);
 	}
 
 }

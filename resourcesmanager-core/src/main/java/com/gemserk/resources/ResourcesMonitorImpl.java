@@ -61,9 +61,13 @@ public class ResourcesMonitorImpl<K> implements ResourcesMonitor, ResourceManage
 	}
 
 	@Override
-	public <T> Resource<T> getFromIndex(int index) {
-		return resourceManager.getFromIndex(index);
+	public <T> Resource<T> getResourceFromIndex(int index) {
+		return resourceManager.getResourceFromIndex(index);
 	}
 
+	@Override
+	public K getKeyFromIndex(int index) {
+		return resourceManager.getKeyFromIndex(index);
+	}
 	
 }
