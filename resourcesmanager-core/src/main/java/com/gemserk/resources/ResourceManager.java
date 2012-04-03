@@ -45,8 +45,21 @@ public interface ResourceManager<K> {
 	<T> T getResourceValue(K id);
 
 	/**
-	 * Unloads all created resources.
+	 * Unloads all created resources by calling each resource.unload() method, it doesn't remove declared resources from the manager.
 	 */
 	void unloadAll();
+
+	/**
+	 * Returns how many resources are registered, useful to iterate with getResource(int index).
+	 */
+	int getResourcesCount();
+
+	/**
+	 * Returns a Resource given an index.
+	 * 
+	 * @param index
+	 *            The index of the Resource.
+	 */
+	<T> Resource<T> getFromIndex(int index);
 
 }

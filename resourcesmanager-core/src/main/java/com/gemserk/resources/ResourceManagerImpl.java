@@ -1,5 +1,6 @@
 package com.gemserk.resources;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +11,7 @@ import com.gemserk.resources.dataloaders.DataLoader;
 public class ResourceManagerImpl<K> implements ResourceManager<K> {
 
 	Map<K, Resource> resources = new HashMap<K, Resource>();
+	ArrayList<K> resourcesList = new ArrayList<K>();
 
 	public <T> Resource<T> get(K id) {
 		if (!resources.containsKey(id))
@@ -40,11 +42,25 @@ public class ResourceManagerImpl<K> implements ResourceManager<K> {
 
 	public void add(K id, DataLoader dataLoader) {
 		resources.put(id, new Resource(dataLoader, true));
+		if (!resourcesList.contains(id))
+			resourcesList.add(id);
 	}
 
 	@Override
 	public void addVolatile(K id, DataLoader dataLoader) {
 		resources.put(id, new VolatileResource(dataLoader, true));
+		if (!resourcesList.contains(id))
+			resourcesList.add(id);
+	}
+
+	@Override
+	public int getResourcesCount() {
+		return resourcesList.size();
+	}
+
+	@Override
+	public <T> Resource<T> getFromIndex(int index) {
+		return resources.get(resourcesList.get(index));
 	}
 
 }

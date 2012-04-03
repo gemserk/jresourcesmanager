@@ -29,7 +29,8 @@ public class Resource<T> {
 	 * Returns the data stored by the Resource.
 	 */
 	public T get() {
-		load();
+		if (!isLoaded())
+			load();
 		return data;
 	}
 
@@ -77,7 +78,6 @@ public class Resource<T> {
 		return data != null;
 	}
 
-	@Override
 	public Resource<T> clone() {
 		return new Resource<T>(dataLoader);
 	}

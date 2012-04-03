@@ -32,7 +32,7 @@ public class ResourcesReloadSample extends BasicGame {
 
 	public static void main(String[] arguments) throws SlickException {
 
-		throw new RuntimeException("This sample must not be working right because a change was made to the slick builder, but I dont want to remove the sample yet.");
+		throw new RuntimeException("This sample must not be working right because a change was made to the slick builder and I dont want to remove the sample yet.");
 
 		// AppGameContainer app = new AppGameContainer(new ResourcesReloadSample(ResourcesReloadSample.class.getName()));
 		//

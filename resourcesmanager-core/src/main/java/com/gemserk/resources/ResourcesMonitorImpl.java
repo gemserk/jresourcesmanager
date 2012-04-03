@@ -54,5 +54,16 @@ public class ResourcesMonitorImpl<K> implements ResourcesMonitor, ResourceManage
 		// TODO Auto-generated function stub
 		
 	}
+
+	@Override
+	public int getResourcesCount() {
+		return resourceManager.getResourcesCount();
+	}
+
+	@Override
+	public <T> Resource<T> getFromIndex(int index) {
+		return resourceManager.getFromIndex(index);
+	}
+
 	
 }

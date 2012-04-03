@@ -11,7 +11,7 @@ public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 	private ResourceManager<K> resourceManager;
 
 	private TaskQueue taskQueue;
-	
+
 	public void setTaskQueue(TaskQueue taskQueue) {
 		this.taskQueue = taskQueue;
 	}
@@ -19,11 +19,11 @@ public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 	public void setResourceManager(ResourceManager<K> resourceManager) {
 		this.resourceManager = resourceManager;
 	}
-	
+
 	public ResourceManagerLoaderProxyImpl() {
-		
+
 	}
-	
+
 	public ResourceManagerLoaderProxyImpl(ResourceManager<K> resourceManager) {
 		this(resourceManager, new TaskQueue());
 	}
@@ -56,7 +56,17 @@ public class ResourceManagerLoaderProxyImpl<K> implements ResourceManager<K> {
 	@Override
 	public void addVolatile(K id, DataLoader dataLoader) {
 		// TODO Auto-generated function stub
-		
+
+	}
+
+	@Override
+	public int getResourcesCount() {
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	@Override
+	public <T> Resource<T> getFromIndex(int index) {
+		throw new UnsupportedOperationException("not implemented yet");
 	}
 
 }
