@@ -33,16 +33,18 @@ public class Resource<T> {
 			load();
 		return data;
 	}
-
+	
 	public void set(T data) {
 		this.data = data;
 	}
 
+	public DataLoader<T> getDataLoader() {
+		return dataLoader;
+	}
+	
 	public void setDataLoader(DataLoader<T> dataLoader) {
-		if (isLoaded())
-			this.dataLoader.unload(data);
+		unload();
 		this.dataLoader = dataLoader;
-		this.data = null;
 	}
 
 	/**
