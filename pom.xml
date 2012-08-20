@@ -63,7 +63,6 @@
 	<modules>
 		<module>resourcesmanager-core</module>
 		<module>resourcesmanager-java2dmodule</module>
-		<module>resourcesmanager-slickmodule</module>
 		<module>resourcesmanager-tests</module>
 	</modules>
 
@@ -186,11 +185,6 @@
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>${project.artifactId}-core</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>${project.artifactId}-slickmodule</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
