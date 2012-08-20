@@ -22,6 +22,7 @@ import com.gemserk.resources.monitor.handlers.ReloadResourceWhenFileModified;
 
 public class ResourcesMonitorSample {
 
+	@SuppressWarnings({ "serial", "unused" })
 	public static void main(String[] args) {
 
 		final ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();

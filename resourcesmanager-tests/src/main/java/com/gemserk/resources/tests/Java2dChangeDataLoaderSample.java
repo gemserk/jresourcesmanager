@@ -24,21 +24,23 @@ public class Java2dChangeDataLoaderSample {
 	public static void main(String[] args) {
 
 		/*
-		 * In this example the DataLoader of the Resource is changed dynamically and then when the resource is reloaded, the new data is loaded from the new DataLoader.
-		 * The problem with this approach is DataLoaders must be same implementation, to use same dispose method implementation when reloading the Resource.
+		 * In this example the DataLoader of the Resource is changed dynamically and then when the resource is reloaded, the new data is loaded from the new DataLoader. The problem with this approach is DataLoaders must be same implementation, to use same dispose method implementation when reloading the Resource.
 		 */
 
 		final ImageLoader whiteLogoImageLoader = new ImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png"));
 		final ImageLoader blackLogoImageLoader = new ImageLoader(new ClassPathDataSource("logo-gemserk-512x116.png"));
 
 		ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();
-		
+
 		resourceManager.add("WHITE", whiteLogoImageLoader);
 		resourceManager.add("BLACK", blackLogoImageLoader);
 
 		final Resource<Image> imagerResource = resourceManager.get("WHITE");
 
 		JFrame frame = new JFrame() {
+
+			private static final long serialVersionUID = -6898015655555959609L;
+
 			{
 
 				setSize(1024, 768);
@@ -54,6 +56,8 @@ public class Java2dChangeDataLoaderSample {
 				});
 
 				add(new JButton() {
+					private static final long serialVersionUID = 1L;
+
 					{
 						setText("Change Color!");
 						setFont(new Font("arial", Font.PLAIN, 48));
@@ -81,6 +85,8 @@ public class Java2dChangeDataLoaderSample {
 				});
 
 				add(new JButton() {
+					private static final long serialVersionUID = 1L;
+
 					{
 						addActionListener(new ActionListener() {
 							@Override

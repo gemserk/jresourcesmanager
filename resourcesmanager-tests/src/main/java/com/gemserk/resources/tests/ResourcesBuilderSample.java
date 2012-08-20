@@ -20,6 +20,7 @@ import com.gemserk.resources.datasources.DataSourceProvider.Source;
 
 public class ResourcesBuilderSample {
 
+	@SuppressWarnings({"unused", "serial"})
 	public static void main(String[] args) {
 
 		final ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();

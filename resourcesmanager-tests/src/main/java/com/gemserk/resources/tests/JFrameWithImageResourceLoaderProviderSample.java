@@ -20,6 +20,7 @@ import com.gemserk.resources.java2d.dataloaders.ImageLoader;
 
 public class JFrameWithImageResourceLoaderProviderSample {
 
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 
 		final ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();

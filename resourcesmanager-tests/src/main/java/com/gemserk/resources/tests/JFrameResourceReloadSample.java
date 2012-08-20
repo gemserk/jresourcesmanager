@@ -21,6 +21,7 @@ import com.gemserk.resources.java2d.dataloaders.ImageLoader;
 
 public class JFrameResourceReloadSample {
 
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 
 		ImageLoader whiteLogoImageLoader = new ImageLoader(new ClassPathDataSource("logo-gemserk-512x116-white.png"));

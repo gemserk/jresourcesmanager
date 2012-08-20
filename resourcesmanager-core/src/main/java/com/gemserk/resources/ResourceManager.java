@@ -15,7 +15,7 @@ public interface ResourceManager<K> {
 	 * @param dataLoader
 	 *            The data loader which specifies how to load/unload the resource.
 	 */
-	void add(K id, DataLoader dataLoader);
+	void add(K id, @SuppressWarnings("rawtypes") DataLoader dataLoader);
 
 	/**
 	 * Adds a new volatile resource.
@@ -25,7 +25,7 @@ public interface ResourceManager<K> {
 	 * @param dataLoader
 	 *            The data loader which specifies how to load/unload the resource.
 	 */
-	void addVolatile(K id, DataLoader dataLoader);
+	void addVolatile(K id, @SuppressWarnings("rawtypes") DataLoader dataLoader);
 
 	/**
 	 * Returns a Resource identified by id.

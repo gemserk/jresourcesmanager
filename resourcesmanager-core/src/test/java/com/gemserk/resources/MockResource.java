@@ -6,7 +6,8 @@ public class MockResource<T> extends Resource<T> {
 
 	boolean unloadCalled = false;
 
-	public MockResource(DataLoader dataLoader) {
+	@SuppressWarnings("unchecked")
+	public MockResource(@SuppressWarnings("rawtypes") DataLoader dataLoader) {
 		super(dataLoader);
 	}
 

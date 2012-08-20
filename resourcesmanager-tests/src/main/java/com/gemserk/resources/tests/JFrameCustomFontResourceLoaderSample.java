@@ -19,6 +19,7 @@ import com.gemserk.resources.java2d.dataloaders.TrueTypeFontLoader;
 
 public class JFrameCustomFontResourceLoaderSample {
 
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 
 		final ResourceManager<String> resourceManager = new ResourceManagerImpl<String>();

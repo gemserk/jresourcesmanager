@@ -13,6 +13,7 @@ public class PropertiesAnimationLoader extends PropertiesBaseLoader {
 
 	DataSourceParser dataSourceParser = new DataSourceParser();
 
+	@SuppressWarnings("rawtypes")
 	public void load(String propertiesFile) {
 
 		PropertiesDataLoader propertiesLoader = new PropertiesDataLoader(dataSourceParser.parse(propertiesFile));

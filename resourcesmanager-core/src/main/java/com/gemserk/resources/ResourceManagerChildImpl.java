@@ -12,6 +12,7 @@ public class ResourceManagerChildImpl<K> implements ResourceManager<K> {
 		this.resourceManager = new ResourceManagerImpl<K>();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T> Resource<T> get(K id) {
 		Resource resource = resourceManager.get(id);
 		if (resource == null)
@@ -32,12 +33,12 @@ public class ResourceManagerChildImpl<K> implements ResourceManager<K> {
 		resourceManager.unloadAll();
 	}
 
-	public void add(K id, DataLoader dataLoader) {
+	public void add(K id, @SuppressWarnings("rawtypes") DataLoader dataLoader) {
 		resourceManager.add(id, dataLoader);
 	}
 
 	@Override
-	public void addVolatile(K id, DataLoader dataLoader) {
+	public void addVolatile(K id, @SuppressWarnings("rawtypes") DataLoader dataLoader) {
 		resourceManager.addVolatile(id, dataLoader);
 	}
 

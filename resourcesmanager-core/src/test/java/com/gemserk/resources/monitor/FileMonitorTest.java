@@ -8,9 +8,6 @@ import java.io.File;
 
 import org.junit.Test;
 
-import com.gemserk.resources.monitor.FileInformation;
-import com.gemserk.resources.monitor.FileInformationImpl;
-
 public class FileMonitorTest {
 
 	@Test

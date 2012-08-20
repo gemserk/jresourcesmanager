@@ -27,7 +27,7 @@ public class JFrameCustomResourceLoaderSample {
 
 		Resource<Image> whiteLogoImageResource;
 
-		CustomGreenLogo(Resource whiteLogoImageResource) {
+		CustomGreenLogo(@SuppressWarnings("rawtypes") Resource whiteLogoImageResource) {
 			this.whiteLogoImageResource = whiteLogoImageResource;
 		}
 

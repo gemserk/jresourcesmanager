@@ -1,10 +1,9 @@
 package com.gemserk.resources.slick;
 
-
 import com.gemserk.resources.ResourceManager;
 import com.google.inject.Inject;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public class PropertiesBaseLoader {
 
 	protected ResourceManager resourceManager;
@@ -13,5 +12,5 @@ public class PropertiesBaseLoader {
 	public void setResourceManager(ResourceManager resourceManager) {
 		this.resourceManager = resourceManager;
 	}
-	
+
 }
