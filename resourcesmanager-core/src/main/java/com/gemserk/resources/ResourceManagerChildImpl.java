@@ -8,8 +8,12 @@ public class ResourceManagerChildImpl<K> implements ResourceManager<K> {
 	ResourceManager<K> childResourceManager;
 
 	public ResourceManagerChildImpl(ResourceManager<K> parentResourceManager) {
+		this(parentResourceManager, new ResourceManagerImpl<K>());
+	}
+	
+	public ResourceManagerChildImpl(ResourceManager<K> parentResourceManager, ResourceManager<K> childResourceManager) {
 		this.parentResourceManager = parentResourceManager;
-		this.childResourceManager = new ResourceManagerImpl<K>();
+		this.childResourceManager = childResourceManager;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
