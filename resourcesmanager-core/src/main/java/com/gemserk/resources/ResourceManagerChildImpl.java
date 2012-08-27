@@ -5,16 +5,16 @@ import com.gemserk.resources.dataloaders.DataLoader;
 public class ResourceManagerChildImpl<K> implements ResourceManager<K> {
 
 	ResourceManager<K> parentResourceManager;
-	ResourceManager<K> resourceManager;
+	ResourceManager<K> childResourceManager;
 
 	public ResourceManagerChildImpl(ResourceManager<K> parentResourceManager) {
 		this.parentResourceManager = parentResourceManager;
-		this.resourceManager = new ResourceManagerImpl<K>();
+		this.childResourceManager = new ResourceManagerImpl<K>();
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T> Resource<T> get(K id) {
-		Resource resource = resourceManager.get(id);
+		Resource resource = childResourceManager.get(id);
 		if (resource == null)
 			return parentResourceManager.get(id);
 		return resource;
@@ -22,7 +22,7 @@ public class ResourceManagerChildImpl<K> implements ResourceManager<K> {
 
 	@Override
 	public <T> T getResourceValue(K id) {
-		T resourceValue = resourceManager.getResourceValue(id);
+		T resourceValue = childResourceManager.getResourceValue(id);
 		if (resourceValue == null)
 			return parentResourceManager.getResourceValue(id);
 		return resourceValue;
@@ -30,35 +30,35 @@ public class ResourceManagerChildImpl<K> implements ResourceManager<K> {
 
 	@Override
 	public void unloadAll() {
-		resourceManager.unloadAll();
+		childResourceManager.unloadAll();
 	}
 
 	public void add(K id, @SuppressWarnings("rawtypes") DataLoader dataLoader) {
-		resourceManager.add(id, dataLoader);
+		childResourceManager.add(id, dataLoader);
 	}
 
 	@Override
 	public void addVolatile(K id, @SuppressWarnings("rawtypes") DataLoader dataLoader) {
-		resourceManager.addVolatile(id, dataLoader);
+		childResourceManager.addVolatile(id, dataLoader);
 	}
 
 	@Override
 	public int getResourcesCount() {
-		return resourceManager.getResourcesCount() + parentResourceManager.getResourcesCount();
+		return childResourceManager.getResourcesCount() + parentResourceManager.getResourcesCount();
 	}
 
 	@Override
 	public <T> Resource<T> getResourceFromIndex(int index) {
-		if (index < resourceManager.getResourcesCount())
-			return resourceManager.getResourceFromIndex(index);
-		return parentResourceManager.getResourceFromIndex(index - resourceManager.getResourcesCount());
+		if (index < childResourceManager.getResourcesCount())
+			return childResourceManager.getResourceFromIndex(index);
+		return parentResourceManager.getResourceFromIndex(index - childResourceManager.getResourcesCount());
 	}
 
 	@Override
 	public K getKeyFromIndex(int index) {
-		if (index < resourceManager.getResourcesCount())
-			return resourceManager.getKeyFromIndex(index);
-		return parentResourceManager.getKeyFromIndex(index - resourceManager.getResourcesCount());
+		if (index < childResourceManager.getResourcesCount())
+			return childResourceManager.getKeyFromIndex(index);
+		return parentResourceManager.getKeyFromIndex(index - childResourceManager.getResourcesCount());
 	}
 
 }
